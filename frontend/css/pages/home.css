@@ -1,0 +1,12 @@
+.kid-switch { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 14px; scrollbar-width: none; }
+.kid-card { display: flex; gap: 12px; align-items: center; background: #fff; border: 1.5px solid var(--border-subtle); border-radius: 14px; padding: 12px 14px; flex: 1 0 260px; text-decoration: none; color: inherit; }
+.kid-card .chips { margin-top: 6px; }
+.home-actions { display: grid; gap: 10px; margin-bottom: 20px; }
+@media (min-width: 600px) { .home-actions { grid-template-columns: 1fr 1fr; } }
+.next-ride { display: flex; justify-content: space-between; gap: 12px; align-items: center; text-decoration: none; color: inherit; }
+.next-ride .time { font-size: 24px; font-weight: 900; }
+.impact-hero { background: linear-gradient(135deg, #E6F2F1 0%, #FFFFFF 100%); border: 1px solid var(--brand-blue-border); border-radius: 16px; padding: 18px; margin-bottom: 16px; text-decoration: none; color: inherit; display: block; }
+.impact-hero .big { font-size: 30px; font-weight: 900; color: var(--brand-blue); line-height: 1.1; margin: 6px 0 2px; }
+.impact-hero .stat-grid { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--brand-blue-border); }
+.impact-hero .stat { background: transparent; border: none; padding: 0; }
+.impact-hero .stat-value { font-size: 18px; color: var(--text-primary); }

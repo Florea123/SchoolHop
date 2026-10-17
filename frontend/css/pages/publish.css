@@ -1,0 +1,4 @@
+.vehicle-form { background: var(--bg-app); }
+.location-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: -6px 0 16px; }
+fieldset { border: none; }
+legend { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }

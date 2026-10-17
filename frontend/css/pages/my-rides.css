@@ -1,0 +1,5 @@
+.ride-item { display: flex; flex-direction: column; gap: 6px; }
+.ride-item .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ride-item .route { font-size: 14px; }
+.ride-item .links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+.group-title { grid-column: 1 / -1; }

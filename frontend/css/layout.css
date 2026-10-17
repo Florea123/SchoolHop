@@ -1,0 +1,98 @@
+/* ==========================================================================
+   APP SHELL: header, navigație (bară de jos pe telefon, sus pe desktop), container
+   ========================================================================== */
+
+.app-header {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--header-height);
+  /* fără backdrop-filter: ar deveni containing block pentru bara de navigație fixă de pe telefon */
+  background: #fff;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.app-header-inner {
+  height: 100%; max-width: 1200px; margin: 0 auto; padding: 0 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brand { display: flex; align-items: center; text-decoration: none; font-weight: 900; font-size: 22px; letter-spacing: -0.5px; }
+.brand-name { color: var(--brand-blue-dark); }
+.brand-name b { color: var(--brand-coral); font-weight: 900; }
+.brand-school { font-size: 11px; font-weight: 700; color: var(--brand-yellow-dark); background: var(--brand-yellow-light); padding: 2px 8px; border-radius: 999px; max-width: 40vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.header-spacer { flex: 1; }
+
+.bell { position: relative; }
+.bell-count {
+  position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 5px;
+  border-radius: 999px; background: var(--brand-red); color: #fff; font-size: 11px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; border: 2px solid #fff;
+}
+
+/* Navigația principală: implicit (telefon) bară fixă jos */
+.app-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  height: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #fff; border-top: 1px solid var(--border-subtle);
+  display: flex; justify-content: space-around; align-items: stretch;
+}
+.nav-item {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  color: var(--text-muted); text-decoration: none; font-size: 11px; font-weight: 600; position: relative;
+}
+.nav-item svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; }
+.nav-item span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 2px; }
+.nav-item[aria-current="page"] { color: var(--brand-blue); font-weight: 800; }
+.nav-item[aria-current="page"]::before { content: ""; position: absolute; top: 0; width: 28px; height: 3px; border-radius: 0 0 3px 3px; background: var(--brand-coral); }
+
+.app-main {
+  width: 100%; max-width: 640px; margin: 0 auto;
+  padding: 20px 16px calc(var(--tabbar-height) + 32px + env(safe-area-inset-bottom));
+}
+.app-main.wide { max-width: 1200px; }
+
+.page-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.page-head .eyebrow { flex: 1; }
+
+/* Pagini fără autentificare (login, înregistrare, link public) */
+.auth-body { display: flex; align-items: flex-start; justify-content: center; background: linear-gradient(180deg, #E6F2F1 0%, #FCFAF6 45%); }
+.auth-brand .brand { font-size: 34px; }
+.auth-main { width: 100%; max-width: 480px; padding: 32px 16px 48px; }
+.auth-card { background: #fff; border-radius: 20px; padding: 24px 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border-subtle); }
+.auth-brand { display: flex; justify-content: center; margin-bottom: 20px; }
+.steps { display: flex; gap: 6px; margin-bottom: 18px; }
+.steps span { flex: 1; height: 5px; border-radius: 999px; background: var(--border-subtle); }
+.steps span.done { background: var(--brand-blue); }
+
+.nav-item .label-long { display: none; }
+.nav-item .label-short { display: inline; }
+
+/* Desktop / laptop: navigația urcă în header */
+@media (min-width: 900px) {
+  .app-nav {
+    position: static; height: auto; padding: 0; background: transparent; border: none;
+    gap: 4px; justify-content: center;
+  }
+  .app-header .app-nav { display: flex; }
+  .nav-item { flex: 0 0 auto; flex-direction: row; gap: 8px; padding: 8px 12px; border-radius: 10px; font-size: 14px; }
+  .nav-item:hover { background: var(--bg-muted); color: var(--brand-blue); }
+  .nav-item[aria-current="page"] { background: var(--brand-blue-light); }
+  .nav-item[aria-current="page"]::before { display: none; }
+  .nav-item svg { width: 18px; height: 18px; }
+  .nav-item .label-long { display: inline; }
+  .nav-item .label-short { display: none; }
+  .app-main { padding-bottom: 48px; padding-top: 28px; }
+  .auth-main { padding-top: 64px; }
+  .auth-card { padding: 32px; }
+}
+
+/* Telefoane foarte înguste */
+@media (max-width: 360px) {
+  .nav-item { font-size: 10px; }
+  .brand-school { display: none; }
+}
+
+/* Grilă responsivă de carduri (rezultate, liste) */
+.card-grid { display: grid; grid-template-columns: 1fr; gap: 0 16px; }
+@media (min-width: 900px) {
+  .card-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .split { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 24px; align-items: start; }
+}

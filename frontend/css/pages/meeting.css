@@ -1,0 +1,3 @@
+.meet-card .card-row strong { text-align: right; }
+.walk { color: #C9773A; }
+.companions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }

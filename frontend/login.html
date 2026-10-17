@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2563EB">
+  <title>Autentificare · SchoolHop</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='18' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages/login.css">
+  <script type="module" src="js/pages/login.js"></script>
+</head>
+<body class="auth-body">
+  <main class="auth-main" id="main">
+    <div class="auth-brand"><span class="brand"><span class="brand-name">School<b>Hop</b></span></span></div>
+    <div class="auth-card">
+      <h1 class="page-title">Bine ai revenit!</h1>
+      <p class="page-subtitle">Autentifică-te în contul de familie.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" autocomplete="username" required maxlength="150" placeholder="nume@exemplu.ro">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Parolă</label>
+          <input class="form-input" type="password" id="password" name="password" autocomplete="current-password" required maxlength="72" placeholder="Parola contului">
+        </div>
+        <div class="forgot-row"><button type="button" class="btn-link" id="forgot">Ai uitat parola?</button></div>
+        <p class="form-hint error" id="formError" role="alert" hidden></p>
+        <button class="btn btn-primary btn-block" type="submit" id="submit">Intră în contul de familie</button>
+      </form>
+
+      <p class="switch-auth">Părinte nou? <a href="register.html" class="strong">Creează cont cu ID-ul școlar</a></p>
+    </div>
+  </main>
+</body>
+</html>

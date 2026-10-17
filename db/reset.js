@@ -1,5 +1,5 @@
 // ==============================================================================
-// TakeMe - Resetare Bază de Date înainte de Demo (Node.js)
+// SchoolHop - Resetare Bază de Date înainte de Demo (Node.js)
 // Rulare: node db/reset.js
 // Șterge toate tabelele existente și re-rulează schema.sql + seed.sql
 // ==============================================================================
@@ -11,7 +11,7 @@ const { pool } = require('./db');
 async function resetDatabase() {
   const client = await pool.connect();
   try {
-    console.log('🔄 [TakeMe DB] Resetare completă a bazei de date...');
+    console.log('[SchoolHop DB] Resetare completă a bazei de date...');
 
     // Ștergem schema public și o recreăm curată
     await client.query(`
@@ -20,19 +20,19 @@ async function resetDatabase() {
       GRANT ALL ON SCHEMA public TO postgres;
       GRANT ALL ON SCHEMA public TO public;
     `);
-    console.log('🧹 [TakeMe DB] Toate tabelele vechi au fost șterse.');
+    console.log('[SchoolHop DB] Toate tabelele vechi au fost șterse.');
 
     // Rulăm schema
     const schemaSql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
     await client.query(schemaSql);
-    console.log('✅ [TakeMe DB] Schema recreată.');
+    console.log('[SchoolHop DB] Schema recreată.');
 
     // Rulăm seed
     const seedSql = fs.readFileSync(path.join(__dirname, 'seed.sql'), 'utf8');
     await client.query(seedSql);
-    console.log('✅ [TakeMe DB] Seed-ul pentru demo a fost încărcat din nou!');
+    console.log('[SchoolHop DB] Seed-ul pentru demo a fost încărcat din nou!');
   } catch (err) {
-    console.error('❌ [TakeMe DB] Eroare la resetarea bazei de date:', err);
+    console.error('[SchoolHop DB] Eroare la resetarea bazei de date:', err);
     process.exit(1);
   } finally {
     client.release();
