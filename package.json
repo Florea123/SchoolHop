@@ -1,9 +1,12 @@
 {
-  "name": "takeme-carpooling",
+  "name": "schoolhop",
   "version": "1.0.0",
-  "description": "Carpooling sigur pentru navetiști (Iași) - Backend Node.js & Bază de date PostgreSQL",
-  "main": "db/db.js",
+  "description": "SchoolHop - carpooling școlar sigur (Iași): backend Node.js, PostgreSQL și frontend HTML/CSS/JS fără framework-uri",
+  "main": "backend/server.js",
   "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "test": "node --test tests/",
     "db:init": "node db/init.js",
     "db:reset": "node db/reset.js",
     "db:up": "docker compose up -d postgres",
@@ -11,7 +14,7 @@
     "db:logs": "docker compose logs -f postgres"
   },
   "keywords": [
-    "takeme",
+    "schoolhop",
     "carpooling",
     "iasi",
     "nodejs",
@@ -19,9 +22,14 @@
   ],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.12.0"
   }
 }
-

@@ -1,85 +1,113 @@
-# TakeMe Kids - Carpooling Școlar Sigur (Iași)
+# SchoolHop - Carpooling școlar sigur (Iași)
 
-> **Concept (conform feedback-ului mentorilor):**  
-> Platformă dedicată exclusiv **transportului copiilor la școală**.  
-> **Regulă de aur:** Șoferul este un părinte sau o persoană verificată prin contul școlar. **Pasagerii sunt exclusiv copiii** (fără potriviri între adulți).
+Platformă dedicată exclusiv **transportului copiilor la școală**. Șoferii sunt părinți (sau șoferi comunitari) verificați prin registrul școlii, iar **pasagerii sunt exclusiv copiii**.
 
----
-
-## 🎯 Puncte Cheie & Funcționalități
-
-1. **Autentificare prin contul școlar:** Login simulat / integrat cu catalogul electronic (Edu / Școală) pentru acces exclusiv al părinților verificați.
-2. **Profilul copilului & componenta AI:** Părinții completează interesele copiilor (fotbal, pian, robotică, dans). AI-ul identifică potriviri între colegi de pe același traseu pentru a stimula prieteniile pe drum.
-3. **Puncte sigure de predare (Drop-off):** Exemplul **Colegiul Național „Costache Negruzzi”** din Iași – puncte fixe de debarcare pentru a elimina blocajele din fața porții școlii.
-4. **Fondul Social pentru copiii de la sat:** Finanțarea curselor pentru copiii din satele greu accesibile (ex: Sat Horlești / Rediu) cu șoferi comunitari care fac deja traseul spre oraș, plătiți cu o sumă fixă per cursă.
-5. **Transparență totală:** Dashboard pentru fondul social, donații și dublarea sumelor de către sponsori corporate.
+**Stack:** PostgreSQL · Node.js (Express) · HTML/CSS/JavaScript fără framework-uri (ES modules).
 
 ---
 
-## 🗄️ Baza de Date PostgreSQL (`/db`)
+## Funcționalități
 
-Tabelele definite în [`db/schema.sql`](file:///Users/dianaplosnita/MarkAiHackathon/TakeMe/db/schema.sql):
-- **`schools`**: Școli partenere și punctele sigure de predare (drop-off zones).
-- **`users`**: Părinți și șoferi verificați prin contul școlar (`school_account_id`).
-- **`children`**: Copiii (pasagerii) – conțin școala, clasa și interesele (`JSONB`).
-- **`vehicles`**: Mașinile părinților, cu număr de locuri și înălțătoare disponibile.
-- **`rides`**: Cursele școlare (curse obișnuite de părinte sau sponsorizate din Fondul Social).
-- **`bookings`**: Rezervările copiilor (status: `confirmed`, `picked_up`, `arrived_at_school`).
-- **`ai_interest_matches`**: Potrivirile AI între copii pe baza pasiunilor comune și scor de compatibilitate.
-- **`social_fund_transactions`**: Jurnalul transparent al donațiilor și curselor rurale finanțate.
-- **`reviews`**: Evaluări ale părinților (siguranță și punctualitate).
-- **`notifications`**: Alerte live pentru părinți (copilul a fost preluat, a ajuns în siguranță la școală).
+1. **Cont verificat de școală** - înregistrarea cere ID-ul elevului din catalogul școlii (`school_registry`); numele părintelui trebuie să corespundă. Datele copilului (clasă, diriginte, dată naștere) sunt sincronizate din catalog.
+2. **Potrivire „AI” între copii** - scor explicabil calculat din: aceeași clasă / același an, interese comune (Jaccard), aceeași zonă, vârstă apropiată. Rezultatele sunt sortate după apropiere și scor; recomandările se salvează în `ai_interest_matches`.
+3. **Rezervare pe locuri** - harta locurilor din mașină, reguli de siguranță (locul din față doar de la 12 ani), înălțătoare disponibile, rezervare pe mai multe zile + întoarcere după ore.
+4. **Publicare curse** - părintele-șofer alege zilele, mașina, locurile oferite; copiii proprii ocupă automat locuri; vecinii din aceeași zonă sunt notificați.
+5. **Cursă live** - poziția mașinii (GPS din browserul șoferului sau simulare), ETA, preluare copii, **alertă automată de deviere** de la traseu, **SOS** (notifică părinții, șoferul și secretariatul), **link public pentru bunici**.
+6. **Predare la școală** - confirmare de către părinte, puncte „Erou Verde”, evaluarea șoferului.
+7. **Fondul Social** - curse gratuite pentru copiii din satele fără microbuz, donații dublate de sponsor, registru transparent, plata automată a șoferului comunitar la finalul cursei.
+8. **Panou pentru școală** (rol `admin`) - mașini eliminate de la poartă, coridoare, alerte, familii verificate, fondul social.
+
+Toate datele afișate vin din baza de date prin API; nimic nu este hardcodat în frontend.
 
 ---
 
-## 🚀 Utilizare în Node.js
+## Pornire rapidă
 
-### 1. Pornire PostgreSQL
 ```bash
+# 1. PostgreSQL (Docker) - sau orice PostgreSQL 14+ local
 docker compose up -d postgres
-```
 
-### 2. Inițializare / Reîncărcare Schema & Seed
-```bash
+# 2. Dependențe și configurare
 npm install
-npm run db:init
-```
+cp .env.example .env
 
-### 3. Resetare rapidă pentru DEMO
-```bash
+# 3. Schema + date demo (cursele sunt generate relativ la ziua curentă)
 npm run db:reset
+
+# 4. Pornește serverul (API + frontend)
+npm start            # sau: npm run dev (repornire automată)
 ```
 
-### 4. Exemplu interogare în backend-ul Node.js (`db/db.js`):
-```javascript
-const db = require('./db/db');
+Deschide **http://localhost:3000**.
 
-// Căutare curse către o anumită școală
-app.get('/api/schools/:schoolId/rides', async (req, res) => {
-  const { schoolId } = req.params;
-  const { rows } = await db.query(
-    `SELECT r.*, u.full_name as driver_name, u.phone, s.name as school_name, s.dropoff_point_label
-     FROM rides r
-     JOIN users u ON r.driver_id = u.user_id
-     JOIN schools s ON r.school_id = s.school_id
-     WHERE r.school_id = $1 AND r.available_seats > 0 AND r.ride_status = 'scheduled'
-     ORDER BY r.departure_time ASC`,
-    [schoolId]
-  );
-  res.json(rows);
-});
+### Conturi demo (parola: `TakeMe2026!`)
 
-// Potriviri AI de interese pentru un copil
-app.get('/api/children/:childId/matches', async (req, res) => {
-  const { childId } = req.params;
-  const { rows } = await db.query(
-    `SELECT m.*, c.full_name as matched_child_name, c.grade
-     FROM ai_interest_matches m
-     JOIN children c ON (c.child_id = CASE WHEN m.child_id_1 = $1 THEN m.child_id_2 ELSE m.child_id_1 END)
-     WHERE m.child_id_1 = $1 OR m.child_id_2 = $1
-     ORDER BY m.compatibility_score DESC`,
-    [childId]
-  );
-  res.json(rows);
-});
+| Cont | Rol |
+|---|---|
+| `gabriel.enache@parinte.edu.ro` | părinte (David și Ana) - caută și rezervă curse |
+| `andreea.rusu@parinte.edu.ro` | părinte-șofer (Valea Lupului → Negruzzi) |
+| `ionel.ciobanu@comunitate.schoolhop.ro` | șofer comunitar (Fondul Social) |
+| `secretariat@negruzzi.schoolhop.ro` | administrator școală (panou) |
+
+Pentru **înregistrare** poți folosi conturile școlare nerevendicate: `EDU-IS-NEGRUZZI-150` (părinte: *Ioana Popa*, copil Luca), apoi `EDU-IS-NEGRUZZI-151` pentru al doilea copil.
+
+### Teste
+
+```bash
+npm test   # test end-to-end al API-ului (ATENȚIE: reîncarcă schema + seed în baza din .env)
 ```
+
+---
+
+## Structura proiectului
+
+```
+backend/
+  server.js, app.js, config.js
+  middleware/   auth (JWT), errors
+  routes/       auth, meta, me, children, vehicles, rides, bookings, reviews,
+                notifications, share (public), social-fund, schools (panou)
+  services/     ai (potrivire), rides, rideActions, geo, seats, stats, badges, notify, registry
+db/             schema.sql, seed.sql, db.js, init.js, reset.js
+frontend/
+  <pagina>.html            câte un fișier HTML pe pagină
+  css/base.css, layout.css design system + app shell responsive
+  css/pages/<pagina>.css   stiluri specifice paginii
+  js/core/                 api (client HTTP), ui (utilitare), layout (header/navigație), map (hartă SVG)
+  js/pages/<pagina>.js     logica paginii
+tests/api.test.js
+```
+
+Pagini: `login`, `register` → `verify` → `emergency` (înregistrare în 3 pași), `home`, `search` → `results` → `meeting` → `seat` → `schedule` (rezervare), `publish`, `my-rides`, `ride` (live), `alert`, `dropoff`, `review`, `share` (public), `profile`, `impact`, `rewards`, `notifications`, `dashboard` (admin).
+
+Layout responsive: pe telefon navigația e o bară fixă jos; de la 900px urcă în header, iar listele trec pe 2 coloane.
+
+---
+
+## Integrarea unui model AI
+
+Scorul de potrivire este calculat local (`backend/services/ai.js`). Textele generate (recomandarea pentru părinți și „întrebarea zilei” pentru copii) trec prin funcția `generateText()` din același fișier - momentan întoarce `null`, deci se folosesc textele generate local. Implementați acolo apelul către modelul ales.
+
+## API (rezumat)
+
+Toate rutele sunt sub `/api`; cele marcate cu * cer `Authorization: Bearer <token>`.
+
+| Metodă | Rută | Descriere |
+|---|---|---|
+| POST | `/auth/login`, `/auth/register` | autentificare / înregistrare verificată |
+| GET | `/meta` | școli, zone, interese, configurare |
+| GET/PATCH | `/me` * | profil, contact de urgență |
+| GET | `/me/home`, `/me/rides?scope=upcoming\|history`, `/me/impact`, `/me/badges` * | date pentru pagini |
+| PATCH | `/children/:id`, POST `/children/claim` * | profil copil, adăugare copil din catalog |
+| GET/POST/DELETE | `/vehicles` * | mașini |
+| GET | `/rides/search?childId&date&area&arriveBy&direction` * | căutare cu potrivire AI |
+| GET | `/rides/:id?childId` * | detalii, locuri, zilele cursei |
+| POST | `/rides` * | publicare (repetată pe zile) |
+| POST | `/rides/:id/start\|location\|arrive\|cancel` * | acțiunile șoferului |
+| GET | `/rides/:id/live`, `/rides/:id/topic` * | urmărire live, întrebarea zilei |
+| POST | `/rides/:id/sos`, `/rides/:id/alerts/:alertId/resolve`, `/rides/:id/simulate` * | siguranță, simulare |
+| POST | `/bookings`, `/bookings/:id/cancel\|pickup\|confirm-arrival` * | rezervări |
+| GET | `/share/:token` | link public pentru familie |
+| POST | `/reviews` * | evaluare șofer |
+| GET/POST | `/notifications`, `/social-fund`, `/social-fund/donations` * | notificări, fond social |
+| GET | `/schools/:id/dashboard` * | panou școală (admin) |

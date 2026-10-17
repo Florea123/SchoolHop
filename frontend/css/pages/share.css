@@ -1,0 +1,4 @@
+.share-note { margin-top: 14px; }
+.share-status { font-size: 13px; font-weight: 700; color: var(--brand-blue); }
+.progress { height: 8px; border-radius: 999px; background: #E8E1D6; overflow: hidden; margin: 10px 0 4px; }
+.progress span { display: block; height: 100%; background: var(--brand-blue); }

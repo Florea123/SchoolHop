@@ -1,0 +1,6 @@
+.child-card .child-head { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.child-card .synced { color: var(--success); font-weight: 700; font-size: 12px; }
+.child-card .form-group:last-child { margin-bottom: 0; }
+.location-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.add-child summary { cursor: pointer; font-size: 14px; }
+.add-child form { margin-top: 12px; }

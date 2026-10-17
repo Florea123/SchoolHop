@@ -1,0 +1,4 @@
+.school-box { background: var(--bg-app); }
+.school-box .form-group:last-child { margin-bottom: 0; }
+.switch-auth { text-align: center; font-size: 14px; color: var(--text-secondary); margin-top: 18px; }
+#accountId { text-transform: uppercase; letter-spacing: 0.5px; }
