@@ -1,0 +1,26 @@
+{
+  "name": "takeme-carpooling",
+  "version": "1.0.0",
+  "description": "Carpooling sigur pentru navetiști (Iași) - Backend Node.js & Bază de date PostgreSQL",
+  "main": "db/db.js",
+  "scripts": {
+    "db:init": "node db/init.js",
+    "db:reset": "node db/reset.js",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres"
+  },
+  "keywords": [
+    "takeme",
+    "carpooling",
+    "iasi",
+    "nodejs",
+    "postgresql"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0"
+  }
+}
