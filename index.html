@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navetă școlară - Drumuri sigure pentru familii</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <main id="mainStage" class="main-stage mode-web">
+
+    <!-- IPHONE MOCKUP FRAME -->
+    <div class="phone-frame">
+
+      <!-- Dynamic Island & Camera -->
+      <div class="phone-island">
+        <div class="phone-island-cam"></div>
+      </div>
+
+      <!-- iOS Status Bar -->
+      <div class="phone-status-bar">
+        <span class="status-time">7:41</span>
+        <div class="status-indicators">
+          <svg class="status-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.22 18.57 10.57 19 12 19c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 14c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+          </svg>
+          <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
+          </svg>
+          <svg class="status-icon" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="2" y="7" width="18" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+            <rect x="4" y="9" width="13" height="6" rx="1.5"/>
+            <path d="M22 11v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- TOP NAVIGATION BAR -->
+      <nav id="phoneBottomNav" class="phone-bottom-nav">
+        <button id="navSearch" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <span>Caută</span>
+        </button>
+
+        <button id="navRides" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+            <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+          </svg>
+          <span>Cursele mele</span>
+        </button>
+
+        <button id="navPublish" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/>
+          </svg>
+          <span>Publică</span>
+        </button>
+
+        <button id="navProfile" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/>
+          </svg>
+          <span>Profil Elev</span>
+        </button>
+
+        <button id="navAccount" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/>
+          </svg>
+          <span>Cont</span>
+        </button>
+      </nav>
+
+      <!-- PHONE SCROLLABLE VIEWPORT -->
+      <div id="phoneViewport" class="phone-viewport">
+
+        <!-- ========================================== -->
+        <!-- SCREEN 01: Login Școlar Securizat         -->
+        <!-- ========================================== -->
+        <section id="screen-01" class="app-screen">
+          <div class="screen-header">
+            <span class="screen-badge-demo">CONT PĂRINTE</span>
+          </div>
+
+          <div class="auth-brand-center">
+          </div>
+
+          <!-- School Verified Badge -->
+          <div class="school-badge">
+            <span class="school-badge-icon">🏫</span>
+            <span>Comunitate Închisă · Școala Gimnazială Nr. 195</span>
+          </div>
+
+          <h1 class="screen-title">Bine ai revenit, părinte!</h1>
+          <p class="screen-subtitle">Același drum spre școală. Mai siguri împreună.</p>
+
+          <div class="form-group">
+            <label class="form-label">Email instituțional primit de la școală</label>
+            <div class="input-wrapper">
+              <svg class="input-icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <input type="email" id="loginEmail" class="form-input input-with-icon" value="elena.popescu@parinti.scoala195.edu.ro" autocomplete="username">
+            </div>
+            <span style="font-size: 11px; color: var(--brand-green); font-weight: 600; display: block; margin-top: 4px;">
+              ✓ Domeniu școlar verificat (@parinti.scoala195.edu.ro)
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Parolă</label>
+            <div class="input-wrapper">
+              <svg class="input-icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <input type="password" id="loginPassword" class="form-input input-with-icon" placeholder="Introdu parola" autocomplete="current-password">
+            </div>
+          </div>
+
+          <div style="text-align: right; margin-bottom: 20px;">
+            <button id="btnForgotPassword" class="btn-link" style="font-size: 12px;">Ai uitat parola?</button>
+          </div>
+
+          <button id="btnLogin" class="btn-primary" style="margin-bottom: 14px;">
+            Intră în contul de familie
+          </button>
+
+          <div style="text-align: center; margin-bottom: 20px; font-size: 13px; color: var(--text-secondary);">
+            Ești părinte nou la Școala 195? <button id="btnGoRegister" class="btn-link" style="font-weight: 700;">Înregistrează-te</button>
+          </div>
+
+          <div class="card card-green">
+            <h4 style="font-size: 13px; font-weight: 800; color: var(--brand-green-dark); margin-bottom: 4px;">
+              🛡️ Siguranță 100% Garantată
+            </h4>
+            <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.45;">
+              Aplicația este rezervată exclusiv familiilor verificate de la Școala 195. Fără străini, fără riscuri. Copiii călătoresc doar cu colegi și părinți cunoscuți.
+            </p>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 02: Înregistrare Părinte & Elev    -->
+        <!-- ========================================== -->
+        <section id="screen-02" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-01')">◀</button>
+              <span class="screen-header-title-small">DATE PĂRINTE ȘI ELEV</span>
+            </div>
+            <span class="screen-badge-demo">PASUL 1/3</span>
+          </div>
+
+          <h1 class="screen-title">Date părinte & elev</h1>
+          <p class="screen-subtitle">Profilul de familie pentru naveta școlară sigură</p>
+
+          <div class="form-group">
+            <label class="form-label">Nume complet părinte</label>
+            <input type="text" class="form-input" value="Elena Popescu">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email școlar (@scoala195.edu.ro)</label>
+            <input type="email" class="form-input" value="elena.popescu@parinti.scoala195.edu.ro">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="registerPassword">Parolă</label>
+            <input type="password" id="registerPassword" class="form-input" placeholder="Alege o parolă de minimum 8 caractere" autocomplete="new-password">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="registerPasswordConfirm">Confirmă parola</label>
+            <input type="password" id="registerPasswordConfirm" class="form-input" placeholder="Introdu parola din nou" autocomplete="new-password">
+          </div>
+
+          <div class="card" style="background: #F8FAFC; border: 1.5px solid #E2E8F0; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+              <span style="font-size: 20px;">👦</span>
+              <span style="font-size: 14px; font-weight: 800; color: var(--text-primary);">Datele copilului (elev)</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Nume copil</label>
+              <input type="text" class="form-input" value="Matei Popescu">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Vârstă</label>
+                <input type="text" class="form-input" value="9 ani">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Clasă</label>
+                <input type="text" class="form-input" value="Clasa a III-a B">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Profesor / Învățător</label>
+              <input type="text" class="form-input" value="Prof. Anca Dumitrescu" readonly>
+            </div>
+          </div>
+
+          <label class="custom-checkbox">
+            <input type="checkbox" checked>
+            <span>Confirm că sunt părintele / tutorele legal al elevului înscris la Școala Nr. 195.</span>
+          </label>
+
+          <button id="btnRegisterNext" class="btn-primary" style="margin-bottom: 14px;">
+            Continuă la verificarea școlară
+          </button>
+
+          <div style="text-align: center; font-size: 13px; color: var(--text-secondary);">
+            Ai deja cont? <button id="btnRegisterLogin" class="btn-link">Intră în cont.</button>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 03: Verificare Apartenență Școală   -->
+        <!-- ========================================== -->
+        <section id="screen-03" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-02')">◀</button>
+              <span class="screen-header-title-small">VERIFICARE</span>
+            </div>
+            <span class="screen-badge-demo">PASUL 2/3</span>
+          </div>
+
+          <h1 class="screen-title">Validare cont școlar</h1>
+          <p class="screen-subtitle">Sincronizare cu registrul oficial al Școlii Nr. 195</p>
+
+          <div class="callout-info">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--brand-green)" stroke-width="2" style="flex-shrink: 0;">
+              <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+            </svg>
+            <span>Validarea se realizează automat prin email-ul instituțional eliberat de secretariatul școlii.</span>
+          </div>
+
+          <!-- Document Upload 1: Carnet Elev -->
+          <div class="card" style="margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 13px; font-weight: 700;">Carnet de Elev / Adeverință Școală</span>
+              <span style="font-size: 16px;">📚</span>
+            </div>
+            <div style="background: #F1F5F9; border-radius: 8px; padding: 14px; text-align: center; margin-bottom: 10px;">
+              <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.5px;">
+                📄 SPECIMEN SINCRONIZAT · CARNET_MATEI_195.PDF
+              </span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+              <span style="color: var(--brand-green); font-weight: 700; display: flex; align-items: center; gap: 4px;">
+                ✓ Sincronizat cu catalogul clasei a III-a B
+              </span>
+              <button class="btn-link" style="font-size: 12px;">Verifică</button>
+            </div>
+          </div>
+
+          <!-- Document Upload 2: Buletin Părinte -->
+          <div class="card" style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 13px; font-weight: 700;">Identitate Părinte / Tutore</span>
+              <span style="font-size: 16px;">🛡️</span>
+            </div>
+            <div style="background: #F1F5F9; border-radius: 8px; padding: 14px; text-align: center; margin-bottom: 10px;">
+              <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.5px;">
+                👤 ELENA POPESCU · PĂRINTE AUTORIZAT
+              </span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+              <span style="color: var(--brand-green); font-weight: 700;">
+                ✓ Verificat în comunitatea școlii
+              </span>
+            </div>
+          </div>
+
+          <button id="btnKycNext" class="btn-primary">
+            Continuă la contactul de urgență
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 04: Siguranța la Școală (Fără Coduri)-->
+        <!-- ========================================== -->
+        <section id="screen-04" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-03')">◀</button>
+              <span class="screen-header-title-small">SIGURANȚĂ</span>
+            </div>
+            <span class="screen-badge-demo">PASUL 3/3</span>
+          </div>
+
+          <h1 class="screen-title">Siguranța la școală</h1>
+          <p class="screen-subtitle">Identitate verificată prin școală · Fără coduri sau PIN-uri</p>
+
+          <div class="card card-green">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span style="font-size: 20px;">🛡️</span>
+              <span style="font-size: 14px; font-weight: 800; color: var(--brand-green-dark);">
+                Comunitate verificată direct de școală
+              </span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+              Deoarece toți părinții sunt autentificați cu adresele de email oficiale de la școală (<em>@parinti.scoala195.edu.ro</em>), nu mai este nevoie de coduri de verificare sau PIN-uri greoaie. Predarea și preluarea copiilor se fac simplu și în deplină încredere între colegi și părinți cunoscuți.
+            </p>
+          </div>
+
+          <!-- Contact Urgență Familial -->
+          <div class="card">
+            <span style="font-size: 13px; font-weight: 800; display: block; margin-bottom: 8px;">
+              Contact de urgență (Al doilea părinte / Bunic)
+            </span>
+            <div class="form-group">
+              <label class="form-label">Nume contact</label>
+              <input type="text" class="form-input" value="Maria Popescu (Bunică)">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Telefon alertă SMS</label>
+              <input type="text" class="form-input" value="+40 722 123 456" readonly>
+            </div>
+          </div>
+
+          <button id="btnSafetySave" class="btn-primary">
+            Activează profilul de familie
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 05: Acasă Părinte                  -->
+        <!-- ========================================== -->
+        <section id="screen-05" class="app-screen">
+          <div class="screen-header">
+            <span class="screen-badge-demo" style="background: #FEF3C7; color: #92400E;">🏫 ȘCOALA 195</span>
+          </div>
+
+          <!-- Kid Profile Highlight Card -->
+          <div class="kid-card-summary">
+            <div class="kid-avatar-icon">👦</div>
+            <div class="kid-details">
+              <span class="kid-name">Matei Popescu</span>
+              <span class="kid-meta">Clasa a III-a B · Școala Gimnazială Nr. 195</span>
+              <div style="display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap;">
+                <span style="font-size: 10px; background: #E2E8F0; padding: 1px 6px; border-radius: 10px;">🤖 Robotică</span>
+                <span style="font-size: 10px; background: #E2E8F0; padding: 1px 6px; border-radius: 10px;">🧱 Lego</span>
+                <span style="font-size: 10px; background: #E2E8F0; padding: 1px 6px; border-radius: 10px;">⚽ Fotbal</span>
+              </div>
+            </div>
+          </div>
+
+          <h1 class="screen-title" style="font-size: 22px;">Bună dimineața, Elena!</h1>
+          <p class="screen-subtitle">Matei merge azi la școală cu colegii?</p>
+
+          <button id="btnHomeSearchRide" class="btn-primary" style="margin-bottom: 12px; background: var(--brand-blue);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            Caută curse spre școală
+          </button>
+
+          <button id="btnHomeOfferRide" class="btn-secondary" style="margin-bottom: 20px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+              <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+            </svg>
+            Iau eu copiii azi (Ofer locuri)
+          </button>
+
+          <!-- School Community Impact Card -->
+          <div id="btnHomeImpactDetails" class="impact-hero-card" style="cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="font-size: 12px; font-weight: 800; color: var(--brand-green-dark); text-transform: uppercase;">
+                  Comunitatea Școlii Nr. 195
+                </span>
+                <span style="font-size: 10px; color: var(--text-muted); display: block;">Trafic redus la poarta școlii</span>
+              </div>
+              <span class="ai-match-badge">COMUNITATE</span>
+            </div>
+
+            <div class="impact-hero-points" style="font-size: 28px;">156 mașini</div>
+            <span style="font-size: 12px; font-weight: 700; color: var(--text-secondary); display: block; margin-top: -6px;">
+              eliminate azi din ambuteiajul din fața porții
+            </span>
+
+            <div class="impact-stat-grid">
+              <div class="impact-stat-item">
+                <span class="impact-stat-val">428</span>
+                <span class="impact-stat-lbl">Părinți verificați</span>
+              </div>
+              <div class="impact-stat-item">
+                <span class="impact-stat-val">36 kg</span>
+                <span class="impact-stat-lbl">CO2 evitat la școală</span>
+              </div>
+              <div class="impact-stat-item">
+                <span class="impact-stat-val">120 pct</span>
+                <span class="impact-stat-lbl">Puncte Erou Verde</span>
+              </div>
+              <div class="impact-stat-item">
+                <span class="impact-stat-val">12 curse</span>
+                <span class="impact-stat-lbl">Cu colegii de clasă</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 06: Căutare Cursă Spre Școală       -->
+        <!-- ========================================== -->
+        <section id="screen-06" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-05')">◀</button>
+              <span class="screen-header-title-small">CĂUTARE CURSĂ</span>
+            </div>
+            <span class="screen-badge-demo">DRUM SPRE ȘCOALĂ</span>
+          </div>
+
+          <h1 class="screen-title">Căutare cursă colegi</h1>
+          <p class="screen-subtitle">Plecare din cartier către Școala Gimnazială Nr. 195</p>
+
+          <!-- Vector Map Route -->
+          <div class="map-visual-container">
+            <svg viewBox="0 0 360 200" fill="none">
+              <path d="M-20 180 C80 150, 160 170, 260 110 S340 70, 400 40" stroke="#BFDBFE" stroke-width="26" stroke-linecap="round"/>
+              <path d="M110 170 L130 90 L240 45" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="110" cy="170" r="6" fill="#2563EB" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="122" y="174" fill="#1E293B" font-size="11" font-weight="800">Titan (Acasă)</text>
+              <circle cx="240" cy="45" r="7" fill="#F59E0B" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="252" y="49" fill="#1E293B" font-size="11" font-weight="800">🏫 Școala 195</text>
+            </svg>
+            <span style="position: absolute; bottom: 6px; left: 10px; font-size: 9px; color: var(--text-muted);">
+              Traseu securizat de cartier · Fără zone de risc
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Punct plecare (Cartier Titan)</label>
+            <input type="text" class="form-input" value="Metrou Nicolae Grigorescu, Titan">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Destinație școală</label>
+            <input type="text" class="form-input" value="Școala Gimnazială Nr. 195 (Poarta 1 - Hamburg)" readonly>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Data</label>
+              <input type="text" class="form-input" value="Luni, 19 oct. 2026">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ora sosire dorită</label>
+              <input type="text" class="form-input" value="07:50 (Clopoțel 08:00)">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Pasager elev</label>
+            <input type="text" class="form-input" value="Matei Popescu · Clasa a III-a B (Necesită înălțător)" readonly>
+          </div>
+
+          <button id="btnSearchMatches" class="btn-primary" style="margin-top: 6px;">
+            Vezi cursele disponibile
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 07: Curse potrivite                 -->
+        <!-- ========================================== -->
+        <section id="screen-07" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-06')">◀</button>
+              <span class="screen-header-title-small">CURSE POTRIVITE</span>
+            </div>
+            <span class="screen-badge-demo">REZULTATE</span>
+          </div>
+
+          <h1 class="screen-title">Colegi potriviți pentru Matei</h1>
+          <p class="screen-subtitle">Am găsit 3 părinți din Școala 195 cu interese comune</p>
+
+          <!-- Match Card 1: Radu Ionescu -->
+          <div class="match-card featured" style="border: 2px solid var(--brand-green);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="ai-match-badge">✨ Potrivire 98%</span>
+              <span style="font-size: 11px; font-weight: 700; color: var(--brand-green);">Aceeași clasă (III-B)</span>
+            </div>
+
+            <div class="match-driver-header">
+              <img src="assets/avatars/alex.png" alt="Radu Ionescu" class="driver-avatar-circle" onerror="this.outerHTML='<div class=\'driver-initials-avatar\'>RI</div>'">
+              <div>
+                <span style="font-size: 14px; font-weight: 800; display: block;">Radu Ionescu · Tatăl lui Luca</span>
+                <span style="font-size: 11px; color: var(--text-muted);">★ 4,9 · Părinte verificat în Școala 195</span>
+              </div>
+            </div>
+
+            <!-- AI Reason & Interests Box -->
+            <div class="ai-match-box">
+              <span style="font-size: 18px;">🤖</span>
+              <div style="font-size: 11px; color: #1E3A8A; line-height: 1.4;">
+                <strong>De ce se potrivesc:</strong> Luca este coleg de bancă cu Matei în clasa a III-a B. Ambii au selectate ca pasiuni <em>Robotica & Lego</em>!
+              </div>
+            </div>
+
+            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">
+              🚗 <strong>Dacia Duster · B123PAR</strong> · Echipat cu 2 înălțătoare copii
+            </div>
+
+            <div class="match-time-price">
+              <span class="match-time">07:45</span>
+              <span class="match-price">8 lei</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">
+              <span>3 min pe jos · punct urcare</span>
+              <span style="color: var(--brand-green); font-weight: 700;">2 locuri libere pentru copii</span>
+            </div>
+
+            <button id="btnMatchAlex" class="btn-primary" style="height: 44px; font-size: 14px;">
+              Alege cursa cu Luca și tatăl lui
+            </button>
+          </div>
+
+          <!-- Match Card 2: Maria Marin -->
+          <div class="match-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="ai-match-badge" style="background: #2563EB;">✨ Potrivire 92%</span>
+              <span style="font-size: 11px; color: var(--text-muted);">Clasa a III-a A</span>
+            </div>
+            <div class="match-driver-header">
+              <div class="driver-initials-avatar" style="background: #FEE2E2; color: #DC2626;">MM</div>
+              <div>
+                <span style="font-size: 14px; font-weight: 800; display: block;">Maria Marin · Mama Sofiei</span>
+                <span style="font-size: 11px; color: var(--text-muted);">Pasiuni comune: ♟️ Șah & 🎨 Desen</span>
+              </div>
+            </div>
+            <div class="match-time-price">
+              <span class="match-time">07:40</span>
+              <span class="match-price">8 lei</span>
+            </div>
+          </div>
+
+          <!-- Match Card 3: Mihai Stan -->
+          <div class="match-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span class="ai-match-badge" style="background: #1D4ED8;">✨ Potrivire 86%</span>
+              <span style="font-size: 11px; color: var(--text-muted);">Clasa a IV-a B</span>
+            </div>
+            <div class="match-driver-header">
+              <div class="driver-initials-avatar" style="background: #FEF3C7; color: #B45309;">MS</div>
+              <div>
+                <span style="font-size: 14px; font-weight: 800; display: block;">Mihai Stan · Tatăl lui Tudor</span>
+                <span style="font-size: 11px; color: var(--text-muted);">Pasiuni comune: ⚽ Fotbal & Sport</span>
+              </div>
+            </div>
+            <div class="match-time-price">
+              <span class="match-time">07:50</span>
+              <span class="match-price">8 lei</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 08: Punct de Întâlnire Sigur       -->
+        <!-- ========================================== -->
+        <section id="screen-08" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-07')">◀</button>
+              <span class="screen-header-title-small">PUNCT DE ÎNTÂLNIRE</span>
+            </div>
+            <span class="screen-badge-demo">PUNCT ÎNTÂLNIRE</span>
+          </div>
+
+          <h1 class="screen-title">Punct de întâlnire</h1>
+          <p class="screen-subtitle">Plecare împreună spre Școala 195</p>
+
+          <div class="map-visual-container large">
+            <svg viewBox="0 0 360 260" fill="none">
+              <path d="M-20 230 C80 200, 160 210, 260 160 S340 120, 400 90" stroke="#BFDBFE" stroke-width="28" stroke-linecap="round"/>
+              <path d="M125 210 L140 110 L250 50" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+              <path d="M85 240 L125 210" stroke="#F59E0B" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+              <circle cx="85" cy="240" r="5" fill="#F59E0B"/>
+              <text x="40" y="255" fill="#92400E" font-size="10" font-weight="800">Elena & Matei · 3 min</text>
+              <circle cx="125" cy="210" r="7" fill="#1E293B" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="140" y="215" fill="#1E293B" font-size="12" font-weight="800">Întâlnire cu Radu & Luca</text>
+              <circle cx="250" cy="50" r="7" fill="#F59E0B" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="262" y="54" fill="#1E293B" font-size="11" font-weight="800">🏫 Școala 195</text>
+            </svg>
+          </div>
+
+          <div class="card card-green" style="margin-bottom: 14px;">
+            <span style="font-size: 13px; font-weight: 800; color: var(--brand-green-dark); display: block; margin-bottom: 4px;">
+              Punctul de urcare al copiilor
+            </span>
+            <span style="font-size: 12px; color: var(--text-secondary); display: block; margin-bottom: 10px;">
+              Bd. Camil Ressu colț cu Grigorescu (Zonă pietonală sigură)
+            </span>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; border-top: 1px dashed var(--brand-green-border); padding-top: 8px;">
+              <span>Elena & Matei merg pe jos:</span>
+              <span style="color: #D97706;">3 min</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-top: 4px;">
+              <span>Ora urcării în mașină:</span>
+              <span>07:45</span>
+            </div>
+          </div>
+
+          <button id="btnPickupSelectSeat" class="btn-primary">
+            Alege locul lui Matei în mașină
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 09: Cabină Auto cu Înălțătoare      -->
+        <!-- ========================================== -->
+        <section id="screen-09" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-08')">◀</button>
+              <span class="screen-header-title-small">SELECTEAZĂ LOCUL</span>
+            </div>
+            <span class="screen-badge-demo">LOCURI & ÎNĂLȚĂTOR</span>
+          </div>
+
+          <h1 class="screen-title">Alege locul lui Matei</h1>
+          <p class="screen-subtitle">Echipare cu înălțătoare auto omologate pentru copii</p>
+
+          <!-- Cabin Diagram with Booster Seat Indicators -->
+          <div class="car-cabin-wrapper">
+            <div class="car-cabin-hood">↑ FAȚA MAȘINII · DACIA DUSTER ↑</div>
+
+            <div class="car-row-seats">
+              <div class="seat-button disabled">
+                <span>Șofer</span>
+                <span class="seat-status" style="font-size: 9px;">Radu (Tatăl)</span>
+              </div>
+              <div class="seat-button free seat-clickable" data-seat="front-right">
+                <span>Față dreapta</span>
+                <span class="seat-status" style="font-size: 9px;">Liber</span>
+              </div>
+            </div>
+
+            <div class="car-row-seats">
+              <div class="seat-button selected seat-clickable" data-seat="back-left">
+                <span>Spate stânga</span>
+                <span class="seat-status" style="font-size: 9px;">Matei · selectat</span>
+                <span class="seat-booster-badge">Înălțător ✓</span>
+              </div>
+              <div class="seat-button blocked">
+                <span>Mijloc</span>
+                <span class="seat-status" style="font-size: 8px;">Ghiozdane</span>
+              </div>
+              <div class="seat-button occupied">
+                <span>Spate dreapta</span>
+                <span class="seat-status" style="font-size: 9px;">Luca Ionescu</span>
+                <span class="seat-booster-badge">Înălțător ✓</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 16px;">
+            <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.45; margin-bottom: 8px;">
+              👧👦 <strong>Siguranță copii:</strong> Mașina dispune de 2 înălțătoare auto Isofix. Matei va sta pe bancheta din spate alături de colegul său Luca. Locul din mijloc rămâne liber pentru ghiozdane.
+            </div>
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 8px; display: flex; justify-content: space-between; font-size: 12px;">
+              <span>Locul lui Matei:</span>
+              <strong id="selectedSeatDisplay" style="color: var(--brand-green);">Spate stânga (Înălțător)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+              <span>Contribuție drum:</span>
+              <strong>8 lei / copil</strong>
+            </div>
+          </div>
+
+          <button id="btnConfirmSeat" class="btn-primary">
+            Confirmă locul lui Matei · 8 lei
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 10: Publică Cursă ca Părinte Șofer -->
+        <!-- ========================================== -->
+        <section id="screen-10" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-05')">◀</button>
+              <span class="screen-header-title-small">PUBLICĂ O CURSĂ</span>
+            </div>
+            <span class="screen-badge-demo">OFERĂ LOCURI</span>
+          </div>
+
+          <h1 class="screen-title">Iau eu copiii azi</h1>
+          <p class="screen-subtitle">Elena · oferi locuri pentru colegii de la Școala 195</p>
+
+          <div class="form-group">
+            <label class="form-label">Punct plecare</label>
+            <input type="text" class="form-input" value="Metrou Nicolae Grigorescu, Titan">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Destinație</label>
+            <input type="text" class="form-input" value="Școala Gimnazială Nr. 195 (Hamburg)" readonly>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Data</label>
+              <input type="text" class="form-input" value="19 oct. 2026">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ora plecării</label>
+              <input type="text" class="form-input" value="07:45">
+            </div>
+          </div>
+
+          <!-- Zile recurente pentru cursă -->
+          <label class="form-label">Zilele în care oferi cursa</label>
+          <div class="day-selector-pills">
+            <button type="button" class="day-pill driver-day-pill active" data-day="L" aria-label="Luni" aria-pressed="true">L</button>
+            <button type="button" class="day-pill driver-day-pill active" data-day="Ma" aria-label="Marți" aria-pressed="true">Ma</button>
+            <button type="button" class="day-pill driver-day-pill active" data-day="Mi" aria-label="Miercuri" aria-pressed="true">Mi</button>
+            <button type="button" class="day-pill driver-day-pill active" data-day="J" aria-label="Joi" aria-pressed="true">J</button>
+            <button type="button" class="day-pill driver-day-pill active" data-day="V" aria-label="Vineri" aria-pressed="true">V</button>
+            <button type="button" class="day-pill driver-day-pill" data-day="S" aria-label="Sâmbătă" aria-pressed="false">S</button>
+            <button type="button" class="day-pill driver-day-pill" data-day="D" aria-label="Duminică" aria-pressed="false">D</button>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Locuri disponibile pentru colegi</label>
+            <input type="text" class="form-input" value="2 locuri (Dotate cu înălțătoare)" readonly>
+          </div>
+
+          <button id="btnPublishRide" class="btn-primary" style="margin-top: 10px;">
+            Publică cursa pentru părinții din școală
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 11: În Drum Spre Școală (Live + AI) -->
+        <!-- ========================================== -->
+        <section id="screen-11" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-05')">◀</button>
+              <span class="screen-header-title-small">ÎN DRUM SPRE ȘCOALĂ</span>
+            </div>
+            <span class="screen-badge-demo" style="background: #EFF6FF; color: #1E3A8A;">ÎN DRUM SPRE ȘCOALĂ</span>
+          </div>
+
+          <h1 class="screen-title">În drum spre școală</h1>
+          <p class="screen-subtitle">Luni · Matei și Luca călătoresc cu tatăl Radu</p>
+
+          <!-- Fun AI Topic of the Morning Card -->
+          <div class="ai-topic-card">
+            <div class="ai-topic-title">
+              <span>ÎNTREBAREA ZILEI PENTRU COPII</span>
+            </div>
+            <div class="ai-topic-content">
+              "Dacă ați putea construi azi la școală un robot din piese de Lego, ce super-putere ar avea robotul vostru?"
+            </div>
+          </div>
+
+          <!-- Live Animated Vector Map -->
+          <div class="map-visual-container large">
+            <svg viewBox="0 0 360 260" fill="none">
+              <path d="M-20 230 C80 200, 160 210, 260 160 S340 120, 400 90" stroke="#BFDBFE" stroke-width="28" stroke-linecap="round"/>
+              <path d="M110 180 L130 95 L240 40" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="110" cy="180" r="5" fill="#2563EB" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="120" y="184" fill="#1E293B" font-size="11" font-weight="800">Titan</text>
+              <circle cx="240" cy="40" r="7" fill="#F59E0B" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="252" y="44" fill="#1E293B" font-size="11" font-weight="800">🏫 Școala 195</text>
+              <!-- Animated Car Marker with Pulse -->
+              <g id="animatedCarMarker" transform="translate(130, 95)">
+                <circle cx="0" cy="0" r="16" fill="rgba(27, 106, 67, 0.2)" class="live-pulse"/>
+                <circle cx="0" cy="0" r="11" fill="#2563EB" stroke="#FFFFFF" stroke-width="2"/>
+                <path d="M-5 -2 L5 -2 L4 3 L-4 3 Z" fill="#FFFFFF"/>
+              </g>
+            </svg>
+            <span style="position: absolute; bottom: 8px; left: 10px; font-size: 9px; color: var(--text-muted);">
+              Urmărire live pe coridorul școlar securizat
+            </span>
+          </div>
+
+          <!-- Estimated arrival at School -->
+          <div class="card card-green" style="margin-bottom: 12px; padding: 12px 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <div>
+                <span style="font-size: 11px; color: var(--text-muted); display: block;">Sosire la poarta școlii</span>
+                <span style="font-size: 26px; font-weight: 900; color: var(--brand-green-dark);">07:55</span>
+              </div>
+              <span style="font-size: 12px; font-weight: 700; color: var(--brand-green); background: #FFFFFF; padding: 4px 8px; border-radius: 6px;">
+                Cu 5 min înainte de clopoțel
+              </span>
+            </div>
+          </div>
+
+          <!-- Carpool Companions -->
+          <div class="card" style="margin-bottom: 14px;">
+            <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.5;">
+              <div>🚗 <strong>Șofer:</strong> Radu Ionescu (Tatăl lui Luca · Clasa a III-a B)</div>
+              <div>👦 <strong>Copii în mașină:</strong> Matei Popescu & Luca Ionescu</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+            <button id="btnRideSOS" class="btn-danger" style="flex: 1; height: 42px;">
+              SOS · Siguranță
+            </button>
+            <button id="btnRideShareFriend" class="btn-secondary" style="flex: 1; height: 42px; font-size: 12px;">
+              Trimite bunicilor
+            </button>
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <button id="btnSimulateDeviation" class="btn-link" style="color: var(--accent-red); font-size: 12px;">
+              ⚠️ Simulează deviere de la traseul școlii
+            </button>
+          </div>
+
+          <button id="btnRideArrived" class="btn-primary">
+            Predare la poarta școlii
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 12: Alertă Deviere Traseu Școală    -->
+        <!-- ========================================== -->
+        <section id="screen-12" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-11')">◀</button>
+              <span class="screen-header-title-small">ALERTĂ DE SIGURANȚĂ</span>
+            </div>
+            <span class="screen-badge-demo" style="background: var(--accent-red); color: #fff;">ALERTĂ SIGURANȚĂ</span>
+          </div>
+
+          <h1 class="screen-title">Verificare traseu elev</h1>
+          <p class="screen-subtitle">Sistemul a detectat o abatere neprogramată de la drumul spre școală</p>
+
+          <div class="callout-alert">
+            <span>⚠️ Alertă de siguranță automată: Traseul autovehiculului a deviat de la coridorul școlar. Se solicită confirmarea șoferului și a părinților.</span>
+          </div>
+
+          <div class="map-visual-container large">
+            <svg viewBox="0 0 360 260" fill="none">
+              <path d="M-20 230 C80 200, 160 210, 260 160 S340 120, 400 90" stroke="#BFDBFE" stroke-width="28" stroke-linecap="round"/>
+              <path d="M110 180 L130 95 L240 40" stroke="#2563EB" stroke-width="5" opacity="0.6"/>
+              <path d="M130 95 L170 125 L210 135" stroke="#DC2626" stroke-width="5" stroke-dasharray="6 4"/>
+              <circle cx="210" cy="135" r="14" fill="#DC2626"/>
+              <text x="210" y="140" fill="#FFFFFF" font-size="14" font-weight="900" text-anchor="middle">!</text>
+            </svg>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+            <button id="btnDeviationSOS" class="btn-danger" style="flex: 1; height: 44px;">
+              Apelează secretariatul
+            </button>
+            <button id="btnDeviationBack" class="btn-secondary" style="flex: 1; height: 44px;">
+              Traseu clarificat
+            </button>
+          </div>
+
+          <button id="btnDeviationArrived" class="btn-primary">
+            Confirmă sosirea la școală
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 13: Predare la Poarta Școlii (Direct)-->
+        <!-- ========================================== -->
+        <section id="screen-13" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-11')">◀</button>
+              <span class="screen-header-title-small">PREDARE LA ȘCOALĂ</span>
+            </div>
+            <span class="screen-badge-demo">POARTA ȘCOLII 195</span>
+          </div>
+
+          <h1 class="screen-title">Predare la poarta școlii</h1>
+          <p class="screen-subtitle">Luni · ora 07:55 · Poarta 1 (Hamburg)</p>
+
+          <div class="card card-green" style="margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span style="color: var(--brand-green); font-size: 20px; font-weight: 900;">✓</span>
+              <span style="font-size: 13px; font-weight: 800; color: var(--brand-green-dark);">
+                Radu Ionescu a oprit în zona de drop-off
+              </span>
+            </div>
+            <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.45;">
+              Copiii coboară în siguranță în curtea școlii, sub supravegherea cadrului didactic de serviciu.
+            </p>
+          </div>
+
+          <!-- Direct Handover Confirmation (No PIN codes) -->
+          <div class="card" style="margin-bottom: 16px; text-align: center; padding: 18px;">
+            <span style="font-size: 28px; display: block; margin-bottom: 6px;">🏫</span>
+            <span style="font-size: 14px; font-weight: 800; display: block; margin-bottom: 4px;">
+              Predare confirmată la intrarea elevilor
+            </span>
+            <span style="font-size: 12px; color: var(--text-secondary); display: block; line-height: 1.45;">
+              Matei și Luca au fost preluați în curtea școlii. Nu sunt necesare coduri de verificare datorită contului instituțional verificat.
+            </span>
+          </div>
+
+          <button id="btnConfirmArrival" class="btn-primary" style="margin-bottom: 14px;">
+            Confirmă predarea în siguranță la școală
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 14: Mulțumiri, Rating & Puncte Verde-->
+        <!-- ========================================== -->
+        <section id="screen-14" class="app-screen">
+          <div class="screen-header">
+            <span class="screen-header-title-small">EVALUARE CURSĂ</span>
+            <span class="screen-badge-demo">CURSĂ FINALIZATĂ</span>
+          </div>
+
+          <h1 class="screen-title">Matei a ajuns la ore!</h1>
+          <p class="screen-subtitle">Copiii au ajuns la timp și binedispuși la Școala 195</p>
+
+          <div class="form-row" style="margin-bottom: 16px;">
+            <div class="card card-green" style="margin-bottom: 0; padding: 14px;">
+              <span style="font-size: 22px; font-weight: 900; color: var(--brand-green); display: block;">+10 puncte</span>
+              <span style="font-size: 11px; color: var(--text-muted); display: block; margin-top: 4px;">Eroul Verde al Școlii</span>
+            </div>
+            <div class="card card-blue" style="margin-bottom: 0; padding: 14px;">
+              <span style="font-size: 22px; font-weight: 900; color: var(--accent-blue); display: block;">-1 Mașină</span>
+              <span style="font-size: 11px; color: var(--text-muted); display: block; margin-top: 4px;">Ambuteiaj evitat la poartă</span>
+            </div>
+          </div>
+
+          <!-- 5-Star Rating Card -->
+          <div class="card" style="margin-bottom: 16px;">
+            <span style="font-size: 13px; font-weight: 800; text-align: center; display: block;">
+              Cum a fost cursa cu Radu și Luca?
+            </span>
+            
+            <div class="star-rating-row">
+              <button class="star-btn active" data-rating="1">★</button>
+              <button class="star-btn active" data-rating="2">★</button>
+              <button class="star-btn active" data-rating="3">★</button>
+              <button class="star-btn active" data-rating="4">★</button>
+              <button class="star-btn active" data-rating="5">★</button>
+            </div>
+
+            <div id="ratingLabel" style="text-align: center; font-size: 12px; font-weight: 700; color: var(--brand-green); margin-bottom: 12px;">
+              Excelent! Copiii au călătorit în siguranță și s-au bucurat de drum.
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Comentariu părinte</label>
+              <textarea class="form-input" style="height: 65px; padding: 10px; font-size: 12px; resize: none;">Punctual, copiii au povestit despre roboți pe drum, predarea la școală a fost impecabilă.</textarea>
+            </div>
+          </div>
+
+          <button id="btnSubmitReview" class="btn-primary" style="margin-bottom: 10px;">
+            Trimite aprecierea
+          </button>
+
+          <button id="btnRatingGoHome" class="btn-secondary">
+            Revenire acasă
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 15: Link Web Partajat cu Familia   -->
+        <!-- ========================================== -->
+        <section id="screen-15" class="app-screen">
+          <div class="screen-header">
+            <span class="screen-badge-demo">Link Live Părinți / Bunici</span>
+          </div>
+
+          <h1 class="screen-title" style="font-size: 20px;">Matei este în drum spre școală</h1>
+          <p class="screen-subtitle">Călătorește cu colegul Luca și tatăl acestuia (Radu)</p>
+
+          <div class="card" style="margin-bottom: 14px;">
+            <div style="font-size: 12px; margin-bottom: 4px;"><strong>Destinație:</strong> Școala Gimnazială Nr. 195</div>
+            <div style="font-size: 12px; color: var(--brand-green); font-weight: 700;">Sosire estimată: 07:55</div>
+          </div>
+
+          <button id="btnShareBackToRide" class="btn-secondary">
+            Înapoi în aplicație
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 17: Cursele Școlare (My Rides)      -->
+        <!-- ========================================== -->
+        <section id="screen-17" class="app-screen">
+          <div class="screen-header">
+            <span class="screen-header-title-small">CURSELE MELE</span>
+            <span class="screen-badge-demo">PROGRAM ȘCOLAR</span>
+          </div>
+
+          <h1 class="screen-title">Cursele școlare</h1>
+          <p class="screen-subtitle">Programul de navetă al lui Matei la Școala 195</p>
+
+          <div class="tab-pills-container">
+            <button id="tabMyRidesUpcoming" class="tab-pill active">Programate</button>
+            <button id="tabMyRidesHistory" class="tab-pill">Istoric</button>
+          </div>
+
+          <div id="ridesUpcomingList">
+            <div class="card" style="margin-bottom: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 13px; font-weight: 800;">Luni, 19 octombrie</span>
+                <span style="background: var(--brand-green-light); color: var(--brand-green); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;">Confirmată</span>
+              </div>
+              <div style="font-size: 12px; margin-bottom: 6px;">
+                <div><strong>07:45</strong> Titan → <strong>07:55</strong> Școala 195</div>
+              </div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">
+                Șofer: Radu Ionescu (Tatăl lui Luca · coleg a III-a B)
+              </div>
+              <button id="btnMyRidesViewAlex" class="btn-link" style="font-size: 12px; font-weight: 700;">Vezi detaliile cursei →</button>
+            </div>
+          </div>
+
+          <div id="ridesHistoryList" style="display: none;">
+            <div class="card">
+              <span style="font-size: 12px; font-weight: 700;">Vineri, 16 octombrie</span>
+              <span style="font-size: 11px; color: var(--text-muted); display: block;">Titan → Școala 195 · Cu Maria Marin (Mama Sofiei)</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 18: Calendar Commute Școală        -->
+        <!-- ========================================== -->
+        <section id="screen-18" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-09')">◀</button>
+              <span class="screen-header-title-small">REZERVARE</span>
+            </div>
+            <span class="screen-badge-demo">PROGRAMARE SĂPTĂMÂNĂ</span>
+          </div>
+
+          <h1 class="screen-title">Orar săptămânal școală</h1>
+          <p class="screen-subtitle">Rezervă drumul spre școală pentru una sau mai multe zile</p>
+
+          <div class="day-selector-pills">
+            <div class="day-pill calendar-day-pill active" data-day="19">
+              <span style="font-size: 9px;">Lun</span>
+              <span>19</span>
+            </div>
+            <div class="day-pill calendar-day-pill" data-day="20">
+              <span style="font-size: 9px;">Mar</span>
+              <span>20</span>
+            </div>
+            <div class="day-pill calendar-day-pill active" data-day="21">
+              <span style="font-size: 9px;">Mie</span>
+              <span>21</span>
+            </div>
+            <div class="day-pill calendar-day-pill" data-day="22">
+              <span style="font-size: 9px;">Joi</span>
+              <span>22</span>
+            </div>
+            <div class="day-pill calendar-day-pill" data-day="23">
+              <span style="font-size: 9px;">Vin</span>
+              <span>23</span>
+            </div>
+          </div>
+
+          <span id="calendarDaysCount" style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 16px;">
+            2 zile de școală selectate · 1 loc (Matei)
+          </span>
+
+          <label class="custom-checkbox">
+            <input type="checkbox" id="returnTripCheckbox">
+            <div>
+              <strong>Adaugă și preluarea după ore (12:30 / After-school)</strong>
+              <span style="display: block; color: var(--text-muted); font-size: 11px;">+8 lei / zi / copil</span>
+            </div>
+          </label>
+
+          <div class="card" style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+              <span id="calendarCostMath">2 zile × 1 loc × 8 lei</span>
+              <span style="font-weight: 700;">16 lei</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 800; border-top: 1px solid var(--border-subtle); padding-top: 8px;">
+              <span>Total contribuție carpool</span>
+              <span id="calendarTotalVal" style="color: var(--brand-green);">16 lei</span>
+            </div>
+          </div>
+
+          <button id="btnConfirmCalendar" class="btn-primary">
+            Confirmă rezervarea săptămânală · 16 lei
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 19: Profil Părinte & Interese Elev -->
+        <!-- ========================================== -->
+        <section id="screen-19" class="app-screen">
+          <div class="screen-header">
+            <span class="screen-header-title-small">PROFIL FAMILIE</span>
+            <span class="screen-badge-demo">INTERESELE COPILULUI</span>
+          </div>
+
+          <h1 class="screen-title">Profil familie & elev</h1>
+          <p class="screen-subtitle">Gestionează datele de contact și pasiunile copilului pentru a găsi colegi de drum</p>
+
+          <!-- Parent info -->
+          <div class="card" style="margin-bottom: 14px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--brand-green); color: #fff; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center;">
+                EP
+              </div>
+              <div>
+                <span style="font-size: 15px; font-weight: 800; display: block;">Elena Popescu</span>
+                <span style="font-size: 11px; color: var(--brand-green); font-weight: 700;">
+                  🏫 Verificat: Școala Gimnazială Nr. 195
+                </span>
+              </div>
+            </div>
+            <span style="font-size: 11px; color: var(--text-muted); display: block;">
+              elena.popescu@parinti.scoala195.edu.ro
+            </span>
+          </div>
+
+          <!-- KID PROFILE & INTERACTIVE AI INTERESTS -->
+          <div class="card card-green" style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-size: 14px; font-weight: 800; color: var(--brand-green-dark);">
+                👦 Profilul elevului (Matei)
+              </span>
+              <span class="ai-match-badge">POTRIVIRI DE DRUM</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Nume copil</label>
+              <input type="text" id="inputKidName" class="form-input" value="Matei Popescu">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Clasa elevului</label>
+              <input type="text" id="inputKidGrade" class="form-input" value="Clasa a III-a B">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Descriere / Pasiuni (pentru potrivirea cu colegii)</label>
+              <textarea id="inputKidBio" class="form-input" style="height: 60px; padding: 8px; font-size: 12px; resize: none;">Îi plac roboțeii, piesele Lego și meciurile de fotbal în pauză.</textarea>
+            </div>
+
+            <!-- Interactive Interest Chips -->
+            <label class="form-label" style="margin-bottom: 4px;">
+              Apasă pe etichete pentru a selecta interesele copilului:
+            </label>
+            <div class="interest-chips-grid">
+              <span class="interest-chip selected">🤖 Robotică</span>
+              <span class="interest-chip selected">🧱 Lego</span>
+              <span class="interest-chip selected">⚽ Fotbal</span>
+              <span class="interest-chip selected">♟️ Șah</span>
+              <span class="interest-chip">🎨 Desen & Pictură</span>
+              <span class="interest-chip">🔬 Știință & Experimente</span>
+              <span class="interest-chip">🎵 Muzică</span>
+              <span class="interest-chip">📚 Lectură</span>
+              <span class="interest-chip">🚀 Spațiu & Astronomie</span>
+              <span class="interest-chip">🦕 Dinozauri</span>
+            </div>
+
+            <span style="font-size: 10px; color: var(--text-muted); display: block;">
+              Aceste interese ajută la găsirea colegilor cu preocupări similare pentru aceeași cursă.
+            </span>
+          </div>
+
+          <button id="btnSaveProfile" class="btn-primary" style="margin-bottom: 12px;">
+            Salvează profilul elevului
+          </button>
+
+          <div style="display: flex; gap: 10px;">
+            <button id="btnProfileViewImpact" class="btn-secondary" style="flex: 1; font-size: 12px;">
+              Impact școlar
+            </button>
+            <button id="btnProfileViewRewards" class="btn-secondary" style="flex: 1; font-size: 12px;">
+              Insigne & Recompense
+            </button>
+          </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 20: Detalii Impact Școală          -->
+        <!-- ========================================== -->
+        <section id="screen-20" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-19')">◀</button>
+              <span class="screen-header-title-small">IMPACTUL COMUNITĂȚII</span>
+            </div>
+            <span class="screen-badge-demo">IMPACT ȘCOLAR</span>
+          </div>
+
+          <h1 class="screen-title">Impactul familiei la școală</h1>
+          <p class="screen-subtitle">Cum ajută carpooling-ul la siguranța din jurul Școlii 195</p>
+
+          <div class="impact-hero-card">
+            <span style="font-size: 13px; font-weight: 800; color: var(--brand-green-dark); text-transform: uppercase;">Contribuția familiei Popescu</span>
+            <div class="impact-stat-grid" style="grid-template-columns: 1fr; border-top: none; padding-top: 0;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span>Curse de carpool cu colegii:</span>
+                <strong>12 curse</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span>Mașini eliminate din fața școlii:</span>
+                <strong style="color: var(--brand-green);">12 deplasări solo</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>Timp economisit în trafic:</span>
+                <strong>~6 ore / lună</strong>
+              </div>
+            </div>
+          </div>
+
+          <button id="btnImpactViewHistory" class="btn-primary">
+            Vezi istoricul curselor
+          </button>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SCREEN 21: Insigne & Recompense Matei     -->
+        <!-- ========================================== -->
+        <section id="screen-21" class="app-screen">
+          <div class="screen-header">
+            <div class="screen-header-left">
+              <button class="btn-icon-back" onclick="navigateTo('screen-19')">◀</button>
+              <span class="screen-header-title-small">RECOMPENSE</span>
+            </div>
+            <span class="screen-badge-demo">RECOMPENSE ELEV</span>
+          </div>
+
+          <h1 class="screen-title">Recompense & Insigne</h1>
+          <p class="screen-subtitle">Insigne obținute de Matei pentru mersul ecologic la școală</p>
+
+          <div class="badge-item-card">
+            <div class="badge-icon-box" style="background: #FEF3C7; color: #D97706;">🌟</div>
+            <div>
+              <span style="font-size: 13px; font-weight: 700; display: block;">Coleg de Drum</span>
+              <span style="font-size: 11px; color: var(--text-muted);">A călătorit cu un coleg nou de clasă.</span>
+            </div>
+          </div>
+
+          <div class="badge-item-card">
+            <div class="badge-icon-box" style="background: #EFF6FF; color: #2563EB;">🤖</div>
+            <div>
+              <span style="font-size: 13px; font-weight: 700; display: block;">Micul Robotician</span>
+              <span style="font-size: 11px; color: var(--text-muted);">A împărtășit idei de robotică cu Luca pe drum.</span>
+            </div>
+          </div>
+
+          <div class="badge-item-card">
+            <div class="badge-icon-box" style="background: #EFF6FF; color: #2563EB;">⏰</div>
+            <div>
+              <span style="font-size: 13px; font-weight: 700; display: block;">Campion la Punctualitate</span>
+              <span style="font-size: 11px; color: var(--text-muted);">A ajuns cu 10 min înainte de clopoțel 5 zile la rând.</span>
+            </div>
+          </div>
+
+          <button id="btnRewardsGotIt" class="btn-secondary" style="margin-top: 14px;">
+            Înapoi la profil
+          </button>
+        </section>
+
+      </div> <!-- /phone-viewport -->
+
+      <!-- iOS Home Bar Indicator -->
+      <div class="phone-home-indicator"></div>
+
+    </div> <!-- /phone-frame -->
+
+
+    <!-- ======================================================== -->
+    <!-- SCREEN 16: DESKTOP DASHBOARD PENTRU ADMINISTRAȚIA ȘCOLII -->
+    <!-- ======================================================== -->
+    <div id="screen-16" class="desktop-view-container app-screen">
+      <div class="desktop-dashboard">
+
+        <!-- Header -->
+        <header class="dash-header">
+          <div class="dash-header-brand">
+            <span class="screen-badge-demo" style="background: #FEF3C7; color: #92400E; font-weight: 800; font-size: 11px;">
+              🏫 PANOU DE MOBILITATE · ȘCOALA GIMNAZIALĂ NR. 195
+            </span>
+          </div>
+
+          <nav class="dash-nav-links">
+            <a href="#" class="dash-nav-link active">Trafic Poartă Școală</a>
+            <a href="#" class="dash-nav-link">Coridoare Cartier</a>
+            <a href="#" class="dash-nav-link">Catalog Familii Verificate</a>
+          </nav>
+        </header>
+
+        <!-- Main Title -->
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px;">
+          <div>
+            <h1 style="font-size: 30px; font-weight: 900; color: var(--text-primary); margin-bottom: 4px;">
+              Drumuri mai sigure și fără ambuteiaje la Școala Nr. 195
+            </h1>
+            <p style="font-size: 14px; color: var(--text-secondary);">
+              Sistem demonstrativ de carpooling școlar dedicat părinților și elevilor din cartierul Titan.
+            </p>
+          </div>
+          <div style="background: var(--bg-muted); padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700;">
+            📅 Semestrul I · Octombrie 2026 ▾
+          </div>
+        </div>
+
+        <!-- 4 KPI Metrics -->
+        <div class="dash-kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-number" style="color: #F59E0B;">156</div>
+            <div class="kpi-label">Mașini eliminate zilnic la poartă</div>
+            <div class="kpi-sub">Fără blocaje la orele de vârf (07:45 - 08:00)</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-number">428</div>
+            <div class="kpi-label">Părinți verificați cu email școlar</div>
+            <div class="kpi-sub">Comunitate 100% securizată fără străini</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-number">98%</div>
+            <div class="kpi-label">Potriviri între colegi</div>
+            <div class="kpi-sub">Pe baza clasei, intereselor și apropierii</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-number" style="color: var(--brand-green);">468 kg</div>
+            <div class="kpi-label">CO2 eliminat din aerul curții școlii</div>
+            <div class="kpi-sub">Aer mai curat pentru sănătatea copiilor</div>
+          </div>
+        </div>
+
+        <!-- Corridors Network Map & Stats -->
+        <div class="dash-content-grid">
+          <div class="corridor-map-box">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+              <span style="font-size: 14px; font-weight: 800;">Harta coridoarelor sigure către Școala 195</span>
+              <span style="font-size: 11px; color: var(--text-muted);">Sector 3 · Titan</span>
+            </div>
+
+            <svg viewBox="0 0 600 280" style="width: 100%; height: 260px;">
+              <rect width="600" height="280" fill="#F8FAFC" rx="12"/>
+              <path d="M-20 220 C150 170, 300 190, 420 120 S540 80, 620 40" stroke="#BFDBFE" stroke-width="36" stroke-linecap="round"/>
+              <text x="350" y="175" fill="#94A3B8" font-size="11" font-weight="700" opacity="0.6">Dâmbovița</text>
+              
+              <!-- Corridor 1: Nicolae Grigorescu -> Scoala 195 -->
+              <path d="M440 210 L440 90 L400 40" stroke="#2563EB" stroke-width="12" stroke-linecap="round"/>
+              
+              <!-- Corridor 2: Camil Ressu -> Scoala 195 -->
+              <path d="M300 240 L300 140 L400 40" stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+              
+              <!-- School Node -->
+              <circle cx="400" cy="40" r="14" fill="#F59E0B" stroke="#FFFFFF" stroke-width="4"/>
+              <text x="420" y="45" fill="#111827" font-size="14" font-weight="900">🏫 Școala Nr. 195</text>
+              <circle cx="440" cy="210" r="9" fill="#2563EB" stroke="#FFFFFF" stroke-width="2"/>
+              <text x="455" y="215" fill="#111827" font-size="12" font-weight="700">Titan Sud</text>
+            </svg>
+          </div>
+
+          <div class="corridor-stats-box">
+            <span style="font-size: 15px; font-weight: 800; display: block; margin-bottom: 4px;">Unde carpool-ează părinții</span>
+            <span style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 20px;">
+              Distribuția curselor pe zonele de domiciliu
+            </span>
+
+            <div class="corridor-bar-item">
+              <div class="corridor-bar-label">
+                <span>Zona Grigorescu – Liviu Rebreanu</span>
+                <span style="color: var(--brand-green);">82 elevi (62%)</span>
+              </div>
+              <div class="corridor-bar-bg">
+                <div class="corridor-bar-fill" style="width: 62%; background: var(--brand-green);"></div>
+              </div>
+            </div>
+
+            <div class="corridor-bar-item">
+              <div class="corridor-bar-label">
+                <span>Zona Camil Ressu – Dristor</span>
+                <span style="color: var(--accent-blue);">34 elevi (26%)</span>
+              </div>
+              <div class="corridor-bar-bg">
+                <div class="corridor-bar-fill" style="width: 26%; background: var(--accent-blue);"></div>
+              </div>
+            </div>
+
+            <div class="corridor-bar-item">
+              <div class="corridor-bar-label">
+                <span>Zona Parc IOR – Baba Novac</span>
+                <span style="color: var(--brand-school-gold);">16 elevi (12%)</span>
+              </div>
+              <div class="corridor-bar-bg">
+                <div class="corridor-bar-fill" style="width: 12%; background: var(--brand-school-gold);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div> <!-- /desktop-view-container -->
+
+  </main>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <aside id="toastNotification" class="toast-notification" aria-live="polite">
+    <span id="toastIcon" class="toast-icon">✓</span>
+    <span id="toastText">Acțiune efectuată cu succes!</span>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
