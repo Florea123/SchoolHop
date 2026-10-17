@@ -75,7 +75,8 @@ frontend/
   <pagina>.html            câte un fișier HTML pe pagină
   css/base.css, layout.css design system + app shell responsive
   css/pages/<pagina>.css   stiluri specifice paginii
-  js/core/                 api (client HTTP), ui (utilitare), layout (header/navigație), map (hartă SVG)
+  js/core/                 api (client HTTP), ui (utilitare), layout (header/navigație), map (hartă Leaflet), assistant (chat)
+  vendor/leaflet/          Leaflet 1.9.4 (hărți OpenStreetMap)
   js/pages/<pagina>.js     logica paginii
 tests/api.test.js
 ```
@@ -83,6 +84,8 @@ tests/api.test.js
 Pagini: `login`, `register` → `verify` (zona de domiciliu) → `emergency` (înregistrare în 3 pași), `home`, `search` → `results` → `meeting` → `seat` → `schedule` (rezervare), `publish`, `my-rides`, `ride` (live), `alert`, `dropoff`, `review`, `share` (public), `profile`, `impact`, `rewards`, `notifications`, `dashboard` (admin).
 
 Layout responsive: pe telefon navigația e o bară fixă jos; de la 900px urcă în header, iar listele trec pe 2 coloane.
+
+Hărțile sunt hărți reale ale Iașiului (OpenStreetMap), afișate cu [Leaflet](https://leafletjs.com) 1.9.4 - librărie inclusă local în `frontend/vendor/leaflet` (licență BSD-2). Traseul e desenat ca linie directă între puncte.
 
 ---
 

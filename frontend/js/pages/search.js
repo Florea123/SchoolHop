@@ -27,7 +27,7 @@ function refresh() {
   renderMap($('#map'), {
     route: home ? (toSchool ? [home, dest] : [dest, home]) : [],
     points: [home, dest].filter(Boolean),
-    caption: 'Traseu schematic · locațiile exacte apar după alegerea cursei',
+    caption: 'Zona de plecare și școala',
   });
 }
 
