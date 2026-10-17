@@ -2,6 +2,7 @@
 
 import { api, auth } from './api.js';
 import { html, raw } from './ui.js';
+import { mountAssistant } from './assistant.js';
 
 const ICONS = {
   home: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
@@ -69,6 +70,7 @@ export async function mountShell({ active, roles } = {}) {
         ${me.unreadNotifications ? raw(`<span class="bell-count">${me.unreadNotifications > 99 ? '99+' : me.unreadNotifications}</span>`) : ''}
       </a>
     </div>`;
+  if (!isAdmin) mountAssistant(me);
   return me;
 }
 

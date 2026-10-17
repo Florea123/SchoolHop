@@ -43,6 +43,7 @@ api.use('/reviews', require('./routes/reviews'));
 api.use('/notifications', require('./routes/notifications'));
 api.use('/social-fund', require('./routes/fund'));
 api.use('/schools', require('./routes/schools'));
+api.use('/assistant', require('./routes/assistant'));
 
 app.use('/api', api);
 app.use('/api', notFoundApi);

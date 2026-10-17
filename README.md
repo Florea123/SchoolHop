@@ -84,6 +84,10 @@ Layout responsive: pe telefon navigația e o bară fixă jos; de la 900px urcă 
 
 ---
 
+## Asistentul pentru părinți (chat)
+
+Pe paginile părinților apare un robot mic, pe care îl poți muta trăgându-l; la click se deschide chat-ul lângă el. Interfața și endpoint-ul `POST /api/assistant` sunt gata. Modelul AI se conectează în `replyWithModel()` din `backend/services/assistant.js`, folosind cheia `AI_API_KEY` din `.env`. Cât timp cheia e goală, asistentul răspunde că nu este încă configurat.
+
 ## Integrarea unui model AI
 
 Scorul de potrivire este calculat local (`backend/services/ai.js`). Textele generate (recomandarea pentru părinți și „întrebarea zilei” pentru copii) trec prin funcția `generateText()` din același fișier - momentan întoarce `null`, deci se folosesc textele generate local. Implementați acolo apelul către modelul ales.
@@ -111,3 +115,4 @@ Toate rutele sunt sub `/api`; cele marcate cu * cer `Authorization: Bearer <toke
 | POST | `/reviews` * | evaluare șofer |
 | GET/POST | `/notifications`, `/social-fund`, `/social-fund/donations` * | notificări, fond social |
 | GET | `/schools/:id/dashboard` * | panou școală (admin) |
+| POST | `/assistant` * | chat cu asistentul pentru părinți |

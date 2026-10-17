@@ -227,3 +227,14 @@ test('validare: date invalide respinse, login doar cu cont existent', async () =
   const gone = await call('GET', '/api/me', { token: ok.body.token });
   assert.equal(gone.status, 401);
 });
+
+test('asistent: răspuns când modelul AI nu e configurat, validarea mesajelor', async () => {
+  const token = await login('gabriel.enache@parinte.edu.ro');
+  const ok = await call('POST', '/api/assistant', { token, body: { messages: [{ role: 'user', content: 'Caută o cursă pentru mâine' }] } });
+  assert.equal(ok.status, 200);
+  assert.equal(ok.body.configured, false);
+  assert.ok(ok.body.reply.length > 10);
+  assert.equal((await call('POST', '/api/assistant', { token, body: { messages: [] } })).status, 400);
+  assert.equal((await call('POST', '/api/assistant', { token, body: { messages: [{ role: 'user', content: 'x'.repeat(1001) }] } })).status, 400);
+  assert.equal((await call('POST', '/api/assistant', { body: { messages: [{ role: 'user', content: 'salut' }] } })).status, 401);
+});

@@ -32,6 +32,9 @@ module.exports = {
   // Distanța față de traseu peste care se declanșează alerta de deviere
   deviationThresholdM: num(process.env.DEVIATION_THRESHOLD_M, 600),
 
+  // Cheia pentru modelul AI al asistentului (goală = asistent neconfigurat)
+  aiApiKey: process.env.AI_API_KEY || '',
+
   // Fondul social: cât dublează sponsorul pentru fiecare leu donat
   sponsorMatchRatio: num(process.env.SPONSOR_MATCH_RATIO, 1),
 
