@@ -5,7 +5,7 @@ const db = require('../../db/db');
 const { badRequest, forbidden, notFound, toInt, toNumber } = require('../utils/http');
 const validate = require('../utils/validate');
 const { interestLabels, validInterestSlugs, findArea } = require('../services/catalog');
-const { claimRegistryEntry } = require('../services/registry');
+const { createChild } = require('../services/childProfile');
 const serialize = require('../services/serialize');
 
 const router = express.Router();
@@ -56,14 +56,10 @@ router.patch('/:id', async (req, res) => {
   res.json({ child: serialize.child(updated, await interestLabels()) });
 });
 
-// Adaugă încă un copil folosind ID-ul lui din catalogul școlii
-router.post('/claim', async (req, res) => {
-  const accountId = validate.accountId(req.body.schoolAccountId);
+// Adaugă încă un copil
+router.post('/', async (req, res) => {
   const schoolId = toInt(req.body.schoolId, 'Școala', { min: 1 });
-  const child = await db.withTransaction(async (client) => {
-    const { rows: [user] } = await client.query('SELECT * FROM users WHERE user_id = $1', [req.user.id]);
-    return claimRegistryEntry(client, user, schoolId, accountId);
-  });
+  const child = await db.withTransaction((client) => createChild(client, req.user.id, schoolId, req.body));
   res.status(201).json({ child: serialize.child(child, await interestLabels()) });
 });
 

@@ -6,7 +6,6 @@ const EMAIL_RE = /^[a-z0-9._%+-]+@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/i;
 const NAME_RE = /^[\p{L}][\p{L} .'-]*[\p{L}.]$/u;
 // Telefon românesc: 0xxxxxxxxx sau +40xxxxxxxxx (9 cifre după prefix)
 const PHONE_RE = /^(?:\+40|0040|0)(\d{9})$/;
-const ACCOUNT_RE = /^[A-Z]{2,10}(?:-[A-Z]{2,15}){1,3}-\d{3,5}$/;
 const PLATE_RE = /^(B \d{2,3}|[A-Z]{2} \d{2}) [A-Z]{3}$/;
 
 function email(value) {
@@ -42,12 +41,6 @@ function password(value) {
   return v;
 }
 
-function accountId(value) {
-  const v = String(value ?? '').trim().toUpperCase();
-  if (!ACCOUNT_RE.test(v)) throw badRequest('ID-ul contului școlar nu are formatul corect (ex: EDU-IS-NEGRUZZI-123)');
-  return v;
-}
-
 function plate(value) {
   const v = String(value ?? '').trim().toUpperCase().replace(/\s+/g, ' ')
     .replace(/^([A-Z]{1,2})\s?(\d{2,3})\s?([A-Z]{3})$/, '$1 $2 $3');
@@ -65,4 +58,4 @@ function text(value, label, { min = 1, max = 255, required = true } = {}) {
   return v;
 }
 
-module.exports = { email, personName, fullName, phone, password, accountId, plate, text };
+module.exports = { email, personName, fullName, phone, password, plate, text };

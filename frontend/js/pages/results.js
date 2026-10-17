@@ -25,7 +25,7 @@ function card(r, child, isBest) {
         <div class="avatar">${initials(ride.driver.fullName)}</div>
         <div>
           <div class="strong">${ride.driver.fullName}${r.companions.length ? ` · cu ${r.companions.map((c) => `${c.name} (${c.grade.replace('Clasa a ', '')})`).join(', ')}` : ''}</div>
-          <div class="small muted">${ride.driver.reviews ? `★${ride.driver.rating} (${ride.driver.reviews})` : 'Fără evaluări încă'} · ${ride.driver.role === 'community_driver' ? 'Șofer comunitar verificat' : 'Părinte verificat'}</div>
+          <div class="small muted">${ride.driver.reviews ? `★${ride.driver.rating} (${ride.driver.reviews})` : 'Fără evaluări încă'} · ${ride.driver.role === 'community_driver' ? 'Șofer comunitar' : 'Părinte'}</div>
         </div>
       </div>
       <div class="ai-box"><div>

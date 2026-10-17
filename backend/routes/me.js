@@ -29,7 +29,6 @@ async function loadMe(userId) {
       emergencyContactName: user.emergency_contact_name,
       emergencyContactPhone: user.emergency_contact_phone,
       greenPoints: user.green_points,
-      schoolAccountId: user.school_account_id,
     },
     school: school.rows[0] || null,
     children: children.rows.map((c) => serialize.child(c, labels)),

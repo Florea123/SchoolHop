@@ -123,25 +123,23 @@ test('flux părinte: căutare AI → rezervare săptămânală → cursă live �
   assert.ok(notifs.body.notifications.some((n) => n.type === 'arrived_at_school'));
 });
 
-test('înregistrare verificată prin registrul școlii', async () => {
-  const wrong = await call('POST', '/api/auth/register', { body: {
-    fullName: 'Ioana Popa', email: 'ioana.popa@test.ro', phone: '0744000111', password: 'parola-sigura1',
-    schoolId: 1, schoolAccountId: 'EDU-IS-NEGRUZZI-999', consent: true } });
-  assert.equal(wrong.status, 400);
-  const nameMismatch = await call('POST', '/api/auth/register', { body: {
-    fullName: 'Alt Nume', email: 'alt@test.ro', phone: '0744000111', password: 'parola-sigura1',
-    schoolId: 1, schoolAccountId: 'EDU-IS-NEGRUZZI-150', consent: true } });
-  assert.equal(nameMismatch.status, 400);
+test('înregistrare cu școala și datele copilului', async () => {
+  const base = { fullName: 'Ioana Popa', email: 'ioana.popa@test.ro', phone: '0744000111', password: 'parola-sigura1',
+    schoolId: 1, childName: 'Luca Popa', childBirthDate: '2014-05-12', childGradeLevel: 'a VI-a', childGradeLetter: 'b', consent: true };
+  assert.equal((await call('POST', '/api/auth/register', { body: { ...base, schoolId: 999 } })).status, 400);
+  assert.equal((await call('POST', '/api/auth/register', { body: { ...base, childBirthDate: '2024-01-01' } })).status, 400);
+  assert.equal((await call('POST', '/api/auth/register', { body: { ...base, childGradeLevel: 'a XX-a' } })).status, 400);
 
-  const ok = await call('POST', '/api/auth/register', { body: {
-    fullName: 'Ioana Popa', email: 'ioana.popa@test.ro', phone: '0744000111', password: 'parola-sigura1',
-    schoolId: 1, schoolAccountId: 'edu-is-negruzzi-150', consent: true } });
+  const ok = await call('POST', '/api/auth/register', { body: base });
   assert.equal(ok.status, 201, JSON.stringify(ok.body));
   assert.equal(ok.body.child.full_name, 'Luca Popa');
+  assert.equal(ok.body.child.grade, 'Clasa a VI-a B');
   const token = ok.body.token;
+  assert.equal((await call('POST', '/api/auth/register', { body: base })).status, 409, 'email deja folosit');
 
-  const claim = await call('POST', '/api/children/claim', { token, body: { schoolId: 1, schoolAccountId: 'EDU-IS-NEGRUZZI-151' } });
-  assert.equal(claim.status, 201);
+  const second = await call('POST', '/api/children', { token, body: { schoolId: 1, childName: 'Irina Popa', childBirthDate: '2017-11-03', childGradeLevel: 'a III-a', childGradeLetter: 'A' } });
+  assert.equal(second.status, 201, JSON.stringify(second.body));
+  assert.equal((await call('POST', '/api/children', { token, body: { schoolId: 1, childName: 'Irina Popa', childBirthDate: '2017-11-03', childGradeLevel: 'a III-a' } })).status, 400, 'duplicat');
 
   const patch = await call('PATCH', `/api/children/${ok.body.child.child_id}`, { token, body: { homeArea: 'Copou', interests: ['robotica', 'sah'], bio: 'Test' } });
   assert.equal(patch.status, 200);
@@ -149,8 +147,8 @@ test('înregistrare verificată prin registrul școlii', async () => {
   const badInterest = await call('PATCH', `/api/children/${ok.body.child.child_id}`, { token, body: { interests: ['zbor'] } });
   assert.equal(badInterest.status, 400);
 
-  const em = await call('PATCH', '/api/me', { token, body: { emergencyContactName: 'Bunica', emergencyContactPhone: '+40722123456' } });
-  assert.equal(em.body.user.emergencyContactName, 'Bunica');
+  const em = await call('PATCH', '/api/me', { token, body: { emergencyContactName: 'Bunica Popa', emergencyContactPhone: '+40722123456' } });
+  assert.equal(em.body.user.emergencyContactName, 'Bunica Popa');
 });
 
 test('publicare cursă de către un părinte nou devenit șofer', async () => {
@@ -190,7 +188,7 @@ test('panoul școlii este doar pentru administrator; fondul social primește don
 
 test('validare: date invalide respinse, login doar cu cont existent', async () => {
   const base = { fullName: 'Radu Ionescu', email: 'radu@test.ro', phone: '0744000222', password: 'parola123',
-    schoolId: 2, schoolAccountId: 'EDU-IS-RACOVITA-077', consent: true };
+    schoolId: 2, childName: 'Sara Ionescu', childBirthDate: '2016-02-27', childGradeLevel: 'a IV-a', consent: true };
   const cases = [
     { email: 'fara-arond.ro' },
     { email: 'a@b' },
@@ -200,7 +198,8 @@ test('validare: date invalide respinse, login doar cu cont existent', async () =
     { password: 'fara-cifre-deloc' },
     { fullName: 'Radu' },
     { fullName: 'R4du Ion3scu' },
-    { schoolAccountId: 'orice text' },
+    { childName: 'Sara' },
+    { childGradeLetter: 'AB' },
     { consent: false },
   ];
   for (const override of cases) {

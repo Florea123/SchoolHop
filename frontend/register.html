@@ -21,11 +21,11 @@
       <div class="steps" aria-label="Pasul 1 din 3"><span class="done"></span><span></span><span></span></div>
       <span class="eyebrow">Pasul 1 din 3 · Date părinte</span>
       <h1 class="page-title">Creează contul de familie</h1>
-      <p class="page-subtitle">Verificăm contul în registrul școlii folosind ID-ul primit de la secretariat.</p>
+      <p class="page-subtitle">Datele tale, școala și copilul care va merge la școală.</p>
 
       <form id="registerForm" novalidate>
         <div class="form-group">
-          <label class="form-label" for="fullName">Nume complet părinte (ca în catalog)</label>
+          <label class="form-label" for="fullName">Numele tău complet</label>
           <input class="form-input" id="fullName" autocomplete="name" required maxlength="100">
         </div>
         <div class="form-group">
@@ -48,21 +48,17 @@
         </div>
 
         <div class="card school-box">
-          <div class="card-title">Școala copilului</div>
+          <div class="card-title">Școala și copilul</div>
           <div class="form-group">
             <label class="form-label" for="school">Școala</label>
             <select class="form-input" id="school" required><option value="">Se încarcă…</option></select>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="accountId">ID cont școlar al elevului</label>
-            <input class="form-input" id="accountId" required autocapitalize="characters" spellcheck="false" maxlength="40">
-            <span class="form-hint" id="accountHint">ID-ul îl primești de la secretariat sau din catalogul electronic.</span>
-          </div>
+          <div id="childFields"></div>
         </div>
 
-        <label class="checkbox"><input type="checkbox" id="consent"> <span>Confirm că sunt părintele / tutorele legal al elevului și sunt de acord ca datele să fie verificate în registrul școlii.</span></label>
+        <label class="checkbox"><input type="checkbox" id="consent"> <span>Confirm că sunt părintele / tutorele legal al copilului.</span></label>
         <p class="form-hint error" id="formError" role="alert" hidden></p>
-        <button class="btn btn-primary btn-block" type="submit" id="submit">Verifică și continuă</button>
+        <button class="btn btn-primary btn-block" type="submit" id="submit">Creează contul</button>
       </form>
       <p class="switch-auth">Ai deja cont? <a href="login.html" class="strong">Intră în cont</a></p>
     </div>

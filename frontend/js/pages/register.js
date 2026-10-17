@@ -1,6 +1,7 @@
 import { api, auth, getMeta } from '../core/api.js';
 import { $, html, showError, withLoading } from '../core/ui.js';
 import { check, firstError } from '../core/validate.js';
+import { childFieldsHtml, readChildFields } from '../core/childForm.js';
 
 const errorEl = $('#formError');
 const schoolSelect = $('#school');
@@ -14,17 +15,14 @@ function fail(message, field) {
 
 async function init() {
   try {
-    ({ schools } = await getMeta());
+    const meta = await getMeta();
+    ({ schools } = meta);
+    $('#childFields').innerHTML = childFieldsHtml('child', meta.config.gradeLevels);
     schoolSelect.innerHTML = html`<option value="">Alege școala</option>${schools.map((s) => html`<option value="${s.id}">${s.name}</option>`)}`;
   } catch (err) {
     showError(err);
   }
 }
-
-schoolSelect.addEventListener('change', () => {
-  const school = schools.find((s) => String(s.id) === schoolSelect.value);
-  $('#accountId').placeholder = school ? `${school.accountPrefix}-XXX` : '';
-});
 
 $('#registerForm').addEventListener('input', (e) => e.target.classList.remove('invalid'));
 
@@ -37,7 +35,7 @@ $('#registerForm').addEventListener('submit', async (e) => {
     phone: $('#phone').value.trim(),
     password: $('#password').value,
     schoolId: Number(schoolSelect.value),
-    schoolAccountId: $('#accountId').value.trim(),
+    ...readChildFields('child').body,
     consent: $('#consent').checked,
   };
   const error = firstError([
@@ -47,7 +45,7 @@ $('#registerForm').addEventListener('submit', async (e) => {
     [$('#password'), check.password(body.password)],
     [$('#passwordConfirm'), body.password !== $('#passwordConfirm').value ? 'Parolele nu se potrivesc.' : null],
     [schoolSelect, body.schoolId ? null : 'Alege școala copilului.'],
-    [$('#accountId'), check.accountId(body.schoolAccountId)],
+    ...readChildFields('child').rules,
     [$('#consent'), body.consent ? null : 'Bifează confirmarea de părinte / tutore legal.'],
   ]);
   if (error) return fail(error);

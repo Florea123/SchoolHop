@@ -1,7 +1,8 @@
-// Pasul 2: date sincronizate din catalog + completarea profilului copilului
+// Pasul 2: completarea profilului copiilor (zonă, înălțător) + adăugarea altor copii
 import { api, auth, getMeta } from '../core/api.js';
 import { $, $$, html, raw, showError, toast, withLoading, getCurrentPosition, formatDate, initials } from '../core/ui.js';
 import { check, firstError } from '../core/validate.js';
+import { childFieldsHtml, readChildFields } from '../core/childForm.js';
 
 if (!auth.isLoggedIn) window.location.replace('login.html');
 
@@ -17,7 +18,6 @@ function childForm(c) {
         <div>
           <div class="strong">${c.fullName}</div>
           <div class="small muted">${c.grade} · ${c.age} ani${c.teacher ? ` · ${c.teacher}` : ''}</div>
-          <div class="synced">Sincronizat cu catalogul școlii · născut(ă) ${formatDate(c.birthDate, { day: 'numeric', month: 'long', year: 'numeric' })}</div>
         </div>
       </div>
       <div class="form-group">
@@ -41,7 +41,6 @@ function childForm(c) {
 }
 
 function render() {
-  $('#subtitle').textContent = `Registrul ${me.school ? me.school.name : 'școlii'}`;
   $('#children').innerHTML = me.children.length
     ? me.children.map((c) => raw(childForm(c))).join('')
     : html`<p class="muted">Niciun copil asociat încă.</p>`;
@@ -60,18 +59,20 @@ async function load() {
     [me, meta] = await Promise.all([api.get('/me'), getMeta()]);
     if (me.user.role === 'admin') return window.location.replace('dashboard.html');
     render();
+    if (!$('#addChildFields').innerHTML) $('#addChildFields').innerHTML = childFieldsHtml('add', meta.config.gradeLevels);
   } catch (err) { showError(err); }
 }
 
-$('#claimForm').addEventListener('submit', async (e) => {
+$('#addChildForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const error = firstError([[$('#claimAccount'), check.accountId($('#claimAccount').value)]]);
+  const { body, rules } = readChildFields('add');
+  const error = firstError(rules);
   if (error) { showError(new Error(error)); return; }
-  await withLoading($('#claimSubmit'), async () => {
+  await withLoading($('#addChildSubmit'), async () => {
     try {
-      await api.post('/children/claim', { schoolId: me.user.schoolId, schoolAccountId: $('#claimAccount').value.trim() });
-      toast('Copilul a fost găsit în catalog și adăugat');
-      $('#claimAccount').value = '';
+      await api.post('/children', { schoolId: me.user.schoolId, ...body });
+      toast('Copilul a fost adăugat');
+      $('#addChildFields').innerHTML = childFieldsHtml('add', meta.config.gradeLevels);
       $('#addChild').open = false;
       await load();
     } catch (err) { showError(err); }

@@ -19,20 +19,17 @@
     <div class="auth-brand"><span class="brand"><span class="brand-name">School<b>Hop</b></span></span></div>
     <div class="auth-card">
       <div class="steps" aria-label="Pasul 2 din 3"><span class="done"></span><span class="done"></span><span></span></div>
-      <span class="eyebrow">Pasul 2 din 3 · Verificare</span>
-      <h1 class="page-title">Validare cont școlar</h1>
-      <p class="page-subtitle" id="subtitle">Sincronizare cu registrul oficial al școlii…</p>
+      <span class="eyebrow">Pasul 2 din 3 · Copii</span>
+      <h1 class="page-title">Unde locuiți?</h1>
+      <p class="page-subtitle" id="subtitle">Zona de domiciliu ne ajută să găsim colegi de drum din apropiere.</p>
 
         <div id="children"><div class="skeleton"></div></div>
 
       <details class="card add-child" id="addChild">
         <summary class="strong">Mai ai un copil la această școală?</summary>
-        <form id="claimForm" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="claimAccount">ID cont școlar al celui de-al doilea copil</label>
-            <input class="form-input" id="claimAccount" autocapitalize="characters" spellcheck="false" maxlength="40">
-          </div>
-          <button class="btn btn-secondary btn-block" type="submit" id="claimSubmit">Adaugă copilul</button>
+        <form id="addChildForm" novalidate>
+          <div id="addChildFields"></div>
+          <button class="btn btn-secondary btn-block" type="submit" id="addChildSubmit">Adaugă copilul</button>
         </form>
       </details>
 

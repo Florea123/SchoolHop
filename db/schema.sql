@@ -1,7 +1,7 @@
 -- ==============================================================================
 -- SchoolHop - Bază de Date Carpooling Școlar Sigur (Iași)
 --   1. Public țintă: exclusiv transportul copiilor la școală (fără adulți pasageri).
---   2. Autentificare cu cont școlar, verificat în registrul școlii (catalog).
+--   2. Cont de părinte asociat școlii copilului.
 --   3. Profil copii cu școală, clasă și interese (fotbal, pian, robotică etc.).
 --   4. Componentă AI: potrivire copii după interese comune.
 --   5. Fond social & donații: curse gratuite pentru copiii din sate greu accesibile.
@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS schools (
     lon DECIMAL(9, 6) NOT NULL,
     dropoff_point_label VARCHAR(255) NOT NULL, -- Punct de predare stabilit (evită aglomerația)
     phone VARCHAR(20),                         -- Secretariat (apel SOS)
-    account_prefix VARCHAR(40) NOT NULL,       -- Prefixul conturilor din catalog (ex: EDU-IS-NEGRUZZI)
     bell_time TIME NOT NULL DEFAULT '08:00',   -- Ora de începere a orelor
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -50,10 +49,9 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash VARCHAR(255) NOT NULL,
     phone VARCHAR(20),
     school_id INT REFERENCES schools(school_id) ON DELETE SET NULL,
-    school_account_id VARCHAR(100) UNIQUE,     -- ID cont catalog electronic (Edu/Școală)
     role VARCHAR(30) DEFAULT 'parent'
         CHECK (role IN ('parent', 'parent_driver', 'community_driver', 'admin')),
-    is_school_verified BOOLEAN DEFAULT FALSE,  -- Verificat prin registrul școlii
+    is_school_verified BOOLEAN DEFAULT TRUE,
     emergency_contact_name VARCHAR(100),
     emergency_contact_phone VARCHAR(20),
     green_points INT NOT NULL DEFAULT 0,       -- Puncte "Erou Verde"
@@ -61,19 +59,6 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 5. TABELUL SCHOOL_REGISTRY (simulare catalog electronic al școlii)
--- La înregistrare, contul școlar al părintelui trebuie să existe aici.
-CREATE TABLE IF NOT EXISTS school_registry (
-    registry_id SERIAL PRIMARY KEY,
-    school_id INT NOT NULL REFERENCES schools(school_id) ON DELETE CASCADE,
-    account_id VARCHAR(100) UNIQUE NOT NULL,
-    parent_full_name VARCHAR(100) NOT NULL,
-    child_full_name VARCHAR(100) NOT NULL,
-    child_birth_date DATE NOT NULL,
-    grade VARCHAR(30) NOT NULL,
-    teacher VARCHAR(100),
-    claimed_by INT REFERENCES users(user_id) ON DELETE SET NULL
-);
 
 -- 6. TABELUL CHILDREN (Copiii - singurii pasageri!)
 CREATE TABLE IF NOT EXISTS children (

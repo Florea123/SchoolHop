@@ -1,4 +1,4 @@
-// Autentificare: login și înregistrare verificată prin registrul școlii
+// Autentificare: login și înregistrare (părinte + primul copil)
 
 const express = require('express');
 const bcrypt = require('bcryptjs');
@@ -6,7 +6,7 @@ const db = require('../../db/db');
 const { signToken } = require('../middleware/auth');
 const { badRequest, conflict, HttpError, requireFields, toInt } = require('../utils/http');
 const validate = require('../utils/validate');
-const { claimRegistryEntry } = require('../services/registry');
+const { createChild } = require('../services/childProfile');
 
 const router = express.Router();
 
@@ -29,13 +29,12 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  requireFields(req.body, ['fullName', 'email', 'phone', 'password', 'schoolId', 'schoolAccountId']);
+  requireFields(req.body, ['fullName', 'email', 'phone', 'password', 'schoolId', 'childName', 'childBirthDate', 'childGradeLevel']);
   const fullName = validate.fullName(req.body.fullName);
   const email = validate.email(req.body.email);
   const phone = validate.phone(req.body.phone);
   const password = validate.password(req.body.password);
   const schoolId = toInt(req.body.schoolId, 'Școala', { min: 1 });
-  const accountId = validate.accountId(req.body.schoolAccountId);
   if (req.body.consent !== true) throw badRequest('Trebuie să confirmi că ești părintele / tutorele legal al elevului');
 
   const existing = await db.query('SELECT 1 FROM users WHERE lower(email) = $1', [email]);
@@ -44,15 +43,12 @@ router.post('/register', async (req, res) => {
   const passwordHash = await bcrypt.hash(password, 10);
   const result = await db.withTransaction(async (client) => {
     const { rows: [user] } = await client.query(
-      `INSERT INTO users (full_name, email, password_hash, phone, school_id, school_account_id, role, is_school_verified)
-       VALUES ($1, $2, $3, $4, $5, $6, 'parent', false) RETURNING *`,
-      [fullName, email, passwordHash, phone, schoolId, accountId]
+      `INSERT INTO users (full_name, email, password_hash, phone, school_id, role)
+       VALUES ($1, $2, $3, $4, $5, 'parent') RETURNING *`,
+      [fullName, email, passwordHash, phone, schoolId]
     );
-    const child = await claimRegistryEntry(client, user, schoolId, accountId);
-    const { rows: [verified] } = await client.query(
-      'UPDATE users SET is_school_verified = true WHERE user_id = $1 RETURNING *', [user.user_id]
-    );
-    return { user: verified, child };
+    const child = await createChild(client, user.user_id, schoolId, req.body);
+    return { user, child };
   });
 
   res.status(201).json({ token: signToken(result.user), user: publicUser(result.user), child: result.child });

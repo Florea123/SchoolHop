@@ -9,78 +9,78 @@ SET TIME ZONE 'Europe/Bucharest';
 TRUNCATE TABLE
     notifications, reviews, social_fund_transactions, ai_interest_matches,
     ride_alerts, ride_locations, bookings, rides, vehicles, children,
-    school_registry, users, interests, areas, schools
+    users, interests, areas, schools
 RESTART IDENTITY CASCADE;
 
 -- 1. ȘCOLI PARTENERE
-INSERT INTO schools (name, short_name, address, city, lat, lon, dropoff_point_label, phone, account_prefix, bell_time) VALUES
+INSERT INTO schools (name, short_name, address, city, lat, lon, dropoff_point_label, phone, bell_time) VALUES
     ('Colegiul Național „Costache Negruzzi”', 'Colegiul Negruzzi', 'Strada Toma Cozma 4, Iași', 'Iași',
-     47.172500, 27.568200, 'Punct Sigur Debarcare Elevi (Parcarea Laterală Toma Cozma)', '+40232215000', 'EDU-IS-NEGRUZZI', '08:00'),
+     47.172500, 27.568200, 'Punct Sigur Debarcare Elevi (Parcarea Laterală Toma Cozma)', '+40232215000', '08:00'),
     ('Colegiul Național „Emil Racoviță”', 'Colegiul Racoviță', 'Aleea Nicolina 4, Iași', 'Iași',
-     47.152800, 27.581000, 'Punct Sigur Debarcare (Rond Podu Roș / Parcare Liceu)', '+40232230000', 'EDU-IS-RACOVITA', '08:00'),
+     47.152800, 27.581000, 'Punct Sigur Debarcare (Rond Podu Roș / Parcare Liceu)', '+40232230000', '08:00'),
     ('Colegiul Național Iași', 'Colegiul Național', 'Strada Arcu 4, Iași', 'Iași',
-     47.166200, 27.576800, 'Punct Sigur Debarcare (Bulevardul Independenței / Arcu)', '+40232214000', 'EDU-IS-NATIONAL', '08:00');
+     47.166200, 27.576800, 'Punct Sigur Debarcare (Bulevardul Independenței / Arcu)', '+40232214000', '08:00');
 
 -- Celelalte școli și licee din municipiul Iași (nume, adresă și coordonate din OpenStreetMap)
-INSERT INTO schools (name, short_name, address, city, lat, lon, dropoff_point_label, phone, account_prefix, bell_time) VALUES
+INSERT INTO schools (name, short_name, address, city, lat, lon, dropoff_point_label, phone, bell_time) VALUES
     ('Colegiul Național „Mihai Eminescu”', 'CN Mihai Eminescu', 'Strada Mihail Kogălniceanu 10, Iași', 'Iași',
-     47.172750, 27.581727, 'Intrarea principală', NULL, 'EDU-IS-EMINESCU', '08:00'),
+     47.172750, 27.581727, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul Național „Garabet Ibrăileanu”', 'CN Garabet Ibrăileanu', 'Strada Oastei 1, Iași', 'Iași',
-     47.180193, 27.569848, 'Intrarea principală', NULL, 'EDU-IS-IBRAILEANU', '08:00'),
+     47.180193, 27.569848, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul Național de Artă „Octav Băncilă”', 'CN de Artă Octav Băncilă', 'Strada Ion Constantin Brătianu, Iași', 'Iași',
-     47.165320, 27.585863, 'Intrarea principală', NULL, 'EDU-IS-BANCILA', '08:00'),
+     47.165320, 27.585863, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul Pedagogic „Vasile Lupu”', 'Colegiul Pedagogic', 'Pista Copou, Iași', 'Iași',
-     47.201017, 27.540382, 'Intrarea principală', NULL, 'EDU-IS-PEDAGOGIC', '08:00'),
+     47.201017, 27.540382, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul „Richard Wurmbrand”', 'Colegiul Richard Wurmbrand', 'Strada Barbu Lăutaru, Iași', 'Iași',
-     47.157888, 27.599799, 'Intrarea principală', NULL, 'EDU-IS-WURMBRAND', '08:00'),
+     47.157888, 27.599799, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul Tehnic „Ioan C. Ștefănescu”', 'CT Ioan C. Ștefănescu', 'Bulevardul Socola 51-53, Iași', 'Iași',
-     47.143763, 27.598237, 'Intrarea principală', NULL, 'EDU-IS-STEFANESCU', '08:00'),
+     47.143763, 27.598237, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul Tehnic „Gheorghe Asachi”', 'CT Gheorghe Asachi', 'Strada Sărărie 189, Iași', 'Iași',
-     47.182123, 27.570062, 'Intrarea principală', NULL, 'EDU-IS-ASACHI', '08:00'),
+     47.182123, 27.570062, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul Tehnic „Mihail Sturdza”', 'CT Mihail Sturdza', 'Fundacul Boiangiu 2, Iași', 'Iași',
-     47.141523, 27.601461, 'Intrarea principală', NULL, 'EDU-IS-MSTURDZA', '08:00'),
+     47.141523, 27.601461, 'Intrarea principală', NULL, '08:00'),
     ('Colegiul Tehnic „Ion Holban”', 'CT Ion Holban', 'Strada Pantelimon Halipa 16, Iași', 'Iași',
-     47.148141, 27.575612, 'Intrarea principală', NULL, 'EDU-IS-HOLBAN', '08:00'),
+     47.148141, 27.575612, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Economic „Virgil Madgearu”', 'Liceul Virgil Madgearu', 'Strada Plăieșilor, Iași', 'Iași',
-     47.163532, 27.559025, 'Intrarea principală', NULL, 'EDU-IS-MADGEARU', '08:00'),
+     47.163532, 27.559025, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Tehnologic de Mecatronică și Automatizări', 'Liceul de Mecatronică', 'Strada Mitropolit Varlaam 54, Iași', 'Iași',
-     47.144001, 27.593119, 'Intrarea principală', NULL, 'EDU-IS-MECATRONICA', '08:00'),
+     47.144001, 27.593119, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Tehnologic „Dimitrie Leonida”', 'Liceul Dimitrie Leonida', 'Bulevardul Socola 188-190, Iași', 'Iași',
-     47.142211, 27.597180, 'Intrarea principală', NULL, 'EDU-IS-LEONIDA', '08:00'),
+     47.142211, 27.597180, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Tehnologic UCECOM „Spiru Haret”', 'Liceul UCECOM Spiru Haret', 'Bulevardul C.A. Rosetti 14-16, Iași', 'Iași',
-     47.168726, 27.593699, 'Intrarea principală', NULL, 'EDU-IS-UCECOM', '08:00'),
+     47.168726, 27.593699, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Teoretic „Dimitrie Cantemir”', 'Liceul Dimitrie Cantemir', 'Strada Decebal 13, Iași', 'Iași',
-     47.150299, 27.581592, 'Intrarea principală', NULL, 'EDU-IS-CANTEMIR', '08:00'),
+     47.150299, 27.581592, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Teoretic Internațional „Spectrum”', 'Liceul Spectrum', 'Bulevardul C.A. Rosetti 12-14, Iași', 'Iași',
-     47.169267, 27.593843, 'Intrarea principală', NULL, 'EDU-IS-SPECTRUM', '08:00'),
+     47.169267, 27.593843, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Teoretic Waldorf Iași', 'Liceul Waldorf', 'Calea Chișinăului 132 bis, Iași', 'Iași',
-     47.144849, 27.622453, 'Intrarea principală', NULL, 'EDU-IS-WALDORF', '08:00'),
+     47.144849, 27.622453, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Teoretic de Informatică „Grigore C. Moisil”', 'Liceul Grigore Moisil', 'Strada Petre Andrei 9, Iași', 'Iași',
-     47.185426, 27.567026, 'Intrarea principală', NULL, 'EDU-IS-MOISIL', '08:00'),
+     47.185426, 27.567026, 'Intrarea principală', NULL, '08:00'),
     ('Liceul Teoretic „Vasile Alecsandri”', 'Liceul Vasile Alecsandri', 'Strada Costache Negri, Iași', 'Iași',
-     47.161244, 27.588008, 'Intrarea principală', NULL, 'EDU-IS-ALECSANDRI', '08:00'),
+     47.161244, 27.588008, 'Intrarea principală', NULL, '08:00'),
     ('Liceul cu Program Sportiv Iași', 'Liceul cu Program Sportiv', 'Strada Petre Andrei, Iași', 'Iași',
-     47.186510, 27.564109, 'Intrarea principală', NULL, 'EDU-IS-SPORTIV', '08:00'),
+     47.186510, 27.564109, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Alexandru Vlahuță”', 'Școala Alexandru Vlahuță', 'Strada Buridava, Iași', 'Iași',
-     47.168834, 27.551357, 'Intrarea principală', NULL, 'EDU-IS-VLAHUTA', '08:00'),
+     47.168834, 27.551357, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Carmen Sylva”', 'Școala Carmen Sylva', 'Strada Grigore Ghica Vodă, Iași', 'Iași',
-     47.160475, 27.593938, 'Intrarea principală', NULL, 'EDU-IS-CARMENSYLVA', '08:00'),
+     47.160475, 27.593938, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Petru Poni”', 'Școala Petru Poni', 'Strada Păcurari 112, Iași', 'Iași',
-     47.173525, 27.561327, 'Intrarea principală', NULL, 'EDU-IS-PONI', '08:00'),
+     47.173525, 27.561327, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Ion Neculce”', 'Școala Ion Neculce', 'Strada Dacia, Iași', 'Iași',
-     47.152963, 27.577081, 'Intrarea principală', NULL, 'EDU-IS-NECULCE', '08:00'),
+     47.152963, 27.577081, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Dimitrie A. Sturdza”', 'Școala Dimitrie A. Sturdza', 'Strada Radu Vodă, Iași', 'Iași',
-     47.137925, 27.587220, 'Intrarea principală', NULL, 'EDU-IS-DSTURDZA', '08:00'),
+     47.137925, 27.587220, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Vasile Conta”', 'Școala Vasile Conta', 'Strada Gheorghe Doja 2, Iași', 'Iași',
-     47.145409, 27.577896, 'Intrarea principală', NULL, 'EDU-IS-CONTA', '08:00'),
+     47.145409, 27.577896, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Otilia Cazimir”', 'Școala Otilia Cazimir', 'Bulevardul Țuțora, Iași', 'Iași',
-     47.149490, 27.591007, 'Intrarea principală', NULL, 'EDU-IS-CAZIMIR', '08:00'),
+     47.149490, 27.591007, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială Proselnici', 'Școala Proselnici', 'Str. Theodor Palade, Iași', 'Iași',
-     47.110091, 27.485641, 'Intrarea principală', NULL, 'EDU-IS-PROSELNICI', '08:00'),
+     47.110091, 27.485641, 'Intrarea principală', NULL, '08:00'),
     ('Școala Gimnazială „Ion Creangă”', 'Școala Ion Creangă', 'Strada Neculau, Iași', 'Iași',
-     47.174963, 27.552721, 'Intrarea principală', NULL, 'EDU-IS-CREANGA', '08:00'),
+     47.174963, 27.552721, 'Intrarea principală', NULL, '08:00'),
     ('Școala Primară Vișan', 'Școala Primară Vișan', 'Strada Castanul Unirii, Iași', 'Iași',
-     47.116426, 27.597734, 'Intrarea principală', NULL, 'EDU-IS-VISAN', '08:00');
+     47.116426, 27.597734, 'Intrarea principală', NULL, '08:00');
 
 -- 2. ZONE (cartiere și sate)
 INSERT INTO areas (name, lat, lon, is_rural) VALUES
@@ -113,32 +113,17 @@ INSERT INTO interests (slug, label) VALUES
     ('baschet', 'Baschet');
 
 -- 4. UTILIZATORI (parola demo: TakeMe2026!)
-INSERT INTO users (full_name, email, password_hash, phone, school_id, school_account_id, role, is_school_verified, emergency_contact_name, emergency_contact_phone) VALUES
-    ('Andreea Rusu', 'andreea.rusu@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40740123456', 1, 'EDU-IS-NEGRUZZI-084', 'parent_driver', true, 'Ion Rusu (Bunic)', '+40740111222'),
-    ('Gabriel Enache', 'gabriel.enache@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40740987654', 1, 'EDU-IS-NEGRUZZI-112', 'parent', true, 'Irina Enache (Mamă)', '+40740333444'),
-    ('Dan Radu', 'dan.radu@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40742111222', 2, 'EDU-IS-RACOVITA-035', 'parent_driver', true, 'Ana Radu (Mamă)', '+40742555666'),
-    ('Elena Vasiliu', 'elena.vasiliu@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40743333444', 1, 'EDU-IS-NEGRUZZI-091', 'parent_driver', true, 'Mihai Vasiliu (Tată)', '+40743777888'),
-    ('Ionel Ciobanu', 'ionel.ciobanu@comunitate.schoolhop.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40749888999', 1, 'COM-IS-RURAL-003', 'community_driver', true, 'Primăria Rediu', '+40232299000'),
-    ('Maria Moraru', 'maria.moraru@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40755123789', 1, 'EDU-IS-NEGRUZZI-204', 'parent', true, 'Vasile Moraru (Tată)', '+40755999000'),
-    ('Cristina Pavel', 'cristina.pavel@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40744222333', 1, 'EDU-IS-NEGRUZZI-130', 'parent_driver', true, 'Sorin Pavel (Tată)', '+40744666777'),
-    ('Secretariat Negruzzi', 'secretariat@negruzzi.schoolhop.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40232215000', 1, NULL, 'admin', true, NULL, NULL),
-    ('Mihai Stan', 'mihai.stan@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40746444555', 1, 'EDU-IS-NEGRUZZI-145', 'parent_driver', true, 'Laura Stan (Mamă)', '+40746888999');
+INSERT INTO users (full_name, email, password_hash, phone, school_id, role, is_school_verified, emergency_contact_name, emergency_contact_phone) VALUES
+    ('Andreea Rusu', 'andreea.rusu@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40740123456', 1, 'parent_driver', true, 'Ion Rusu (Bunic)', '+40740111222'),
+    ('Gabriel Enache', 'gabriel.enache@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40740987654', 1, 'parent', true, 'Irina Enache (Mamă)', '+40740333444'),
+    ('Dan Radu', 'dan.radu@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40742111222', 2, 'parent_driver', true, 'Ana Radu (Mamă)', '+40742555666'),
+    ('Elena Vasiliu', 'elena.vasiliu@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40743333444', 1, 'parent_driver', true, 'Mihai Vasiliu (Tată)', '+40743777888'),
+    ('Ionel Ciobanu', 'ionel.ciobanu@comunitate.schoolhop.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40749888999', 1, 'community_driver', true, 'Primăria Rediu', '+40232299000'),
+    ('Maria Moraru', 'maria.moraru@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40755123789', 1, 'parent', true, 'Vasile Moraru (Tată)', '+40755999000'),
+    ('Cristina Pavel', 'cristina.pavel@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40744222333', 1, 'parent_driver', true, 'Sorin Pavel (Tată)', '+40744666777'),
+    ('Secretariat Negruzzi', 'secretariat@negruzzi.schoolhop.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40232215000', 1, 'admin', true, NULL, NULL),
+    ('Mihai Stan', 'mihai.stan@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40746444555', 1, 'parent_driver', true, 'Laura Stan (Mamă)', '+40746888999');
 
--- 5. REGISTRUL ȘCOLAR (catalog). Intrările fără claimed_by pot fi folosite la înregistrare.
-INSERT INTO school_registry (school_id, account_id, parent_full_name, child_full_name, child_birth_date, grade, teacher, claimed_by) VALUES
-    (1, 'EDU-IS-NEGRUZZI-084', 'Andreea Rusu', 'Matei Rusu', '2014-03-02', 'Clasa a VI-a B', 'Prof. Carmen Ursu', 1),
-    (1, 'EDU-IS-NEGRUZZI-112', 'Gabriel Enache', 'David Enache', '2014-07-19', 'Clasa a VI-a A', 'Prof. Doina Lazăr', 2),
-    (2, 'EDU-IS-RACOVITA-035', 'Dan Radu', 'Mara Radu', '2016-09-10', 'Clasa a IV-a C', 'Înv. Lucia Popovici', 3),
-    (1, 'EDU-IS-NEGRUZZI-091', 'Elena Vasiliu', 'Sofia Vasiliu', '2016-04-04', 'Clasa a IV-a B', 'Înv. Ana Dumitrescu', 4),
-    (1, 'EDU-IS-NEGRUZZI-204', 'Maria Moraru', 'Andrei Moraru', '2013-02-11', 'Clasa a VII-a A', 'Prof. Victor Bejan', 6),
-    (1, 'EDU-IS-NEGRUZZI-130', 'Cristina Pavel', 'Ioana Pavel', '2014-10-01', 'Clasa a VI-a B', 'Prof. Carmen Ursu', 7),
-    (1, 'EDU-IS-NEGRUZZI-145', 'Mihai Stan', 'Tudor Stan', '2014-01-15', 'Clasa a VI-a B', 'Prof. Carmen Ursu', 9),
-    (1, 'EDU-IS-NEGRUZZI-113', 'Gabriel Enache', 'Ana Enache', '2017-06-20', 'Clasa a III-a A', 'Înv. Elena Cozma', 2),
-    -- Conturi încă nerevendicate (pentru demonstrarea înregistrării)
-    (1, 'EDU-IS-NEGRUZZI-150', 'Ioana Popa', 'Luca Popa', '2014-05-12', 'Clasa a VI-a B', 'Prof. Carmen Ursu', NULL),
-    (1, 'EDU-IS-NEGRUZZI-151', 'Ioana Popa', 'Irina Popa', '2017-11-03', 'Clasa a III-a A', 'Înv. Elena Cozma', NULL),
-    (2, 'EDU-IS-RACOVITA-077', 'Radu Ionescu', 'Sara Ionescu', '2016-02-27', 'Clasa a IV-a C', 'Înv. Lucia Popovici', NULL),
-    (3, 'EDU-IS-NATIONAL-021', 'Alina Munteanu', 'Vlad Munteanu', '2013-08-30', 'Clasa a VII-a B', 'Prof. Sorin Hrițcu', NULL);
 
 -- 6. COPII
 INSERT INTO children (parent_id, school_id, full_name, birth_date, grade, teacher, bio, interests, needs_booster, home_village_or_area, home_address, home_lat, home_lon, is_social_beneficiary) VALUES

@@ -1,6 +1,6 @@
 # SchoolHop - Carpooling școlar sigur (Iași)
 
-Platformă dedicată exclusiv **transportului copiilor la școală**. Șoferii sunt părinți (sau șoferi comunitari) verificați prin registrul școlii, iar **pasagerii sunt exclusiv copiii**.
+Platformă dedicată exclusiv **transportului copiilor la școală**. Șoferii sunt părinți ai copiilor de la aceeași școală (sau șoferi comunitari), iar **pasagerii sunt exclusiv copiii**.
 
 **Stack:** PostgreSQL · Node.js (Express) · HTML/CSS/JavaScript fără framework-uri (ES modules).
 
@@ -8,7 +8,7 @@ Platformă dedicată exclusiv **transportului copiilor la școală**. Șoferii s
 
 ## Funcționalități
 
-1. **Cont verificat de școală** - înregistrarea cere ID-ul elevului din catalogul școlii (`school_registry`); numele părintelui trebuie să corespundă. Datele copilului (clasă, diriginte, dată naștere) sunt sincronizate din catalog.
+1. **Cont de familie** - părintele își alege școala și introduce datele copilului (nume, data nașterii, clasa); alți copii se pot adăuga din profil. Toate datele sunt validate (email, telefon românesc, nume, parolă etc.).
 2. **Potrivire „AI” între copii** - scor explicabil calculat din: aceeași clasă / același an, interese comune (Jaccard), aceeași zonă, vârstă apropiată. Rezultatele sunt sortate după apropiere și scor; recomandările se salvează în `ai_interest_matches`.
 3. **Rezervare pe locuri** - harta locurilor din mașină, reguli de siguranță (locul din față doar de la 12 ani), înălțătoare disponibile, rezervare pe mai multe zile + întoarcere după ore.
 4. **Publicare curse** - părintele-șofer alege zilele, mașina, locurile oferite; copiii proprii ocupă automat locuri; vecinii din aceeași zonă sunt notificați.
@@ -49,7 +49,7 @@ Deschide **http://localhost:3000**.
 | `ionel.ciobanu@comunitate.schoolhop.ro` | șofer comunitar (Fondul Social) |
 | `secretariat@negruzzi.schoolhop.ro` | administrator școală (panou) |
 
-Pentru **înregistrare** poți folosi conturile școlare nerevendicate: `EDU-IS-NEGRUZZI-150` (părinte: *Ioana Popa*, copil Luca), apoi `EDU-IS-NEGRUZZI-151` pentru al doilea copil.
+Pentru **înregistrare** apasă „Creează cont”, alege școala și completează datele copilului.
 
 ### Teste
 
@@ -67,7 +67,7 @@ backend/
   middleware/   auth (JWT), errors
   routes/       auth, meta, me, children, vehicles, rides, bookings, reviews,
                 notifications, share (public), social-fund, schools (panou)
-  services/     ai (potrivire), rides, rideActions, geo, seats, stats, badges, notify, registry
+  services/     ai (potrivire), rides, rideActions, geo, seats, stats, badges, notify, childProfile
 db/             schema.sql, seed.sql, db.js, init.js, reset.js
 frontend/
   <pagina>.html            câte un fișier HTML pe pagină
@@ -78,7 +78,7 @@ frontend/
 tests/api.test.js
 ```
 
-Pagini: `login`, `register` → `verify` → `emergency` (înregistrare în 3 pași), `home`, `search` → `results` → `meeting` → `seat` → `schedule` (rezervare), `publish`, `my-rides`, `ride` (live), `alert`, `dropoff`, `review`, `share` (public), `profile`, `impact`, `rewards`, `notifications`, `dashboard` (admin).
+Pagini: `login`, `register` → `verify` (zona de domiciliu) → `emergency` (înregistrare în 3 pași), `home`, `search` → `results` → `meeting` → `seat` → `schedule` (rezervare), `publish`, `my-rides`, `ride` (live), `alert`, `dropoff`, `review`, `share` (public), `profile`, `impact`, `rewards`, `notifications`, `dashboard` (admin).
 
 Layout responsive: pe telefon navigația e o bară fixă jos; de la 900px urcă în header, iar listele trec pe 2 coloane.
 
@@ -94,11 +94,11 @@ Toate rutele sunt sub `/api`; cele marcate cu * cer `Authorization: Bearer <toke
 
 | Metodă | Rută | Descriere |
 |---|---|---|
-| POST | `/auth/login`, `/auth/register` | autentificare / înregistrare verificată |
+| POST | `/auth/login`, `/auth/register` | autentificare / înregistrare (părinte + primul copil) |
 | GET | `/meta` | școli, zone, interese, configurare |
 | GET/PATCH | `/me` * | profil, contact de urgență |
 | GET | `/me/home`, `/me/rides?scope=upcoming\|history`, `/me/impact`, `/me/badges` * | date pentru pagini |
-| PATCH | `/children/:id`, POST `/children/claim` * | profil copil, adăugare copil din catalog |
+| PATCH | `/children/:id`, POST `/children` * | profil copil, adăugare copil |
 | GET/POST/DELETE | `/vehicles` * | mașini |
 | GET | `/rides/search?childId&date&area&arriveBy&direction` * | căutare cu potrivire AI |
 | GET | `/rides/:id?childId` * | detalii, locuri, zilele cursei |

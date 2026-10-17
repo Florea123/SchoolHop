@@ -13,7 +13,7 @@ function kpis() {
   const p = data.impact.period;
   return html`<div class="kpi-grid">
     <div class="kpi"><div class="kpi-number" style="color:var(--brand-yellow)">${data.carsRemoved}</div><div class="kpi-label">Mașini eliminate de la poartă</div><div class="kpi-sub">copii aduși de alți părinți</div></div>
-    <div class="kpi"><div class="kpi-number">${data.impact.verifiedParents}</div><div class="kpi-label">Părinți verificați</div><div class="kpi-sub">prin registrul școlii</div></div>
+    <div class="kpi"><div class="kpi-number">${data.impact.verifiedParents}</div><div class="kpi-label">Părinți înscriși</div><div class="kpi-sub">cu copii la această școală</div></div>
     <div class="kpi"><div class="kpi-number">${data.avgMatchScore ?? '—'}${data.avgMatchScore != null ? '%' : ''}</div><div class="kpi-label">Scor mediu potrivire AI</div><div class="kpi-sub">${plural(data.matchedPairs, 'pereche de colegi', 'perechi de colegi')}</div></div>
     <div class="kpi"><div class="kpi-number">${p.co2SavedKg} kg</div><div class="kpi-label">CO₂ evitat</div><div class="kpi-sub">${p.kmSaved} km nerulați</div></div>
   </div>`;
@@ -83,10 +83,9 @@ function corridorsTab() {
 
 const ROLE = { parent: 'Părinte', parent_driver: 'Părinte-șofer', community_driver: 'Șofer comunitar' };
 function familiesTab() {
-  return html`<div class="card"><div class="card-title">Catalog familii (${data.families.length})</div>
-    <div class="table-wrap"><table class="data"><thead><tr><th>Nume</th><th>Rol</th><th>Status</th><th class="num">Copii</th><th class="num">Curse conduse</th><th class="num">Puncte</th></tr></thead>
+  return html`<div class="card"><div class="card-title">Familii înscrise (${data.families.length})</div>
+    <div class="table-wrap"><table class="data"><thead><tr><th>Nume</th><th>Rol</th><th class="num">Copii</th><th class="num">Curse conduse</th><th class="num">Puncte</th></tr></thead>
     <tbody>${data.families.map((u) => raw(html`<tr><td><strong>${u.fullName}</strong><br><span class="small muted">${u.email}</span></td><td>${ROLE[u.role] || u.role}</td>
-      <td>${raw(u.verified ? '<span class="badge badge-green">Verificat</span>' : '<span class="badge badge-red">Neverificat</span>')}</td>
       <td class="num">${u.children}</td><td class="num">${u.ridesDriven}</td><td class="num">${u.greenPoints}</td></tr>`))}</tbody></table></div></div>`;
 }
 

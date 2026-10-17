@@ -2,6 +2,7 @@ import { api, auth, getMeta } from '../core/api.js';
 import { mountShell } from '../core/layout.js';
 import { $, $$, html, raw, params, renderError, showError, toast, withLoading, getCurrentPosition, initials, firstName } from '../core/ui.js';
 import { check, firstError } from '../core/validate.js';
+import { childFieldsHtml, readChildFields } from '../core/childForm.js';
 
 const content = $('#content');
 let me;
@@ -14,7 +15,7 @@ function childEditor(c) {
   return html`
     <div class="card card-blue" id="childCard">
       <div class="card-row" style="padding:0 0 10px"><span class="card-title" style="margin:0">${c.fullName}</span><span class="badge badge-ai">POTRIVIRI AI</span></div>
-      <p class="small muted" style="margin-bottom:12px">${c.grade} · ${c.age} ani${c.teacher ? ` · ${c.teacher}` : ''} · date din catalogul școlii</p>
+      <p class="small muted" style="margin-bottom:12px">${c.grade} · ${c.age} ani${c.teacher ? ` · ${c.teacher}` : ''}</p>
       <div class="form-group">
         <label class="form-label" for="bio">Descriere / pasiuni (pentru potrivirea cu colegii)</label>
         <textarea class="form-input" id="bio" maxlength="500">${c.bio || ''}</textarea>
@@ -50,7 +51,7 @@ function render() {
       <div class="parent-head">
         <div class="avatar" style="background:var(--brand-blue);color:#fff">${initials(u.fullName)}</div>
         <div><div class="strong">${u.fullName}</div>
-          <div class="verified">${u.isSchoolVerified ? `Verificat: ${me.school ? me.school.name : ''}` : 'Neverificat'}</div>
+          <div class="verified">${me.school ? me.school.name : ''}</div>
           <div class="small muted">${u.email}</div></div>
       </div>
       <form id="contactForm" novalidate>
@@ -67,13 +68,13 @@ function render() {
       <h2 class="section-title">Copiii mei</h2>
       ${me.children.length > 1 ? raw(html`<div class="child-tabs">${me.children.map((c) => raw(html`<button class="chip" data-child="${c.id}" aria-pressed="${c.id === activeChildId}">${firstName(c.fullName)}</button>`))}</div>`) : ''}
       ${child ? raw(childEditor(child)) : raw('<p class="muted">Niciun copil asociat.</p>')}
-      <details class="card" id="claimBox">
-        <summary class="strong">Adaugă alt copil din catalogul școlii</summary>
-        <form id="claimForm" style="margin-top:12px" novalidate>
-          <div class="form-group"><label class="form-label" for="claimSchool">Școala</label>
-            <select class="form-input" id="claimSchool">${meta.schools.map((s) => raw(html`<option value="${s.id}" ${raw(s.id === u.schoolId ? 'selected' : '')}>${s.name}</option>`))}</select></div>
-          <div class="form-group"><label class="form-label" for="claimAccount">ID cont școlar al copilului</label><input class="form-input" id="claimAccount" autocapitalize="characters" maxlength="40"></div>
-          <button class="btn btn-secondary btn-block" type="submit" id="claimSubmit">Caută în catalog și adaugă</button>
+      <details class="card" id="addChildBox">
+        <summary class="strong">Adaugă alt copil</summary>
+        <form id="addChildForm" style="margin-top:12px" novalidate>
+          <div class="form-group"><label class="form-label" for="addSchool">Școala</label>
+            <select class="form-input" id="addSchool">${meta.schools.map((s) => raw(html`<option value="${s.id}" ${raw(s.id === u.schoolId ? 'selected' : '')}>${s.name}</option>`))}</select></div>
+          ${childFieldsHtml('add', meta.config.gradeLevels)}
+          <button class="btn btn-secondary btn-block" type="submit" id="addChildSubmit">Adaugă copilul</button>
         </form>
       </details>
 
@@ -126,13 +127,14 @@ function bind(child) {
       render();
     } catch (err) { showError(err); }
   }));
-  $('#claimForm').addEventListener('submit', (e) => {
+  $('#addChildForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    const error = firstError([[$('#claimAccount'), check.accountId($('#claimAccount').value)]]);
+    const { body, rules } = readChildFields('add');
+    const error = firstError(rules);
     if (error) { showError(new Error(error)); return; }
-    withLoading($('#claimSubmit'), async () => {
+    withLoading($('#addChildSubmit'), async () => {
       try {
-        const { child: added } = await api.post('/children/claim', { schoolId: Number($('#claimSchool').value), schoolAccountId: $('#claimAccount').value });
+        const { child: added } = await api.post('/children', { schoolId: Number($('#addSchool').value), ...body });
         toast(`${added.fullName} a fost adăugat(ă). Completează-i zona de domiciliu.`);
         me = await api.get('/me');
         activeChildId = added.id;
