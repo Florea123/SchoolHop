@@ -1,88 +1,45 @@
-# TakeMe - Platformă de Carpooling
+# TakeMe Kids - Carpooling Școlar Sigur (Iași)
 
-> **Stack:** PostgreSQL (Bază de date) + Node.js (Backend) + HTML/CSS/JavaScript (Frontend)
-
----
-
-## 🗄️ Baza de Date (Conform Diagramei Detaliate)
-
-Baza de date este formată din cele 6 tabele relaționale:
-
-1. **`USERS`**:
-   - `user_id` (PK, INT)
-   - `full_name` (VARCHAR 100)
-   - `email` (VARCHAR 150, UNIQUE)
-   - `password_hash` (VARCHAR 255)
-   - `phone` (VARCHAR 20)
-   - `profile_photo` (VARCHAR 255)
-   - `created_at` (DATETIME / TIMESTAMP)
-   - `account_status` (VARCHAR 20)
-   - *Notă: Un utilizator poate fi atât șofer, cât și pasager.*
-
-2. **`VEHICLES`**:
-   - `vehicle_id` (PK, INT)
-   - `owner_id` (FK -> users.user_id)
-   - `brand` (VARCHAR 50)
-   - `model` (VARCHAR 50)
-   - `color` (VARCHAR 30)
-   - `license_plate` (VARCHAR 20)
-   - `seats` (INT)
-   - `created_at` (DATETIME)
-
-3. **`RIDES`**:
-   - `ride_id` (PK, INT)
-   - `driver_id` (FK -> users.user_id)
-   - `vehicle_id` (FK -> vehicles.vehicle_id)
-   - `departure_city` (VARCHAR 100)
-   - `departure_address` (VARCHAR 255)
-   - `departure_lat`, `departure_lon` (DECIMAL 9,6)
-   - `destination_city` (VARCHAR 100)
-   - `destination_address` (VARCHAR 255)
-   - `destination_lat`, `destination_lon` (DECIMAL 9,6)
-   - `departure_time` (DATETIME)
-   - `available_seats` (INT - locurile rămase)
-   - `price_per_seat` (DECIMAL 10,2)
-   - `notes` (TEXT)
-   - `ride_status` (VARCHAR 20)
-   - `created_at` (DATETIME)
-
-4. **`BOOKINGS`**:
-   - `booking_id` (PK, INT)
-   - `ride_id` (FK -> rides.ride_id)
-   - `passenger_id` (FK -> users.user_id)
-   - `seats_booked` (INT)
-   - `total_price` (DECIMAL 10,2)
-   - `booking_status` (VARCHAR 20)
-   - `booked_at` (DATETIME)
-
-5. **`REVIEWS`**:
-   - `review_id` (PK, INT)
-   - `booking_id` (FK -> bookings.booking_id)
-   - `reviewer_id` (FK -> users.user_id)
-   - `reviewee_id` (FK -> users.user_id)
-   - `rating` (INT 1-5)
-   - `comment` (TEXT)
-   - `created_at` (DATETIME)
-
-6. **`NOTIFICATIONS`**:
-   - `notification_id` (PK, INT)
-   - `user_id` (FK -> users.user_id)
-   - `title` (VARCHAR 100)
-   - `message` (TEXT)
-   - `notification_type` (VARCHAR 30)
-   - `is_read` (BOOLEAN)
-   - `created_at` (DATETIME)
+> **Concept (conform feedback-ului mentorilor):**  
+> Platformă dedicată exclusiv **transportului copiilor la școală**.  
+> **Regulă de aur:** Șoferul este un părinte sau o persoană verificată prin contul școlar. **Pasagerii sunt exclusiv copiii** (fără potriviri între adulți).
 
 ---
 
-## 🚀 Utilizare în Proiect
+## 🎯 Puncte Cheie & Funcționalități
 
-### 1. Pornire PostgreSQL prin Docker
+1. **Autentificare prin contul școlar:** Login simulat / integrat cu catalogul electronic (Edu / Școală) pentru acces exclusiv al părinților verificați.
+2. **Profilul copilului & componenta AI:** Părinții completează interesele copiilor (fotbal, pian, robotică, dans). AI-ul identifică potriviri între colegi de pe același traseu pentru a stimula prieteniile pe drum.
+3. **Puncte sigure de predare (Drop-off):** Exemplul **Colegiul Național „Costache Negruzzi”** din Iași – puncte fixe de debarcare pentru a elimina blocajele din fața porții școlii.
+4. **Fondul Social pentru copiii de la sat:** Finanțarea curselor pentru copiii din satele greu accesibile (ex: Sat Horlești / Rediu) cu șoferi comunitari care fac deja traseul spre oraș, plătiți cu o sumă fixă per cursă.
+5. **Transparență totală:** Dashboard pentru fondul social, donații și dublarea sumelor de către sponsori corporate.
+
+---
+
+## 🗄️ Baza de Date PostgreSQL (`/db`)
+
+Tabelele definite în [`db/schema.sql`](file:///Users/dianaplosnita/MarkAiHackathon/TakeMe/db/schema.sql):
+- **`schools`**: Școli partenere și punctele sigure de predare (drop-off zones).
+- **`users`**: Părinți și șoferi verificați prin contul școlar (`school_account_id`).
+- **`children`**: Copiii (pasagerii) – conțin școala, clasa și interesele (`JSONB`).
+- **`vehicles`**: Mașinile părinților, cu număr de locuri și înălțătoare disponibile.
+- **`rides`**: Cursele școlare (curse obișnuite de părinte sau sponsorizate din Fondul Social).
+- **`bookings`**: Rezervările copiilor (status: `confirmed`, `picked_up`, `arrived_at_school`).
+- **`ai_interest_matches`**: Potrivirile AI între copii pe baza pasiunilor comune și scor de compatibilitate.
+- **`social_fund_transactions`**: Jurnalul transparent al donațiilor și curselor rurale finanțate.
+- **`reviews`**: Evaluări ale părinților (siguranță și punctualitate).
+- **`notifications`**: Alerte live pentru părinți (copilul a fost preluat, a ajuns în siguranță la școală).
+
+---
+
+## 🚀 Utilizare în Node.js
+
+### 1. Pornire PostgreSQL
 ```bash
 docker compose up -d postgres
 ```
 
-### 2. Inițializare / Seed din Node.js
+### 2. Inițializare / Reîncărcare Schema & Seed
 ```bash
 npm install
 npm run db:init
@@ -93,24 +50,35 @@ npm run db:init
 npm run db:reset
 ```
 
-### 4. Exemplu interogare în backend-ul Node.js (`Express` / `db.js`)
+### 4. Exemplu interogare în backend-ul Node.js (`db/db.js`):
 ```javascript
 const db = require('./db/db');
 
-// Căutare curse după oraș de plecare și destinație
-app.get('/api/rides/search', async (req, res) => {
-  const { from, to } = req.query;
+// Căutare curse către o anumită școală
+app.get('/api/schools/:schoolId/rides', async (req, res) => {
+  const { schoolId } = req.params;
   const { rows } = await db.query(
-    `SELECT r.*, u.full_name as driver_name, u.phone as driver_phone, v.brand, v.model, v.license_plate
+    `SELECT r.*, u.full_name as driver_name, u.phone, s.name as school_name, s.dropoff_point_label
      FROM rides r
      JOIN users u ON r.driver_id = u.user_id
-     JOIN vehicles v ON r.vehicle_id = v.vehicle_id
-     WHERE r.departure_city ILIKE $1 
-       AND r.destination_city ILIKE $2 
-       AND r.available_seats > 0
-       AND r.ride_status = 'scheduled'
+     JOIN schools s ON r.school_id = s.school_id
+     WHERE r.school_id = $1 AND r.available_seats > 0 AND r.ride_status = 'scheduled'
      ORDER BY r.departure_time ASC`,
-    [`%${from}%`, `%${to}%`]
+    [schoolId]
+  );
+  res.json(rows);
+});
+
+// Potriviri AI de interese pentru un copil
+app.get('/api/children/:childId/matches', async (req, res) => {
+  const { childId } = req.params;
+  const { rows } = await db.query(
+    `SELECT m.*, c.full_name as matched_child_name, c.grade
+     FROM ai_interest_matches m
+     JOIN children c ON (c.child_id = CASE WHEN m.child_id_1 = $1 THEN m.child_id_2 ELSE m.child_id_1 END)
+     WHERE m.child_id_1 = $1 OR m.child_id_2 = $1
+     ORDER BY m.compatibility_score DESC`,
+    [childId]
   );
   res.json(rows);
 });
