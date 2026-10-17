@@ -15,7 +15,8 @@ app.use(express.json({ limit: '100kb' }));
 app.use((_req, res, next) => {
   res.set({
     'X-Content-Type-Options': 'nosniff',
-    'Referrer-Policy': 'same-origin',
+    // Doar originea pleacă spre alte site-uri (ex. tile-urile OpenStreetMap o cer), niciodată calea completă
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
     'X-Frame-Options': 'DENY',
   });
   next();

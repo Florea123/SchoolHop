@@ -47,7 +47,8 @@ function setup(L, container) {
 
   const map = L.map(canvas, { scrollWheelZoom: false, zoomControl: false }).setView(IASI_CENTER, 13);
   L.control.zoom({ position: 'topright' }).addTo(map);
-  L.tileLayer(TILE_URL, { maxZoom: 19, attribution: ATTRIBUTION }).addTo(map);
+  // OpenStreetMap blochează tile-urile cerute fără Referer
+  L.tileLayer(TILE_URL, { maxZoom: 19, attribution: ATTRIBUTION, referrerPolicy: 'strict-origin-when-cross-origin' }).addTo(map);
   // Zoom cu rotița doar după ce utilizatorul dă click pe hartă (nu blochează derularea paginii)
   map.on('click', () => map.scrollWheelZoom.enable());
   map.on('mouseout', () => map.scrollWheelZoom.disable());
