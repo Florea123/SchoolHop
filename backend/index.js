@@ -24,6 +24,7 @@ const searchRoutes   = require('./routes/search');
 const bookingsRoutes = require('./routes/bookings');
 const statsRoutes    = require('./routes/stats');
 const reviewsRoutes  = require('./routes/reviews');
+const schoolRidesRoutes = require('./routes/schoolRides');
 
 const app = express();
 
@@ -57,6 +58,7 @@ app.use('/search',   searchRoutes);
 app.use('/bookings', bookingsRoutes);
 app.use('/stats',    statsRoutes);
 app.use('/reviews',  reviewsRoutes);
+app.use('/api',      schoolRidesRoutes); // School Carpooling API
 
 // ---------------------------------------------------------------------------
 // Health check

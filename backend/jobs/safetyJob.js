@@ -58,7 +58,11 @@ function startSafetyJob() {
         await Promise.all(checks);
       }
     } catch (err) {
-      console.error('[SAFETY JOB] Unexpected error:', err.message);
+      if (err.code === 'ECONNREFUSED' || err.message.includes('connect ECONNREFUSED')) {
+        // Ignorăm silențios dacă utilizatorul testează fără Postgres local
+      } else {
+        console.error('[SAFETY JOB] Unexpected error:', err.message);
+      }
     }
   });
 
