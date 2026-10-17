@@ -1,63 +1,117 @@
-# TakeMe - Carpooling sigur pentru navetiști (Iași)
+# TakeMe - Platformă de Carpooling
 
 > **Stack:** PostgreSQL (Bază de date) + Node.js (Backend) + HTML/CSS/JavaScript (Frontend)
 
 ---
 
-## 🗄️ Baza de date PostgreSQL (`/db`)
+## 🗄️ Baza de Date (Conform Diagramei Detaliate)
 
-Tabelele definite conform specificațiilor proiectului:
-1. **`users`**: Pasageri și șoferi (nume, email, telefon, parolă hash, `gender`, `id_verified`, `selfie_verified`, `arrival_code_hash`, `duress_code_hash`, `points`, `rating_avg`).
-2. **`emergency_contacts`**: Persoane de contact notificate automat la incidente pe traseu.
-3. **`vehicles`**: Autovehicule (marcă, model, culoare, număr de înmatriculare, locuri).
-4. **`routes`**: Traseele recurente din Iași, incluzând polilinia OSRM în format JSONB (`[[lat, lng], ...]`), ore de plecare, preț și plafon de cost combustibil (`price_cap`).
-5. **`trips`**: Curse concrete programate pentru o zi (`scheduled`, `in_progress`, `completed`, `cancelled`) + token public de share.
-6. **`bookings`**: Rezervările pasagerilor (`pickup_index`, `dropoff_index`, `seat_pref`, `price`, `status`).
-7. **`trip_positions`**: Poziții GPS live ale mașinii (`lat`, `lng`, `speed`, `recorded_at`).
-8. **`safety_events`**: Alerte de siguranță (`route_deviation`, `long_stop`, `arrival_timeout`, `duress_code`, `sos`).
-9. **`reviews`**: Evaluări și stele (1-5) între șoferi și pasageri.
-10. **`points_ledger`**: Jurnalul de puncte și impact ecologic (CO₂ evitat).
+Baza de date este formată din cele 6 tabele relaționale:
+
+1. **`USERS`**:
+   - `user_id` (PK, INT)
+   - `full_name` (VARCHAR 100)
+   - `email` (VARCHAR 150, UNIQUE)
+   - `password_hash` (VARCHAR 255)
+   - `phone` (VARCHAR 20)
+   - `profile_photo` (VARCHAR 255)
+   - `created_at` (DATETIME / TIMESTAMP)
+   - `account_status` (VARCHAR 20)
+   - *Notă: Un utilizator poate fi atât șofer, cât și pasager.*
+
+2. **`VEHICLES`**:
+   - `vehicle_id` (PK, INT)
+   - `owner_id` (FK -> users.user_id)
+   - `brand` (VARCHAR 50)
+   - `model` (VARCHAR 50)
+   - `color` (VARCHAR 30)
+   - `license_plate` (VARCHAR 20)
+   - `seats` (INT)
+   - `created_at` (DATETIME)
+
+3. **`RIDES`**:
+   - `ride_id` (PK, INT)
+   - `driver_id` (FK -> users.user_id)
+   - `vehicle_id` (FK -> vehicles.vehicle_id)
+   - `departure_city` (VARCHAR 100)
+   - `departure_address` (VARCHAR 255)
+   - `departure_lat`, `departure_lon` (DECIMAL 9,6)
+   - `destination_city` (VARCHAR 100)
+   - `destination_address` (VARCHAR 255)
+   - `destination_lat`, `destination_lon` (DECIMAL 9,6)
+   - `departure_time` (DATETIME)
+   - `available_seats` (INT - locurile rămase)
+   - `price_per_seat` (DECIMAL 10,2)
+   - `notes` (TEXT)
+   - `ride_status` (VARCHAR 20)
+   - `created_at` (DATETIME)
+
+4. **`BOOKINGS`**:
+   - `booking_id` (PK, INT)
+   - `ride_id` (FK -> rides.ride_id)
+   - `passenger_id` (FK -> users.user_id)
+   - `seats_booked` (INT)
+   - `total_price` (DECIMAL 10,2)
+   - `booking_status` (VARCHAR 20)
+   - `booked_at` (DATETIME)
+
+5. **`REVIEWS`**:
+   - `review_id` (PK, INT)
+   - `booking_id` (FK -> bookings.booking_id)
+   - `reviewer_id` (FK -> users.user_id)
+   - `reviewee_id` (FK -> users.user_id)
+   - `rating` (INT 1-5)
+   - `comment` (TEXT)
+   - `created_at` (DATETIME)
+
+6. **`NOTIFICATIONS`**:
+   - `notification_id` (PK, INT)
+   - `user_id` (FK -> users.user_id)
+   - `title` (VARCHAR 100)
+   - `message` (TEXT)
+   - `notification_type` (VARCHAR 30)
+   - `is_read` (BOOLEAN)
+   - `created_at` (DATETIME)
 
 ---
 
-## 🚀 Pornire și Utilizare
+## 🚀 Utilizare în Proiect
 
 ### 1. Pornire PostgreSQL prin Docker
 ```bash
 docker compose up -d postgres
 ```
-*(Baza de date pornește pe portul `5432`, iar scripturile `01_schema.sql` și `02_seed.sql` sunt executate automat la prima inițializare).*
 
-### 2. Inițializare / Reîncărcare din Node.js
-Dacă vrei să rulezi crearea tabelelor și popularea datelor din Node.js:
+### 2. Inițializare / Seed din Node.js
 ```bash
 npm install
 npm run db:init
 ```
 
-### 3. Resetare rapidă înainte de DEMO
-Pentru a aduce baza de date la starea curată de test înainte de prezentare:
+### 3. Resetare rapidă pentru DEMO
 ```bash
 npm run db:reset
 ```
 
-### 4. Utilizare în backend-ul Node.js
-Modulul de conexiune este pregătit în [`db/db.js`](file:///Users/dianaplosnita/MarkAiHackathon/TakeMe/db/db.js). Îl poți importa direct în rutele tale Express / Node:
-
+### 4. Exemplu interogare în backend-ul Node.js (`Express` / `db.js`)
 ```javascript
 const db = require('./db/db');
 
-// Exemplu interogare rute active:
-async function getRoutes() {
+// Căutare curse după oraș de plecare și destinație
+app.get('/api/rides/search', async (req, res) => {
+  const { from, to } = req.query;
   const { rows } = await db.query(
-    'SELECT * FROM routes WHERE active = true ORDER BY departure_time ASC'
+    `SELECT r.*, u.full_name as driver_name, u.phone as driver_phone, v.brand, v.model, v.license_plate
+     FROM rides r
+     JOIN users u ON r.driver_id = u.user_id
+     JOIN vehicles v ON r.vehicle_id = v.vehicle_id
+     WHERE r.departure_city ILIKE $1 
+       AND r.destination_city ILIKE $2 
+       AND r.available_seats > 0
+       AND r.ride_status = 'scheduled'
+     ORDER BY r.departure_time ASC`,
+    [`%${from}%`, `%${to}%`]
   );
-  return rows;
-}
-
-// Exemplu căutare utilizator:
-async function getUserByEmail(email) {
-  const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-  return rows[0];
-}
+  res.json(rows);
+});
 ```
