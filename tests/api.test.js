@@ -1,12 +1,22 @@
 // Test end-to-end al API-ului pe datele de demo.
-// ATENȚIE: reîncarcă schema + seed în baza de date din .env (rulează `npm test` doar pe o bază de demo/test).
+// Rulează pe o bază SEPARATĂ (<numele bazei din .env>_test sau TEST_DATABASE_URL),
+// creată automat; baza aplicației nu este atinsă.
 
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
 const path = require('path');
+const { Client } = require('pg');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
+const appUrl = new URL(process.env.DATABASE_URL
+  || `postgresql://${process.env.POSTGRES_USER || 'postgres'}:${process.env.POSTGRES_PASSWORD || 'postgres'}@${process.env.POSTGRES_HOST || 'localhost'}:${process.env.POSTGRES_PORT || 5432}/${process.env.POSTGRES_DB || 'takeme_db'}`);
+const testUrl = process.env.TEST_DATABASE_URL ? new URL(process.env.TEST_DATABASE_URL) : new URL(appUrl);
+if (!process.env.TEST_DATABASE_URL) testUrl.pathname = `${appUrl.pathname}_test`;
+if (testUrl.pathname === appUrl.pathname) throw new Error('Baza de test trebuie să fie diferită de baza aplicației');
+process.env.DATABASE_URL = testUrl.toString();
 process.env.ALLOW_SIMULATION = 'true';
+
 const db = require('../db/db');
 const app = require('../backend/app');
 
@@ -29,7 +39,19 @@ async function login(email, password = 'TakeMe2026!') {
   return r.body.token;
 }
 
+async function ensureTestDatabase() {
+  const admin = new URL(testUrl);
+  admin.pathname = '/postgres';
+  const client = new Client({ connectionString: admin.toString() });
+  await client.connect();
+  const name = decodeURIComponent(testUrl.pathname.slice(1));
+  const { rows } = await client.query('SELECT 1 FROM pg_database WHERE datname = $1', [name]);
+  if (!rows.length) await client.query(`CREATE DATABASE "${name.replace(/"/g, '""')}"`);
+  await client.end();
+}
+
 before(async () => {
+  await ensureTestDatabase();
   await db.query('DROP SCHEMA public CASCADE; CREATE SCHEMA public;');
   await db.query(fs.readFileSync(path.join(__dirname, '..', 'db', 'schema.sql'), 'utf8'));
   await db.query(fs.readFileSync(path.join(__dirname, '..', 'db', 'seed.sql'), 'utf8'));

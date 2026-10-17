@@ -31,8 +31,8 @@ docker compose up -d postgres
 npm install
 cp .env.example .env
 
-# 3. Schema + date demo (cursele sunt generate relativ la ziua curentă)
-npm run db:reset
+# 3. Schema + date demo (doar dacă baza e goală; nu șterge conturile existente)
+npm run db:init
 
 # 4. Pornește serverul (API + frontend)
 npm start            # sau: npm run dev (repornire automată)
@@ -54,8 +54,10 @@ Pentru **înregistrare** apasă „Creează cont”, alege școala și completea
 ### Teste
 
 ```bash
-npm test   # test end-to-end al API-ului (ATENȚIE: reîncarcă schema + seed în baza din .env)
+npm test   # test end-to-end al API-ului, pe o bază separată (<nume>_test), creată automat
 ```
+
+`npm run db:reset` **șterge toate datele** (inclusiv conturile create din aplicație) și reîncarcă datele demo. Folosiți-l doar când vreți explicit să o luați de la zero.
 
 ---
 
