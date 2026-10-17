@@ -1,10 +1,3 @@
-// ==============================================================================
-// SchoolHop - Resetare Bază de Date înainte de Demo (Node.js)
-// Rulare: node db/reset.js
-// ATENȚIE: șterge TOATE datele (inclusiv conturile create din aplicație)
-// și re-rulează schema.sql + seed.sql. Pentru inițializare fără ștergere: db/init.js
-// ==============================================================================
-
 const fs = require('fs');
 const path = require('path');
 const { pool } = require('./db');
@@ -14,7 +7,6 @@ async function resetDatabase() {
   try {
     console.log('[SchoolHop DB] Resetare completă a bazei de date...');
 
-    // Ștergem schema public și o recreăm curată
     await client.query(`
       DROP SCHEMA public CASCADE;
       CREATE SCHEMA public;
@@ -23,12 +15,10 @@ async function resetDatabase() {
     `);
     console.log('[SchoolHop DB] Toate tabelele vechi au fost șterse.');
 
-    // Rulăm schema
     const schemaSql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
     await client.query(schemaSql);
     console.log('[SchoolHop DB] Schema recreată.');
 
-    // Rulăm seed
     const seedSql = fs.readFileSync(path.join(__dirname, 'seed.sql'), 'utf8');
     await client.query(seedSql);
     console.log('[SchoolHop DB] Seed-ul pentru demo a fost încărcat din nou!');

@@ -1,9 +1,3 @@
--- ==============================================================================
--- SchoolHop - Seed realist pentru Carpooling Școlar (Iași)
--- Parola pentru toate conturile demo: TakeMe2026!
--- Datele (cursele) sunt generate relativ la ziua curentă, ca demo-ul să fie mereu actual.
--- ==============================================================================
-
 SET TIME ZONE 'Europe/Bucharest';
 
 TRUNCATE TABLE
@@ -12,7 +6,7 @@ TRUNCATE TABLE
     users, interests, areas, schools
 RESTART IDENTITY CASCADE;
 
--- 1. ȘCOLI PARTENERE
+-- Școli
 INSERT INTO schools (name, short_name, address, city, lat, lon, dropoff_point_label, phone, bell_time) VALUES
     ('Colegiul Național „Costache Negruzzi”', 'Colegiul Negruzzi', 'Strada Toma Cozma 4, Iași', 'Iași',
      47.172500, 27.568200, 'Punct Sigur Debarcare Elevi (Parcarea Laterală Toma Cozma)', '+40232215000', '08:00'),
@@ -82,7 +76,7 @@ INSERT INTO schools (name, short_name, address, city, lat, lon, dropoff_point_la
     ('Școala Primară Vișan', 'Școala Primară Vișan', 'Strada Castanul Unirii, Iași', 'Iași',
      47.116426, 27.597734, 'Intrarea principală', NULL, '08:00');
 
--- 2. ZONE (cartiere și sate)
+-- Cartiere și sate
 INSERT INTO areas (name, lat, lon, is_rural) VALUES
     ('Valea Lupului', 47.181200, 27.502300, false),
     ('Miroslava', 47.147200, 27.525500, false),
@@ -94,7 +88,7 @@ INSERT INTO areas (name, lat, lon, is_rural) VALUES
     ('Sat Horlești (Rediu)', 47.218500, 27.481200, true),
     ('Lunca Cetățuii', 47.115000, 27.570000, true);
 
--- 3. CATALOG INTERESE
+-- Interese
 INSERT INTO interests (slug, label) VALUES
     ('robotica', 'Robotică'),
     ('fotbal', 'Fotbal'),
@@ -112,7 +106,7 @@ INSERT INTO interests (slug, label) VALUES
     ('dinozauri', 'Dinozauri'),
     ('baschet', 'Baschet');
 
--- 4. UTILIZATORI (parola demo: TakeMe2026!)
+-- Utilizatori (parola demo: TakeMe2026!)
 INSERT INTO users (full_name, email, password_hash, phone, school_id, role, is_school_verified, emergency_contact_name, emergency_contact_phone) VALUES
     ('Andreea Rusu', 'andreea.rusu@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40740123456', 1, 'parent_driver', true, 'Ion Rusu (Bunic)', '+40740111222'),
     ('Gabriel Enache', 'gabriel.enache@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40740987654', 1, 'parent', true, 'Irina Enache (Mamă)', '+40740333444'),
@@ -125,7 +119,7 @@ INSERT INTO users (full_name, email, password_hash, phone, school_id, role, is_s
     ('Mihai Stan', 'mihai.stan@parinte.edu.ro', crypt('TakeMe2026!', gen_salt('bf', 10)), '+40746444555', 1, 'parent_driver', true, 'Laura Stan (Mamă)', '+40746888999');
 
 
--- 6. COPII
+-- Copii
 INSERT INTO children (parent_id, school_id, full_name, birth_date, grade, teacher, bio, interests, needs_booster, home_village_or_area, home_address, home_lat, home_lon, is_social_beneficiary) VALUES
     (1, 1, 'Matei Rusu', '2014-03-02', 'Clasa a VI-a B', 'Prof. Carmen Ursu', 'Construiește roboței și joacă fotbal în pauze.', '["robotica", "fotbal", "sah"]', false, 'Valea Lupului', 'Str. Cireșilor 12, Valea Lupului', 47.182600, 27.500900, false),
     (2, 1, 'David Enache', '2014-07-19', 'Clasa a VI-a A', 'Prof. Doina Lazăr', 'Pasionat de Lego Technic și roboți.', '["robotica", "fotbal", "lego"]', false, 'Valea Lupului', 'Str. Soarelui 8, Valea Lupului', 47.180500, 27.509000, false),
@@ -136,7 +130,7 @@ INSERT INTO children (parent_id, school_id, full_name, birth_date, grade, teache
     (9, 1, 'Tudor Stan', '2014-01-15', 'Clasa a VI-a B', 'Prof. Carmen Ursu', 'Căpitanul echipei de baschet a clasei.', '["fotbal", "baschet", "sah"]', false, 'Copou', 'Bd. Carol I 60, Iași', 47.178900, 27.563100, false),
     (2, 1, 'Ana Enache', '2017-06-20', 'Clasa a III-a A', 'Înv. Elena Cozma', 'Desenează dinozauri și merge la dans.', '["desen", "dans", "dinozauri"]', true, 'Valea Lupului', 'Str. Soarelui 8, Valea Lupului', 47.180500, 27.509000, false);
 
--- 7. AUTOVEHICULE
+-- Mașini
 INSERT INTO vehicles (owner_id, brand, model, color, license_plate, child_seats, booster_seats) VALUES
     (1, 'Dacia', 'Jogger Eco-G', 'Gri Urban', 'IS 23 TKM', 4, 2),
     (3, 'Toyota', 'Corolla Hybrid', 'Alb Perlat', 'IS 10 TKM', 3, 1),
@@ -145,7 +139,7 @@ INSERT INTO vehicles (owner_id, brand, model, color, license_plate, child_seats,
     (7, 'Skoda', 'Octavia Combi', 'Negru', 'IS 77 PVL', 3, 2),
     (9, 'Volkswagen', 'Touran', 'Argintiu', 'IS 09 STN', 4, 1);
 
--- 8. CURSE (generate pentru următoarele 5 zile de școală și ultimele 10 zile de școală)
+-- Curse: următoarele 5 zile de școală + ultimele 10 (istoric)
 CREATE TEMP TABLE seed_days AS
 SELECT d::date AS day, 'upcoming'::text AS kind
 FROM generate_series(CURRENT_DATE + 1, CURRENT_DATE + 9, INTERVAL '1 day') d
@@ -208,8 +202,8 @@ CROSS JOIN seed_days d
 -- Cursele de întoarcere și cele ale lui Mihai/Cristina există doar în săptămâna curentă
 WHERE d.kind = 'upcoming' OR (t.direction = 'to_school' AND t.driver_id IN (1, 4, 5, 3));
 
--- 9. REZERVĂRI
--- Locuri: copilul șoferului ocupă și el un loc în mașină.
+-- Rezervări
+-- Copilul șoferului ocupă și el un loc în mașină.
 CREATE TEMP TABLE seed_booking_plan (driver_id INT, direction TEXT, child_id INT, seat TEXT, kind TEXT, max_days INT);
 INSERT INTO seed_booking_plan VALUES
     (1, 'to_school', 1, 'back_left', 'all', 99),       -- Matei cu mama lui (Andreea)
@@ -261,14 +255,14 @@ UPDATE rides r SET available_seats = r.total_seats - (
     SELECT COUNT(*) FROM bookings b WHERE b.ride_id = r.ride_id AND b.booking_status <> 'cancelled'
 );
 
--- 10. POTRIVIRI AI (cache; scorurile se recalculează de backend la fiecare căutare)
+-- Potriviri (cache; backend-ul recalculează scorurile la căutare)
 INSERT INTO ai_interest_matches (child_id_1, child_id_2, common_interests, compatibility_score, ai_recommendation) VALUES
     (1, 2, '["robotica", "fotbal"]', 0.82,
      'Matei și David sunt colegi la Colegiul Negruzzi și ambii sunt pasionați de robotică și fotbal! Drumul împreună îi va ajuta să se împrietenească.'),
     (3, 4, '["pian"]', 0.41,
      'Mara și Sofia studiază pianul. Se recomandă carpooling comun pentru activitățile extrașcolare.');
 
--- 11. FONDUL SOCIAL
+-- Fondul social
 INSERT INTO social_fund_transactions (transaction_type, donor_id, ride_id, amount, target_village, children_helped_count, description, created_at) VALUES
     ('corporate_match', NULL, NULL, 5000.00, 'Satele din zona metropolitană Iași', 0,
      'Sponsorizare corporate partener (dublarea donațiilor comunității pentru transport școlar rural)', CURRENT_DATE - 30),
@@ -284,7 +278,7 @@ SELECT 'driver_payout', NULL, r.ride_id, r.social_driver_stipend, r.departure_vi
        r.completed_at
 FROM rides r WHERE r.is_social_fund AND r.ride_status = 'completed';
 
--- 12. RECENZII (Gabriel o evaluează pe Andreea pentru cursele lui David)
+-- Recenzii
 INSERT INTO reviews (booking_id, parent_id, driver_id, rating, safety_rating, punctuality_rating, comment, created_at)
 SELECT b.booking_id, b.parent_id, r.driver_id,
        CASE WHEN ROW_NUMBER() OVER (ORDER BY r.departure_time) % 4 = 0 THEN 4 ELSE 5 END, 5, 5,
@@ -302,13 +296,13 @@ FROM bookings b JOIN rides r ON r.ride_id = b.ride_id
 WHERE b.child_id = 5 AND b.booking_status = 'arrived_at_school'
 ORDER BY r.departure_time DESC LIMIT 3;
 
--- 13. PUNCTE ERou VERDE (calculate din istoric: 10 pct / copil predat sau confirmat)
+-- Puncte: 10 pentru fiecare copil predat sau confirmat
 UPDATE users u SET green_points =
     10 * (SELECT COUNT(*) FROM bookings b WHERE b.parent_id = u.user_id AND b.parent_confirmed_at IS NOT NULL)
   + 10 * (SELECT COUNT(*) FROM bookings b JOIN rides r ON r.ride_id = b.ride_id
           WHERE r.driver_id = u.user_id AND b.parent_id <> u.user_id AND b.booking_status = 'arrived_at_school');
 
--- 14. NOTIFICĂRI
+-- Notificări
 INSERT INTO notifications (user_id, title, message, notification_type, link, is_read, created_at) VALUES
     (2, 'David a ajuns la Colegiul Negruzzi ', 'Copilul a fost lăsat în siguranță la Punctul Sigur de Debarcare Toma Cozma.', 'arrived_at_school', 'my-rides.html', true, CURRENT_DATE - 1 + TIME '07:52'),
     (1, 'Nouă potrivire AI găsită! ', 'David Enache din Valea Lupului are interese comune cu Matei (robotică, fotbal).', 'ai_match', 'my-rides.html', false, CURRENT_DATE - 2 + TIME '18:00'),

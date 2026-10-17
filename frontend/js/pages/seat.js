@@ -47,7 +47,7 @@ async function load() {
         <p class="small muted">${child.age < frontAge ? `Copiii sub ${frontAge} ani stau doar pe bancheta din spate.` : `${name} poate sta și în față (are ${child.age} ani).`}
           ${child.needsBooster ? ` ${name} va folosi un înălțător auto omologat.` : ''}</p>
         <hr class="divider">
-        <div class="card-row"><span>Locul lui ${name}:</span><strong id="seatLabel" style="color:var(--brand-blue)">neselectat</strong></div>
+        <div class="card-row"><span>Locul lui ${name}:</span><strong id="seatLabel" style="color:var(--teal)">neselectat</strong></div>
         <div class="card-row"><span>Contribuție drum:</span><strong>${lei(ride.isSocialFund ? 0 : ride.pricePerSeat)} / cursă</strong></div>
       </div>
       <button class="btn btn-primary btn-block" id="confirm" disabled>Confirmă locul și alege zilele</button>`;

@@ -124,7 +124,6 @@ function updateSeats() {
 function onSchoolChange() {
   const school = meta.schools.find((s) => String(s.id) === $('#school').value);
   if (!school) return;
-  $('#subtitle').textContent = `${me.user.fullName.split(' ')[0]}, oferi locuri pentru colegii de la ${school.shortName}`;
   $('#dropoffHint').textContent = `Predare la: ${school.dropoffPoint} · clopoțel ${school.bellTime.slice(0, 5)}`;
   if (!$('#time').value) $('#time').value = addMinutesToTime(school.bellTime, -30);
   const kids = ownKidsAt(school.id);

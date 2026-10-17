@@ -25,7 +25,7 @@ async function load() {
       <h1 class="page-title">${toSchool ? 'Punct de întâlnire' : 'Punct de coborâre'}</h1>
       <p class="page-subtitle">${formatDate(ride.departureTime)} · ${toSchool ? `plecare împreună spre ${ride.school.shortName}` : `întoarcere de la ${ride.school.shortName}`}</p>
       <div class="map-box" id="map"></div>
-      <div class="card card-blue meet-card">
+      <div class="card card-teal meet-card">
         <div class="card-title">${toSchool ? 'Punctul de urcare al copiilor' : 'Punctul de coborâre'}</div>
         <p class="small muted" style="margin-bottom:8px">${toSchool ? ride.departureAddress : ride.destination}</p>
         ${data.walkMinutes != null ? raw(html`<div class="card-row"><span>${firstName(child.fullName)} merge pe jos de acasă:</span><strong class="walk">${data.walkMinutes} min</strong></div>`) : ''}
@@ -39,7 +39,7 @@ async function load() {
           <div><div class="strong">${ride.driver.fullName}</div>
           <div class="small muted">${ride.vehicle.brand} ${ride.vehicle.model} · ${ride.vehicle.color} · ${ride.vehicle.licensePlate}</div></div>
         </div>
-        ${data.companions.length ? raw(html`<div class="companions">${data.companions.map((c) => raw(html`<span class="badge badge-blue">${c.name} · ${c.grade}</span>`))}</div>`) : ''}
+        ${data.companions.length ? raw(html`<div class="companions">${data.companions.map((c) => raw(html`<span class="badge badge-teal">${c.name} · ${c.grade}</span>`))}</div>`) : ''}
         ${ride.notes ? raw(html`<p class="small muted" style="margin-top:8px">${ride.notes}</p>`) : ''}
       </div>
       <a class="btn btn-primary btn-block" href="seat.html?${q}">Alege locul lui ${firstName(child.fullName)} în mașină</a>`;

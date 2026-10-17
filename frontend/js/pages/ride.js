@@ -19,7 +19,6 @@ function renderHeader() {
   const { ride } = state;
   const toSchool = ride.direction === 'to_school';
   const kids = state.bookings.map((b) => firstName(b.childName));
-  $('#eyebrow').textContent = state.status === 'in_progress' ? (toSchool ? 'În drum spre școală' : 'În drum spre casă') : 'Cursa';
   $('#statusBadge').innerHTML = statusBadge(state.status).value;
   $('#title').textContent = state.role === 'driver'
     ? `Cursa ta · ${formatTime(ride.departureTime)}`
@@ -54,7 +53,7 @@ function renderMapAndEta() {
   const etaTime = formatTime(state.eta);
   const beforeBell = bell && ride.direction === 'to_school' ? (etaTime <= bell ? `Înainte de clopoțel (${bell})` : `După clopoțel (${bell})`) : '';
   $('#eta').innerHTML = html`
-    <div class="card card-blue">
+    <div class="card card-teal">
       <div class="eta-card">
         <div><span class="small muted">${label} · ${ride.direction === 'to_school' ? ride.school.dropoffPoint : ride.destination}</span>
           <div class="eta">${etaTime}</div></div>

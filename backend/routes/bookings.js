@@ -133,7 +133,7 @@ router.post('/:id/pickup', async (req, res) => {
   res.json(await rides.liveState(ride));
 });
 
-// Părintele confirmă că a primit vestea predării la școală (+ puncte Erou Verde)
+// Părintele confirmă predarea (+10 puncte)
 router.post('/:id/confirm-arrival', async (req, res) => {
   const booking = await loadBooking(toInt(req.params.id, 'ID rezervare'));
   if (booking.parent_id !== req.user.id) throw forbidden();

@@ -48,9 +48,7 @@ function minutesOfDay(date) {
   return h * 60 + m;
 }
 
-// ---------------------------------------------------------------------------
 // GET /api/rides/search?childId=&date=&area=&arriveBy=&direction=
-// ---------------------------------------------------------------------------
 router.get('/search', async (req, res) => {
   const child = await ownChildOrThrow(toInt(req.query.childId, 'Copilul'), req.user.id);
   const date = dateInRange(req.query.date, 'Data', 60);
@@ -119,9 +117,7 @@ router.get('/search', async (req, res) => {
   res.json({ child: serialize.child(child, labels), date, direction, origin, arriveBy, results });
 });
 
-// ---------------------------------------------------------------------------
 // GET /api/rides/:id?childId=  — detalii cursă, locuri, săptămâna cursei
-// ---------------------------------------------------------------------------
 router.get('/:id', async (req, res) => {
   const ride = await rides.getRide(toInt(req.params.id, 'ID cursă'));
   const bookings = await rides.getRideBookings(ride.ride_id);
@@ -189,9 +185,7 @@ router.get('/:id', async (req, res) => {
   res.json(response);
 });
 
-// ---------------------------------------------------------------------------
 // POST /api/rides — publică o cursă (repetată în zilele selectate)
-// ---------------------------------------------------------------------------
 router.post('/', async (req, res) => {
   const b = req.body;
   requireFields(b, ['schoolId', 'area', 'address', 'startDate', 'time', 'days', 'vehicleId', 'seats']);
@@ -299,9 +293,7 @@ router.post('/', async (req, res) => {
   res.status(201).json({ created, count: created.length });
 });
 
-// ---------------------------------------------------------------------------
 // Acțiuni ale șoferului
-// ---------------------------------------------------------------------------
 async function driverRide(req) {
   const ride = await rides.getRide(toInt(req.params.id, 'ID cursă'));
   if (ride.driver_id !== req.user.id) throw forbidden('Doar șoferul cursei poate face această acțiune');
@@ -344,9 +336,7 @@ router.post('/:id/cancel', async (req, res) => {
   res.json({ ok: true });
 });
 
-// ---------------------------------------------------------------------------
 // Urmărire live, SOS, alerte, întrebarea zilei (participanți)
-// ---------------------------------------------------------------------------
 async function participantRide(req) {
   const ride = await rides.getRide(toInt(req.params.id, 'ID cursă'));
   const bookings = await rides.getRideBookings(ride.ride_id);

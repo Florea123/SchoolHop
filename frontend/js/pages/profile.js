@@ -13,8 +13,8 @@ let coords = null;
 function childEditor(c) {
   const selected = new Set(c.interests.map((i) => i.slug));
   return html`
-    <div class="card card-blue" id="childCard">
-      <div class="card-row" style="padding:0 0 10px"><span class="card-title" style="margin:0">${c.fullName}</span><span class="badge badge-ai">POTRIVIRI AI</span></div>
+    <div class="card card-teal" id="childCard">
+      <div class="card-row" style="padding:0 0 10px"><span class="card-title" style="margin:0">${c.fullName}</span><span class="badge badge-solid">POTRIVIRI AI</span></div>
       <p class="small muted" style="margin-bottom:12px">${c.grade} · ${c.age} ani${c.teacher ? ` · ${c.teacher}` : ''}</p>
       <div class="form-group">
         <label class="form-label" for="bio">Descriere / pasiuni (pentru potrivirea cu colegii)</label>
@@ -49,7 +49,7 @@ function render() {
   content.innerHTML = html`
     <div class="card">
       <div class="parent-head">
-        <div class="avatar" style="background:var(--brand-blue);color:#fff">${initials(u.fullName)}</div>
+        <div class="avatar" style="background:var(--teal);color:#fff">${initials(u.fullName)}</div>
         <div><div class="strong">${u.fullName}</div>
           <div class="verified">${me.school ? me.school.name : ''}</div>
           <div class="small muted">${u.email}</div></div>

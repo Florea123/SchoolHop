@@ -20,14 +20,12 @@ async function load() {
     await mountShell({ active: 'profile', roles: ['parent', 'parent_driver', 'community_driver'] });
     bindBack($('#back'), 'profile.html');
     const [impact, fund] = await Promise.all([api.get('/me/impact'), api.get('/social-fund')]);
-    const surname = impact.familyName.split(' ').slice(-1)[0];
 
     content.innerHTML = html`
-      <h1 class="page-title">Impactul familiei ${surname}</h1>
-      <p class="page-subtitle">Rezultatele drumurilor făcute împreună</p>
+      <h1 class="page-title">Impact</h1>
       <div class="card impact-hero">
         <div class="card-title">Când copiii merg cu alți părinți</div>
-        <p class="small muted" style="margin-bottom:12px">${plural(impact.ridesWithClassmates, 'cursă', 'curse')} de carpool cu colegii · ${impact.greenPoints} puncte Erou Verde</p>
+        <p class="small muted" style="margin-bottom:12px">${plural(impact.ridesWithClassmates, 'cursă', 'curse')} de carpool cu colegii · ${impact.greenPoints} puncte</p>
         ${raw(stats(impact.asPassenger))}
       </div>
       ${impact.childrenDriven ? raw(html`<div class="card">
@@ -36,7 +34,7 @@ async function load() {
         ${raw(stats(impact.asDriver))}</div>`) : ''}
 
       <h2 class="section-title">Fondul Social pentru copiii de la sat</h2>
-      <div class="card card-yellow">
+      <div class="card card-peach">
         <span class="small muted">Sold disponibil</span>
         <div class="fund-balance">${lei(fund.balance)}</div>
         <p class="small muted">${plural(fund.ridesFunded, 'cursă finanțată', 'curse finanțate')} · ${plural(fund.childrenHelped, 'transport de copil', 'transporturi de copii')} din satele fără microbuz${fund.sponsorMatchRatio > 0 ? ` · fiecare leu donat e dublat de sponsor` : ''}</p>
@@ -45,7 +43,7 @@ async function load() {
         <div class="card-title">Donează în fond${impact.donatedLei ? ` · ai donat deja ${lei(impact.donatedLei)}` : ''}</div>
         <div class="donate-row" role="group" aria-label="Sumă">${PRESETS.map((v) => raw(html`<button type="button" class="chip" data-amount="${v}" aria-pressed="false">${v} lei</button>`))}</div>
         <div class="form-group"><label class="form-label" for="amount">Altă sumă (lei)</label><input class="form-input" id="amount" type="number" min="5" max="5000" step="1"></div>
-        <button class="btn btn-yellow btn-block" type="submit" id="donate">Donează</button>
+        <button class="btn btn-peach btn-block" type="submit" id="donate">Donează</button>
         <p class="form-hint">Demo: donația este înregistrată în registrul transparent al fondului, fără plată reală.</p>
       </form>
       <div class="card">

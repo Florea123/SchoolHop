@@ -17,10 +17,9 @@ async function load() {
 
     content.innerHTML = html`
       <h1 class="page-title">${name} a ajuns ${ride.direction === 'to_school' ? 'la ore' : 'acasă'}!</h1>
-      <p class="page-subtitle">Mulțumim că ați folosit carpool-ul școlar.</p>
       <div class="reward-grid">
-        <div class="card card-blue"><span class="val">+10 puncte</span><span class="small muted">Erou Verde al școlii</span></div>
-        <div class="card card-yellow"><span class="val">−1 mașină</span><span class="small muted">mai puțin la poarta școlii</span></div>
+        <div class="card card-teal"><span class="val">+10 puncte</span><span class="small muted">pentru cursa în comun</span></div>
+        <div class="card card-peach"><span class="val">−1 mașină</span><span class="small muted">la poarta școlii</span></div>
       </div>
       ${canReview ? raw(html`
       <form class="card" id="reviewForm">

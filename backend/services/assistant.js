@@ -1,8 +1,3 @@
-// ==============================================================================
-// Asistentul pentru părinți (chat). Interfața și endpoint-ul sunt gata;
-// modelul AI se conectează în funcția replyWithModel() de mai jos.
-// ==============================================================================
-
 const config = require('../config');
 
 // Punct de integrare: primește istoricul conversației și contextul părintelui,

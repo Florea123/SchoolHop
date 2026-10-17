@@ -26,7 +26,6 @@ async function load() {
 
     content.innerHTML = html`
       <h1 class="page-title">${deviation ? 'Verificare traseu elev' : 'Alertă SOS activă'}</h1>
-      <p class="page-subtitle">${deviation ? 'Sistemul a detectat o abatere neprogramată de la drumul spre școală' : 'O persoană de pe cursă a cerut ajutor'}</p>
       ${s.alerts.map((a) => raw(html`
         <div class="callout callout-alert alert-item"><span>${a.alert_type === 'sos' ? '' : ''}</span>
           <div>${a.message}<div class="meta">${relativeTime(a.created_at)}${a.raised_by_name ? ` · de ${a.raised_by_name}` : ' · detectată automat'}${a.distance_m ? ` · ${a.distance_m} m de traseu` : ''}</div>

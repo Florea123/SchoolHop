@@ -1,2 +1,2 @@
-.split .map-box { margin-bottom: 20px; }
-@media (min-width: 900px) { .split .map-box { aspect-ratio: 4 / 3; max-height: none; } }
+.map-box { margin-bottom: 20px; }
+@media (min-width: 900px) { .map-box { height: 460px; } }

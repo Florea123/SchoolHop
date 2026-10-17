@@ -19,7 +19,7 @@ async function load() {
     const s = await api.get(`/share/${encodeURIComponent(token)}`);
     document.title = `${s.childName} · SchoolHop`;
     content.innerHTML = html`
-      <span class="badge badge-blue">Link live părinți / bunici</span>
+      <span class="badge badge-teal">Link live părinți / bunici</span>
       <h1 class="page-title" style="margin-top:10px">${s.childName} ${s.bookingStatus === 'arrived_at_school' ? 'a ajuns' : 'este în drum'}</h1>
       <p class="page-subtitle">${formatDate(s.departureTime)} · cu ${s.driverName} (${s.vehicle})</p>
       ${s.hasActiveAlert ? raw('<div class="callout callout-alert">Există o alertă activă pe această cursă. Părinții au fost anunțați.</div>') : ''}

@@ -1,33 +1,26 @@
-/* ==========================================================================
-   TAKE ME KIDS - DESIGN SYSTEM (tokens, reset, componente comune)
-   "Același drum spre școală. Mai siguri împreună."
-   ========================================================================== */
-
 :root {
-  /* Paleta SchoolHop (din logo): teal închis = identitate, coral = acțiune, piersică = accente, crem = fundal */
-  --brand-coral: #EE6A3F;
-  --brand-coral-hover: #D9542A;
-  --brand-coral-light: #FDECE5;
+  /* Culorile din logo: teal = identitate, coral = acțiuni, piersică = accente */
+  --coral: #EE6A3F;
+  --coral-hover: #D9542A;
+  --coral-light: #FDECE5;
 
-  /* Teal - identitatea, încredere (numele păstrate „blue” pentru compatibilitate) */
-  --brand-blue: #0F6E6E;
-  --brand-blue-hover: #0B5858;
-  --brand-blue-dark: #0A4747;
-  --brand-blue-light: #E6F2F1;
-  --brand-blue-border: #B9DCD8;
+  --teal: #0F6E6E;
+  --teal-hover: #0B5858;
+  --teal-dark: #0A4747;
+  --teal-light: #E6F2F1;
+  --teal-border: #B9DCD8;
 
-  /* Galben - accente vesele, puncte, școala */
-  --brand-yellow: #E8A060;
-  --brand-yellow-dark: #8A4B1C;
-  --brand-yellow-light: #FBEBDD;
-  --brand-yellow-border: #F2CFAE;
+  --peach: #E8A060;
+  --peach-dark: #8A4B1C;
+  --peach-light: #FBEBDD;
+  --peach-border: #F2CFAE;
 
-  /* Roșu - alerte, live */
-  --brand-red: #D64545;
-  --brand-red-hover: #B83232;
-  --brand-red-dark: #8A2323;
-  --brand-red-light: #FBE4E1;
-  --brand-red-border: #F3C2BC;
+  /* Alerte */
+  --red: #D64545;
+  --red-hover: #B83232;
+  --red-dark: #8A2323;
+  --red-light: #FBE4E1;
+  --red-border: #F3C2BC;
 
   --success: #15803D;
   --success-light: #DCFCE7;
@@ -72,22 +65,22 @@ body {
 
 img, svg { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; color: inherit; }
-a { color: var(--brand-blue); }
+a { color: var(--teal); }
 [hidden] { display: none !important; }
 
-:focus-visible { outline: 3px solid var(--brand-blue-border); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--teal-border); outline-offset: 2px; }
 
-/* ---------- Tipografie ---------- */
+/* Tipografie */
 .page-title { font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -0.4px; line-height: 1.2; margin-bottom: 6px; }
 .page-subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
 .section-title { font-size: 15px; font-weight: 800; margin: 24px 0 10px; }
-.eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--brand-blue); }
+.eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--teal); }
 .muted { color: var(--text-muted); }
 .small { font-size: 12px; }
 .strong { font-weight: 700; }
 .text-center { text-align: center; }
 
-/* ---------- Butoane ---------- */
+/* Butoane */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   min-height: 48px; padding: 0 18px; border-radius: 14px; border: none;
@@ -99,15 +92,15 @@ a { color: var(--brand-blue); }
 .btn-block { width: 100%; }
 .btn-sm { min-height: 38px; padding: 0 12px; font-size: 13px; border-radius: 10px; }
 
-.btn-primary { background: var(--brand-coral); color: #fff; box-shadow: 0 4px 12px rgba(238, 106, 63, 0.3); }
-.btn-primary:hover { background: var(--brand-coral-hover); }
+.btn-primary { background: var(--coral); color: #fff; box-shadow: 0 4px 12px rgba(238, 106, 63, 0.3); }
+.btn-primary:hover { background: var(--coral-hover); }
 .btn-secondary { background: #fff; color: var(--text-primary); border: 1.5px solid var(--border-medium); }
-.btn-secondary:hover { border-color: var(--brand-blue); color: var(--brand-blue); background: var(--bg-muted); }
+.btn-secondary:hover { border-color: var(--teal); color: var(--teal); background: var(--bg-muted); }
 .btn-danger { background: #B83232; color: #fff; box-shadow: 0 4px 12px rgba(184, 50, 50, 0.25); }
-.btn-yellow { background: #E8A060; color: #4A2810; }
-.btn-link { background: none; border: none; color: var(--brand-blue); font-weight: 700; font-size: 13px; cursor: pointer; padding: 4px 0; text-decoration: none; }
+.btn-peach { background: #E8A060; color: #4A2810; }
+.btn-link { background: none; border: none; color: var(--teal); font-weight: 700; font-size: 13px; cursor: pointer; padding: 4px 0; text-decoration: none; }
 .btn-link:hover { text-decoration: underline; }
-.btn-link.danger { color: var(--brand-red-hover); }
+.btn-link.danger { color: var(--red-hover); }
 
 .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .btn-row > .btn { flex: 1 1 160px; }
@@ -120,51 +113,51 @@ a { color: var(--brand-blue); }
 .btn-icon:hover { background: var(--bg-muted); }
 .btn-icon svg { width: 22px; height: 22px; }
 
-/* ---------- Formulare ---------- */
+/* Formulare */
 .form-group { margin-bottom: 16px; }
 .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
 .form-hint { display: block; font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 .form-hint.ok { color: var(--success); font-weight: 600; }
-.form-hint.error { color: var(--brand-red-hover); font-weight: 600; }
+.form-hint.error { color: var(--red-hover); font-weight: 600; }
 
 .form-input {
   width: 100%; min-height: 48px; padding: 10px 14px; font-size: 16px; /* 16px evită zoom-ul automat pe iOS */
   background: #fff; border: 1px solid var(--border-medium); border-radius: 10px; outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
-.form-input:focus { border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(15, 110, 110, 0.15); }
+.form-input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15, 110, 110, 0.15); }
 .form-input[readonly] { background: var(--bg-muted); color: var(--text-secondary); }
-.form-input.invalid { border-color: var(--brand-red); }
+.form-input.invalid { border-color: var(--red); }
 textarea.form-input { min-height: 84px; resize: vertical; }
 select.form-input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
 
 .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0 12px; }
 
 .checkbox { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-secondary); cursor: pointer; margin-bottom: 16px; }
-.checkbox input { width: 20px; height: 20px; accent-color: var(--brand-blue); margin-top: 1px; flex-shrink: 0; }
+.checkbox input { width: 20px; height: 20px; accent-color: var(--teal); margin-top: 1px; flex-shrink: 0; }
 
-/* ---------- Carduri ---------- */
+/* Carduri */
 .card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
-.card-blue { background: var(--brand-blue-light); border-color: var(--brand-blue-border); }
-.card-yellow { background: var(--brand-yellow-light); border-color: var(--brand-yellow-border); }
-.card-red { background: var(--brand-red-light); border-color: var(--brand-red-border); }
+.card-teal { background: var(--teal-light); border-color: var(--teal-border); }
+.card-peach { background: var(--peach-light); border-color: var(--peach-border); }
+.card-red { background: var(--red-light); border-color: var(--red-border); }
 .card-title { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
 .card-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; padding: 4px 0; }
 .card-row + .card-row { border-top: 1px dashed var(--border-subtle); }
 .divider { border: none; border-top: 1px solid var(--border-subtle); margin: 12px 0; }
 
 .callout { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 0 10px 10px 0; font-size: 13px; margin-bottom: 16px; line-height: 1.45; }
-.callout-info { background: var(--brand-blue-light); border-left: 3px solid var(--brand-blue); color: var(--text-secondary); }
-.callout-alert { background: var(--brand-red-light); border-left: 3px solid var(--brand-red); color: var(--brand-red-dark); }
-.callout-warn { background: var(--brand-yellow-light); border-left: 3px solid var(--brand-yellow); color: var(--brand-yellow-dark); }
+.callout-info { background: var(--teal-light); border-left: 3px solid var(--teal); color: var(--text-secondary); }
+.callout-alert { background: var(--red-light); border-left: 3px solid var(--red); color: var(--red-dark); }
+.callout-warn { background: var(--peach-light); border-left: 3px solid var(--peach); color: var(--peach-dark); }
 
-/* ---------- Badge-uri, chip-uri ---------- */
+/* Badge-uri, chip-uri */
 .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; background: var(--bg-muted); color: var(--text-secondary); white-space: nowrap; }
-.badge-blue { background: var(--brand-blue-light); color: var(--brand-blue-dark); }
-.badge-yellow { background: var(--brand-yellow-light); color: var(--brand-yellow-dark); }
-.badge-red { background: var(--brand-red-light); color: var(--brand-red-dark); }
+.badge-teal { background: var(--teal-light); color: var(--teal-dark); }
+.badge-peach { background: var(--peach-light); color: var(--peach-dark); }
+.badge-red { background: var(--red-light); color: var(--red-dark); }
 .badge-green { background: var(--success-light); color: var(--success); }
-.badge-ai { background: var(--brand-blue); color: #fff; }
+.badge-solid { background: var(--teal); color: #fff; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
@@ -172,8 +165,8 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
   font-size: 13px; font-weight: 600; background: var(--bg-muted); color: var(--text-secondary);
   border: 1px solid var(--border-subtle); cursor: pointer; user-select: none;
 }
-.chip:hover { border-color: var(--brand-blue); }
-.chip[aria-pressed="true"] { background: var(--brand-blue-light); color: var(--brand-blue-dark); border-color: var(--brand-blue); font-weight: 700; }
+.chip:hover { border-color: var(--teal); }
+.chip[aria-pressed="true"] { background: var(--teal-light); color: var(--teal-dark); border-color: var(--teal); font-weight: 700; }
 .chip-static { cursor: default; padding: 3px 9px; font-size: 12px; }
 
 /* Selector de zile (pill-uri) */
@@ -184,7 +177,7 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
   font-size: 13px; font-weight: 700; color: var(--text-secondary); cursor: pointer; padding: 4px 2px;
 }
 .day-pill small { font-size: 10px; font-weight: 600; }
-.day-pill[aria-pressed="true"] { background: var(--brand-blue); border-color: var(--brand-blue); color: #fff; }
+.day-pill[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
 .day-pill:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* Tab-uri */
@@ -192,35 +185,35 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
 .tab { flex: 1; padding: 9px 12px; font-size: 14px; font-weight: 600; color: var(--text-secondary); background: transparent; border: none; border-radius: 9px; cursor: pointer; }
 .tab[aria-selected="true"] { background: #fff; color: var(--text-primary); box-shadow: var(--shadow-sm); }
 
-/* ---------- Avatar ---------- */
-.avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--brand-blue-light); color: var(--brand-blue-dark); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
-.avatar-kid { background: var(--brand-coral-light); color: var(--brand-coral-hover); }
+/* Avatar */
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--teal-light); color: var(--teal-dark); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
+.avatar-kid { background: var(--coral-light); color: var(--coral-hover); }
 
-/* ---------- Statistici ---------- */
+/* Statistici */
 .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
 .stat { background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px; }
-.stat-value { font-size: 22px; font-weight: 900; color: var(--brand-blue); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat-value { font-size: 22px; font-weight: 900; color: var(--teal); line-height: 1.1; font-variant-numeric: tabular-nums; }
 .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-/* ---------- Hartă (Leaflet / OpenStreetMap) ---------- */
+/* Hartă (Leaflet / OpenStreetMap) */
 /* isolation: controalele Leaflet (z-index 1000) rămân sub header, bara de navigație și asistent */
-.map-box { width: 100%; aspect-ratio: 16 / 9; min-height: 220px; max-height: 360px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); background: #E6F2F1; margin-bottom: 16px; position: relative; isolation: isolate; }
+.map-box { width: 100%; height: clamp(300px, 48vh, 520px); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); background: #E6F2F1; margin-bottom: 16px; position: relative; isolation: isolate; }
 .map-canvas { position: absolute; inset: 0; font-family: var(--font-sans); }
 .map-caption { position: absolute; left: 8px; bottom: 6px; z-index: 500; font-size: 11px; color: var(--text-secondary); background: rgba(255, 255, 255, 0.85); padding: 2px 6px; border-radius: 6px; pointer-events: none; }
 .map-caption[hidden] { display: none; }
 .map-label { font-family: var(--font-sans); font-size: 11px; font-weight: 800; color: var(--text-primary); padding: 2px 6px; border-radius: 6px; border: none; box-shadow: var(--shadow-sm); }
 .map-label-alert { color: #fff; background: #B83232; }
 .map-label-alert::before { border-right-color: #B83232; }
-.map-car span { display: block; width: 24px; height: 24px; border-radius: 50%; background: var(--brand-coral); border: 3px solid #fff; box-shadow: 0 0 0 6px rgba(238, 106, 63, 0.25), 0 2px 6px rgba(0, 0, 0, 0.25); animation: pulse 2s infinite ease-in-out; }
-.leaflet-container a { color: var(--brand-blue); }
+.map-car span { display: block; width: 24px; height: 24px; border-radius: 50%; background: var(--coral); border: 3px solid #fff; box-shadow: 0 0 0 6px rgba(238, 106, 63, 0.25), 0 2px 6px rgba(0, 0, 0, 0.25); animation: pulse 2s infinite ease-in-out; }
+.leaflet-container a { color: var(--teal); }
 
-/* ---------- Stări: încărcare, gol, eroare ---------- */
+/* Stări: încărcare, gol, eroare */
 .skeleton { background: linear-gradient(90deg, #F1EBE1 25%, #FCFAF6 50%, #F1EBE1 75%); background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: var(--radius-lg); min-height: 120px; margin-bottom: 16px; }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 .empty-state { text-align: center; padding: 32px 16px; color: var(--text-muted); }
 .empty-state .emoji { font-size: 36px; display: block; margin-bottom: 8px; }
 
-/* ---------- Toast ---------- */
+/* Toast */
 .toast {
   position: fixed; left: 50%; bottom: calc(var(--tabbar-height) + 16px + env(safe-area-inset-bottom));
   transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
@@ -229,14 +222,14 @@ select.form-input { appearance: none; background-image: url("data:image/svg+xml,
   display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow-lg); z-index: 1000; transition: all 0.25s ease;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
-.toast.error { background: var(--brand-red-dark); }
+.toast.error { background: var(--red-dark); }
 @media (min-width: 900px) { .toast { bottom: 24px; } }
 
-/* ---------- Dialog ---------- */
+/* Dialog */
 dialog.modal { border: none; border-radius: var(--radius-lg); padding: 20px; width: min(440px, calc(100vw - 32px)); box-shadow: var(--shadow-lg); }
 dialog.modal::backdrop { background: rgba(15, 23, 42, 0.45); }
 
-/* ---------- Animații ---------- */
+/* Animații */
 @keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } }
 .live-pulse { animation: pulse 2s infinite ease-in-out; transform-origin: center; transform-box: fill-box; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

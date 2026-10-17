@@ -1,5 +1,5 @@
 .notif { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: inherit; cursor: pointer; width: 100%; text-align: left; font: inherit; }
-.notif.unread { border-color: var(--brand-blue-border); background: var(--brand-blue-light); }
-.notif .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand-blue); margin-top: 6px; flex-shrink: 0; }
+.notif.unread { border-color: var(--teal-border); background: var(--teal-light); }
+.notif .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--teal); margin-top: 6px; flex-shrink: 0; }
 .notif.read .dot { background: transparent; }
 .notif .time { font-size: 12px; color: var(--text-muted); margin-top: 2px; }

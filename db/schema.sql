@@ -1,17 +1,5 @@
--- ==============================================================================
--- SchoolHop - Bază de Date Carpooling Școlar Sigur (Iași)
---   1. Public țintă: exclusiv transportul copiilor la școală (fără adulți pasageri).
---   2. Cont de părinte asociat școlii copilului.
---   3. Profil copii cu școală, clasă și interese (fotbal, pian, robotică etc.).
---   4. Componentă AI: potrivire copii după interese comune.
---   5. Fond social & donații: curse gratuite pentru copiii din sate greu accesibile.
---   6. Puncte sigure de predare la școală (evită aglomerația la poartă - ex: Negruzzi).
---   7. Urmărire live a cursei, alerte de deviere și SOS.
--- ==============================================================================
-
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
--- 1. TABELUL SCHOOLS
 CREATE TABLE IF NOT EXISTS schools (
     school_id SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
@@ -26,7 +14,6 @@ CREATE TABLE IF NOT EXISTS schools (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. TABELUL AREAS (Cartiere / sate din zona metropolitană)
 CREATE TABLE IF NOT EXISTS areas (
     area_id SERIAL PRIMARY KEY,
     name VARCHAR(100) UNIQUE NOT NULL,
@@ -35,13 +22,11 @@ CREATE TABLE IF NOT EXISTS areas (
     is_rural BOOLEAN DEFAULT FALSE
 );
 
--- 3. TABELUL INTERESTS (catalogul de pasiuni folosit de componenta AI)
 CREATE TABLE IF NOT EXISTS interests (
     slug VARCHAR(40) PRIMARY KEY,
     label VARCHAR(60) NOT NULL
 );
 
--- 4. TABELUL USERS (Părinți, șoferi verificați, administratori școală)
 CREATE TABLE IF NOT EXISTS users (
     user_id SERIAL PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -54,13 +39,12 @@ CREATE TABLE IF NOT EXISTS users (
     is_school_verified BOOLEAN DEFAULT TRUE,
     emergency_contact_name VARCHAR(100),
     emergency_contact_phone VARCHAR(20),
-    green_points INT NOT NULL DEFAULT 0,       -- Puncte "Erou Verde"
+    green_points INT NOT NULL DEFAULT 0,
     profile_photo VARCHAR(255),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 
--- 6. TABELUL CHILDREN (Copiii - singurii pasageri!)
 CREATE TABLE IF NOT EXISTS children (
     child_id SERIAL PRIMARY KEY,
     parent_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
@@ -80,7 +64,6 @@ CREATE TABLE IF NOT EXISTS children (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 7. TABELUL VEHICLES
 CREATE TABLE IF NOT EXISTS vehicles (
     vehicle_id SERIAL PRIMARY KEY,
     owner_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
@@ -94,7 +77,6 @@ CREATE TABLE IF NOT EXISTS vehicles (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 8. TABELUL RIDES (Curse școlare)
 CREATE TABLE IF NOT EXISTS rides (
     ride_id SERIAL PRIMARY KEY,
     driver_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
@@ -124,7 +106,6 @@ CREATE TABLE IF NOT EXISTS rides (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 9. TABELUL BOOKINGS (Rezervările copiilor pe cursă)
 CREATE TABLE IF NOT EXISTS bookings (
     booking_id SERIAL PRIMARY KEY,
     ride_id INT NOT NULL REFERENCES rides(ride_id) ON DELETE CASCADE,
@@ -153,7 +134,6 @@ CREATE UNIQUE INDEX IF NOT EXISTS uq_booking_seat_active
     ON bookings(ride_id, seat_position) WHERE booking_status <> 'cancelled';
 CREATE UNIQUE INDEX IF NOT EXISTS uq_booking_share_token ON bookings(share_token);
 
--- 10. TABELUL RIDE_LOCATIONS (poziții GPS transmise de șofer)
 CREATE TABLE IF NOT EXISTS ride_locations (
     location_id SERIAL PRIMARY KEY,
     ride_id INT NOT NULL REFERENCES rides(ride_id) ON DELETE CASCADE,
@@ -162,7 +142,6 @@ CREATE TABLE IF NOT EXISTS ride_locations (
     recorded_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 11. TABELUL RIDE_ALERTS (deviere de la traseu, SOS)
 CREATE TABLE IF NOT EXISTS ride_alerts (
     alert_id SERIAL PRIMARY KEY,
     ride_id INT NOT NULL REFERENCES rides(ride_id) ON DELETE CASCADE,
@@ -177,7 +156,6 @@ CREATE TABLE IF NOT EXISTS ride_alerts (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 12. TABELUL AI_INTEREST_MATCHES (Componenta de Inteligență Artificială)
 CREATE TABLE IF NOT EXISTS ai_interest_matches (
     match_id SERIAL PRIMARY KEY,
     child_id_1 INT NOT NULL REFERENCES children(child_id) ON DELETE CASCADE,
@@ -192,7 +170,6 @@ CREATE TABLE IF NOT EXISTS ai_interest_matches (
     CONSTRAINT uq_ai_match_pair UNIQUE (child_id_1, child_id_2)
 );
 
--- 13. TABELUL SOCIAL_FUND_TRANSACTIONS
 CREATE TABLE IF NOT EXISTS social_fund_transactions (
     transaction_id SERIAL PRIMARY KEY,
     transaction_type VARCHAR(30) NOT NULL
@@ -206,7 +183,6 @@ CREATE TABLE IF NOT EXISTS social_fund_transactions (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 14. TABELUL REVIEWS
 CREATE TABLE IF NOT EXISTS reviews (
     review_id SERIAL PRIMARY KEY,
     booking_id INT NOT NULL REFERENCES bookings(booking_id) ON DELETE CASCADE,
@@ -220,7 +196,6 @@ CREATE TABLE IF NOT EXISTS reviews (
     CONSTRAINT uq_review_booking UNIQUE (booking_id, parent_id)
 );
 
--- 15. TABELUL NOTIFICATIONS
 CREATE TABLE IF NOT EXISTS notifications (
     notification_id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
@@ -232,9 +207,6 @@ CREATE TABLE IF NOT EXISTS notifications (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- ==============================================================================
--- INDECȘI PENTRU CĂUTARE ȘI PERFORMANȚĂ
--- ==============================================================================
 CREATE INDEX IF NOT EXISTS idx_children_parent ON children(parent_id);
 CREATE INDEX IF NOT EXISTS idx_children_school ON children(school_id);
 CREATE INDEX IF NOT EXISTS idx_rides_school ON rides(school_id, departure_time);

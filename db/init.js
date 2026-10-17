@@ -1,10 +1,3 @@
-// ==============================================================================
-// SchoolHop - Inițializare Tabele și Seed în Node.js
-// Rulare: node db/init.js
-// Sigur de rulat oricând: creează tabelele care lipsesc și încarcă datele demo
-// DOAR dacă baza e goală. Nu șterge niciun cont. (Pentru ștergere: db/reset.js)
-// ==============================================================================
-
 const fs = require('fs');
 const path = require('path');
 const { pool } = require('./db');

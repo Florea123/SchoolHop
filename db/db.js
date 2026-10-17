@@ -1,8 +1,3 @@
-// ==============================================================================
-// SchoolHop - Node.js PostgreSQL Connection Pool
-// Folosește librăria standard 'pg' (node-postgres)
-// ==============================================================================
-
 const { Pool, types } = require('pg');
 
 // NUMERIC/DECIMAL și COUNT(*) ca numere JS (implicit pg le întoarce ca string)

@@ -1,7 +1,3 @@
-// ==============================================================================
-// SchoolHop - aplicația Express (API JSON + fișierele statice ale frontend-ului)
-// ==============================================================================
-
 const path = require('path');
 const express = require('express');
 const db = require('../db/db');
@@ -22,7 +18,6 @@ app.use((_req, res, next) => {
   next();
 });
 
-// --- API --------------------------------------------------------------------
 const api = express.Router();
 
 api.get('/health', async (_req, res) => {
@@ -49,7 +44,6 @@ api.use('/assistant', require('./routes/assistant'));
 app.use('/api', api);
 app.use('/api', notFoundApi);
 
-// --- Frontend static ----------------------------------------------------------
 const frontendDir = path.join(__dirname, '..', 'frontend');
 app.use(express.static(frontendDir, { extensions: ['html'], maxAge: 0 }));
 app.use((req, res) => res.status(404).sendFile(path.join(frontendDir, '404.html')));

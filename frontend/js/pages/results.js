@@ -17,9 +17,9 @@ function card(r, child, isBest) {
   return html`
     <article class="card match-card ${isBest ? 'best' : ''} ${r.bookable ? '' : 'unavailable'}">
       <div class="match-top">
-        <span class="badge ${score >= 50 ? 'badge-ai' : 'badge-blue'}">Potrivire ${score}%</span>
+        <span class="badge ${score >= 50 ? 'badge-solid' : 'badge-teal'}">Potrivire ${score}%</span>
         ${r.match.companion && r.match.companion.sameClass ? raw('<span class="badge badge-green">Aceeași clasă</span>') : ''}
-        ${ride.isSocialFund ? raw('<span class="badge badge-yellow">Fond Social</span>') : ''}
+        ${ride.isSocialFund ? raw('<span class="badge badge-peach">Fond Social</span>') : ''}
       </div>
       <div class="driver">
         <div class="avatar">${initials(ride.driver.fullName)}</div>

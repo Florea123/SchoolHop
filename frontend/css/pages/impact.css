@@ -1,9 +1,9 @@
-.impact-hero { background: linear-gradient(135deg, #E6F2F1 0%, #FFFFFF 100%); border-color: var(--brand-blue-border); }
-.fund-balance { font-size: 30px; font-weight: 900; color: var(--brand-yellow-dark); line-height: 1.1; }
+.impact-hero { background: linear-gradient(135deg, #E6F2F1 0%, #FFFFFF 100%); border-color: var(--teal-border); }
+.fund-balance { font-size: 30px; font-weight: 900; color: var(--peach-dark); line-height: 1.1; }
 .tx { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 8px 0; border-top: 1px dashed var(--border-subtle); }
 .tx:first-of-type { border-top: none; }
 .tx .amount { font-weight: 800; white-space: nowrap; }
 .tx .amount.in { color: var(--success); }
-.tx .amount.out { color: var(--brand-red-hover); }
+.tx .amount.out { color: var(--red-hover); }
 .donate-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
 .donate-row .chip { flex: 1 0 70px; justify-content: center; }

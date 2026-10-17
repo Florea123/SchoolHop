@@ -8,7 +8,7 @@ const BADGES = [
   { code: 'friends', title: 'Prieten Nou', description: 'A călătorit cu 2 colegi diferiți.', metric: 'distinctCompanions', goal: 2 },
   { code: 'punctual', title: 'Campion la Punctualitate', description: 'A ajuns înainte de clopoțel de 5 ori.', metric: 'onTimeArrivals', goal: 5 },
   { code: 'driver', title: 'Șofer de Încredere', description: 'A dus la școală 5 copii ai altor familii.', metric: 'childrenDriven', goal: 5 },
-  { code: 'green_hero', title: 'Erou Verde', description: 'A strâns 100 de puncte Erou Verde.', metric: 'greenPoints', goal: 100 },
+  { code: 'green_hero', title: '100 de puncte', description: 'A strâns 100 de puncte.', metric: 'greenPoints', goal: 100 },
   { code: 'donor', title: 'Inimă Mare', description: 'A donat în Fondul Social pentru copiii de la sat.', metric: 'donations', goal: 1 },
 ];
 

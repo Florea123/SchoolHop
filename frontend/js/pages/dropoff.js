@@ -25,7 +25,7 @@ async function load() {
     content.innerHTML = html`
       <h1 class="page-title">Predare ${toSchool ? 'la poarta școlii' : 'la destinație'}</h1>
       <p class="page-subtitle">${formatDate(ride.departureTime)} · ora ${formatTime(booking.dropoffTime)} · ${place}</p>
-      <div class="card card-blue">
+      <div class="card card-teal">
         <div class="card-title">${ride.driver.fullName} a oprit în zona de predare</div>
       </div>
       <div class="card handover">
@@ -39,7 +39,7 @@ async function load() {
     if (btn) btn.addEventListener('click', () => withLoading(btn, async () => {
       try {
         const r = await api.post(`/bookings/${booking.id}/confirm-arrival`);
-        toast(`Mulțumim! +${r.pointsAwarded} puncte Erou Verde (total ${r.greenPoints}).`, { icon: '' });
+        toast(`Predare confirmată. +${r.pointsAwarded} puncte (total ${r.greenPoints}).`);
         setTimeout(() => { window.location.href = `review.html?bookingId=${booking.id}`; }, 800);
       } catch (err) { showError(err); }
     }));

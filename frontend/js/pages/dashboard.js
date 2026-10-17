@@ -12,7 +12,7 @@ let tab = 'traffic';
 function kpis() {
   const p = data.impact.period;
   return html`<div class="kpi-grid">
-    <div class="kpi"><div class="kpi-number" style="color:var(--brand-yellow)">${data.carsRemoved}</div><div class="kpi-label">Mașini eliminate de la poartă</div><div class="kpi-sub">copii aduși de alți părinți</div></div>
+    <div class="kpi"><div class="kpi-number" style="color:var(--peach)">${data.carsRemoved}</div><div class="kpi-label">Mașini eliminate de la poartă</div><div class="kpi-sub">copii aduși de alți părinți</div></div>
     <div class="kpi"><div class="kpi-number">${data.impact.verifiedParents}</div><div class="kpi-label">Părinți înscriși</div><div class="kpi-sub">cu copii la această școală</div></div>
     <div class="kpi"><div class="kpi-number">${data.avgMatchScore ?? '—'}${data.avgMatchScore != null ? '%' : ''}</div><div class="kpi-label">Scor mediu potrivire AI</div><div class="kpi-sub">${plural(data.matchedPairs, 'pereche de colegi', 'perechi de colegi')}</div></div>
     <div class="kpi"><div class="kpi-number">${p.co2SavedKg} kg</div><div class="kpi-label">CO₂ evitat</div><div class="kpi-sub">${p.kmSaved} km nerulați</div></div>
@@ -70,9 +70,9 @@ function corridorsTab() {
         <div class="hbar-label"><span>${c.area}</span><span>${plural(c.count, 'elev', 'elevi')} (${c.share}%)</span></div>
         <div class="hbar-track"><span style="width:${c.share}%"></span></div></div>`)) : raw('<p class="small muted">Nicio cursă în această perioadă.</p>')}
     </div>
-    <div class="card card-yellow">
+    <div class="card card-peach">
       <div class="card-title">Fondul Social</div>
-      <div class="kpi-number" style="color:var(--brand-yellow-dark)">${lei(f.balance)}</div>
+      <div class="kpi-number" style="color:var(--peach-dark)">${lei(f.balance)}</div>
       <div class="card-row"><span>Donații comunitate</span><strong>${lei(f.donations)}</strong></div>
       <div class="card-row"><span>Sponsori corporate</span><strong>${lei(f.corporate)}</strong></div>
       <div class="card-row"><span>Plătit șoferilor comunitari</span><strong>${lei(f.payouts)}</strong></div>
@@ -90,7 +90,7 @@ function familiesTab() {
 }
 
 function render() {
-  $('#schoolName').textContent = `Panou de mobilitate · ${data.school.name}`;
+  $('#schoolTitle').textContent = data.school.name;
   const body = tab === 'traffic' ? trafficTab() : tab === 'corridors' ? corridorsTab() : familiesTab();
   content.innerHTML = kpis() + body;
   $$('.col').forEach((col) => {

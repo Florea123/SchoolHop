@@ -13,7 +13,7 @@ Platformă dedicată exclusiv **transportului copiilor la școală**. Șoferii s
 3. **Rezervare pe locuri** - harta locurilor din mașină, reguli de siguranță (locul din față doar de la 12 ani), înălțătoare disponibile, rezervare pe mai multe zile + întoarcere după ore.
 4. **Publicare curse** - părintele-șofer alege zilele, mașina, locurile oferite; copiii proprii ocupă automat locuri; vecinii din aceeași zonă sunt notificați.
 5. **Cursă live** - poziția mașinii (GPS din browserul șoferului sau simulare), ETA, preluare copii, **alertă automată de deviere** de la traseu, **SOS** (notifică părinții, șoferul și secretariatul), **link public pentru bunici**.
-6. **Predare la școală** - confirmare de către părinte, puncte „Erou Verde”, evaluarea șoferului.
+6. **Predare la școală** - confirmare de către părinte, puncte, evaluarea șoferului.
 7. **Fondul Social** - curse gratuite pentru copiii din satele fără microbuz, donații dublate de sponsor, registru transparent, plata automată a șoferului comunitar la finalul cursei.
 8. **Panou pentru școală** (rol `admin`) - mașini eliminate de la poartă, coridoare, alerte, familii verificate, fondul social.
 

@@ -1,9 +1,3 @@
-// ==============================================================================
-// Componenta AI: potrivirea copiilor după interese + întrebarea zilei pentru drum.
-// Scorul de compatibilitate e calculat local (determinist, explicabil).
-// Punct de integrare pentru un model de limbaj: funcția generateText() de mai jos.
-// ==============================================================================
-
 const { ageOn } = require('./seats');
 
 const WEIGHTS = {

@@ -74,7 +74,7 @@ export async function withLoading(button, fn) {
   }
 }
 
-// ----- Formatare (ora României) -----
+// Formatare (ora României)
 export function formatTime(date) {
   return new Date(date).toLocaleTimeString('ro-RO', { timeZone: TZ, hour: '2-digit', minute: '2-digit' });
 }
@@ -126,12 +126,12 @@ export function addMinutesToTime(hhmm, delta) {
 }
 
 export const STATUS_LABELS = {
-  confirmed: { text: 'Confirmată', cls: 'badge-blue' },
-  picked_up: { text: 'În mașină', cls: 'badge-yellow' },
+  confirmed: { text: 'Confirmată', cls: 'badge-teal' },
+  picked_up: { text: 'În mașină', cls: 'badge-peach' },
   arrived_at_school: { text: 'Ajuns la școală', cls: 'badge-green' },
   cancelled: { text: 'Anulată', cls: 'badge-red' },
-  scheduled: { text: 'Programată', cls: 'badge-blue' },
-  in_progress: { text: 'În desfășurare', cls: 'badge-yellow' },
+  scheduled: { text: 'Programată', cls: 'badge-teal' },
+  in_progress: { text: 'În desfășurare', cls: 'badge-peach' },
   completed: { text: 'Finalizată', cls: 'badge-green' },
 };
 

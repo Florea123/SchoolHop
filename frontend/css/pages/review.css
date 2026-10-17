@@ -1,9 +1,9 @@
 .reward-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
 .reward-grid .card { margin: 0; padding: 14px; }
-.reward-grid .val { font-size: 22px; font-weight: 900; color: var(--brand-blue); display: block; }
+.reward-grid .val { font-size: 22px; font-weight: 900; color: var(--teal); display: block; }
 .stars { display: flex; justify-content: center; gap: 6px; margin: 14px 0 8px; }
 .star { background: none; border: none; font-size: 36px; color: #DDD5C8; cursor: pointer; padding: 4px; line-height: 1; }
 .star[aria-checked="true"] { color: #E8A060; }
-.rating-label { text-align: center; font-size: 13px; font-weight: 700; color: var(--brand-blue); min-height: 18px; margin-bottom: 12px; }
+.rating-label { text-align: center; font-size: 13px; font-weight: 700; color: var(--teal); min-height: 18px; margin-bottom: 12px; }
 .sub-rating { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 14px; flex-wrap: wrap; }
 .sub-rating select { width: auto; min-height: 40px; }
